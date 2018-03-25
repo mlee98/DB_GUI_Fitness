@@ -1,2 +1,2 @@
 # DB_GUI_Fitness
-DB GUI lab project
+<i>DB GUI lab project</i>
