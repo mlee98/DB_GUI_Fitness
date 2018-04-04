@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema DB_GUI
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `DB_GUI` ;
+CREATE DATABASE IF NOT EXISTS `DB_GUI` ;
 USE `DB_GUI` ;
 
 -- -----------------------------------------------------
