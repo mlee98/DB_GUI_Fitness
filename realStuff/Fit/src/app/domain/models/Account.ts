@@ -6,5 +6,8 @@ export class Account {
   weight?: string;
   sleepPerNight?: number;
   disabilities?: Array<string>;
+  workouts?: Array<string>;
+  calsEaten?: Array<number>;
+  calsBurned?: Array<number>;
   goal?: string;
 }

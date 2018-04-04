@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { InputComponent } from './input/input.component';
+import { WorkoutComponent } from './workout/workout.component';
 
 const appRoutes: Routes = [
   {path: 'sign-in', component: SignInComponent},
@@ -19,7 +21,9 @@ const appRoutes: Routes = [
     AppComponent,
     SignInComponent,
     CreateAccountComponent,
-    ProfileComponent
+    ProfileComponent,
+    InputComponent,
+    WorkoutComponent
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,8 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit() {
     this.acc = {};
     this.acc.disabilities = [];
+    this.acc.calsBurned = [500];
+    this.acc.calsEaten = [800];
     this.signIn = false;
     this.createAcc = true;
   }

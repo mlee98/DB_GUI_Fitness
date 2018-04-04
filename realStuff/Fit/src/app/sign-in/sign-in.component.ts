@@ -1,3 +1,4 @@
+import { Account } from './../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { Tracker } from '../domain/models/tracker';
 
@@ -12,6 +13,7 @@ export class SignInComponent implements OnInit {
   public pass: string;
   public username: string;
   public goodLog: number;
+  public accToPass: Account;
 
   ngOnInit() {
     this.pass = '';
@@ -25,9 +27,12 @@ export class SignInComponent implements OnInit {
         this.track.accounts[i].username === this.username
       ) {
         this.goodLog = 2;
+        this.accToPass = this.track.accounts[i];
         return;
       }
     }
+    this.pass = '';
+    this.username = '';
     this.goodLog = 1;
   }
 }
