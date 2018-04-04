@@ -1,22 +1,27 @@
+<html>
+
 <body class="container">
   <header class="container">
     <h1>Welcome to "Fitness App"</h1>
   </header>
-  <main class="container" id="index">
+  <main class="container" id="index" *ngIf="frontPage">
     <br>
-    <a routerLink="/sign-in" class="btn">
+    <a routerLink="sign-in" class="btn" (click)="changePage()">
       Sign In
     </a>
-    <br />
-    <br />
-    <br />
-    <br />
-    <a href="createAccount.html" class="btn">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a routerLink="create-account" class="btn" (click)="changePage()">
       Create Account
     </a>
   </main>
+  <router-outlet></router-outlet>
 
   <footer>
     copyright: NITB LLC 2018
   </footer>
+</body>
 
+</html>
