@@ -1,17 +1,14 @@
 <html>
-	<body class="container">
-		<header class="container">
-			<h1>Welcome to "Fitness App"</h1>
-		</header>
-		<main class="container" id="creAcc">
+	<body class="container" >
+		<main class="container" id="creAcc" *ngIf="createAcc">
 			<form name="createAccount" id="createAccount">
 
 				<label for="user">Username: </label>
-				<input type="text">
+				<input name="username" class="text" type="text" [(ngModel)] = "acc.username">
 				<br>
 				<br>
 				<label for="password">Password: </label>
-				<input type="text">
+				<input name="password" class="text" type="text" [(ngModel)] = "acc.password">
 				<br>
 				<br>
 				<label for="password">Verify Password: </label>
@@ -19,24 +16,24 @@
 				<br>
 				<br>
 				<label for="Name">Name: </label>
-				<input type="text">
+				<input class="text" name="name" type="text" [(ngModel)] = "acc.name">
 
 				<br>
 				<br>
 				<label for="height">Height: </label>
-				<input type="text">
+				<input class="text" name="height" type="text" [(ngModel)] = "acc.height">
 				<br>
 				<br>
 				<label for="weight">Weight: </label>
-				<input type="text">
+				<input class="text" name="weight" type="text" [(ngModel)] = "acc.weight">
 				<br>
 				<br>
 				<label for="Sleep">Avg Hours of Sleep / Night: </label>
-				<input type="text">
+				<input class="text" name="sleep" type="text" [(ngModel)] = "acc.sleepPerNight">
 				<br>
 				<br>
 				<label for="disabilities">Disabilites: </label>
-				<select multiple>
+				<select multiple name="disabilities" [(ngModel)]="acc.disabilities">
 					<option>peanutz</option>
 					<option>sleep apnia</option>
 					<option>lactose intolerant</option>
@@ -51,21 +48,18 @@
 				<br>
 				<br>
 				<label for="goal">Goal: </label>
-				<select>
+				<select name="goal" [(ngModel)] = "acc.goal">
 					<option>Lose Weight</option>
 					<option>Gain Weight</option>
 					<option>Gain Muscle</option>
 				</select>
 			</form>
-			<a href="profile.html" class="btn">
+			<button class="btn btn-primary" (click)="addAcc();goToSignIn()">
 				Create Account
-			</a>
-		</main>
-
-		<footer>
-			copyright: NITB LLC 2018
-		</footer>
-
-
+			</button>
+    </main>
+    <app-sign-in [track]="track" *ngIf="signIn" >
+      here
+    </app-sign-in>
 	</body>
 </html>

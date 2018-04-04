@@ -1,24 +1,20 @@
-<body class="container">
-  <header class="container">
-    <h1>Welcome to "Fitness App"</h1>
-  </header>
+<body class="container" *ngIf="goodLog == 0 || goodLog == 1">
   <main class="container" id="sI">
     <form name="login">
+      <div class="alert alert-danger" *ngIf="goodLog == 1" > bad username/password </div>
       <br>
       <label for="username">Username: </label>
-      <input type="text" id="user" />
+      <input type="text" name="user" id="user" [(ngModel)] = "username" />
       <br>
       <br>
       <label for="password">Password: </label>
-      <input type="text" id="pass" />
+      <input type="text" name="pass" id="pass" [(ngModel)] = "pass"/>
       <br>
       <br>
-      <a href="profile.html" class="btn">
+      <a routerLink="profile" class="btn" (click) = "goodLogin()" >
         Sign In
       </a>
     </form>
   </main>
-
-  <footer>
-    copyright: NITB LLC 2018
-  </footer>
+  </body>
+  <app-profile *ngIf="goodLog == 2"></app-profile>
