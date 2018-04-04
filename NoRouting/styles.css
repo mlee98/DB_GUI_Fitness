@@ -119,6 +119,18 @@ footer{
 	width:69%;
 }
 
+#workouts{
+	border-right-style: solid;
+	border-right-width: 3px;
+	border-left-style: solid;
+	border-left-width: 3px;
+	height:81%;
+	padding-top:;
+	text-align: center;
+	vertical-align:middle;
+	background-color:#f0f5f5;
+}
+
 .btn{
 	-webkit-appearance: button;
     -moz-appearance: button;
