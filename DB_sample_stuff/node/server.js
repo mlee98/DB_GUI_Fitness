@@ -74,19 +74,19 @@ server.route({
     method: 'POST',
     path: '/addUser',
     handler: function (request, reply) {
-        let userid = request.payload[userid];
-        let fName = request.payload[fName];
-        let lName = request.payload[lName];
-        let Height = request.payload[Height];
-        let Weight = request.payload[Weight];
-        let age = request.payload[age];
+        let userid = request.payload['userid'];
+        let fName = request.payload['fName'];
+        let lName = request.payload['lName'];
+        let Height = request.payload['Height'];
+        let Weight = request.payload['Weight'];
+        let Age = request.payload['Age'];
 
-        let query = 'INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`)';
-        query += (' VALUES (' + userid + ',"' + fName + '","' + lName + '",' + Height + ',' + Weight + ',' + age + ');');
+        let query = 'INSERT INTO UserInfo (userid, fName, lName, Height, Weight, Age)';
+        query += " VALUES (\'" + userid + "\', \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\')";
         connection.query(query, function (error, results, fields) {
             if (error)
                 throw error;
-            reply(query);
+            reply("User info added: " + query);
         });
     }
 });
@@ -96,7 +96,7 @@ server.route({
     method: 'GET',
     path: '/accounts',
     handler: function (request, reply) {
-        connection.query('SELECT * FROM User_info', function (error, results, fields) {
+        connection.query('SELECT * FROM UserInfo', function (error, results, fields) {
             if (error)
                 throw error;
             let accNames = '';
