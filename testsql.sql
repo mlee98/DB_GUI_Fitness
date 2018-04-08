@@ -11,19 +11,20 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema DB_GUI
 -- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `DB_GUI` ;
+CREATE SCHEMA IF NOT EXISTS `DB_GUI` ;
 USE `DB_GUI` ;
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`User_info`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`User_info` (
-  `userid` INT NOT NULL,
+  `userid` VARCHAR(45) NOT NULL,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
-  `Height` INT NULL,
-  `Weight` INT NULL,
-  `Age` INT NULL,
+  `Height` VARCHAR(45) NULL,
+  `Weight` VARCHAR(45) NULL,
+  `Age` VARCHAR(45) NULL,
+  `username` VARCHAR(45) NULL,
   PRIMARY KEY (`userid`))
 ENGINE = InnoDB;
 
@@ -32,9 +33,9 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
-  `user_id` INT NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`username`))
 ENGINE = InnoDB;
 
 
@@ -125,8 +126,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`) VALUES (123, 'Jane', 'Doe', 5.7, 160, 28);
-INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`) VALUES (456, 'John', 'Doe', 6.3, 210, 25);
+INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`, `username`) VALUES ('123', 'Jane', 'Doe', '5.7', '160', '28', NULL);
+INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`, `username`) VALUES ('456', 'John', 'Doe', '6.3', '210', '25', NULL);
 
 COMMIT;
 
@@ -196,3 +197,4 @@ INSERT INTO `DB_GUI`.`Allergies` (`name`, `description`) VALUES ('Meat', 'Beef,P
 INSERT INTO `DB_GUI`.`Allergies` (`name`, `description`) VALUES ('Seeds', 'Seasme,Sunflower,Poppy,Pumpkin');
 
 COMMIT;
+
