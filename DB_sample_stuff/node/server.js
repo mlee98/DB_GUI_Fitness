@@ -17,6 +17,8 @@ var connection = mysql.createConnection({
     database : 'DB_GUI'
 });
 
+connection.connect();
+
 
 server.route({
     method: 'GET',
@@ -69,29 +71,90 @@ server.route({
 
 
 server.route({
-    method: 'GET',
-    path: '/{name}',
+    method: 'POST',
+    path: '/addUser',
     handler: function (request, reply) {
-        console.log('Server processing /name request');
-        reply('lashj;jaf, ' + encodeURIComponent(request.params.name) + '!');
+        let userid = request.payload[userid];
+        let fName = request.payload[fName];
+        let lName = request.payload[lName];
+        let Height = request.payload[Height];
+        let Weight = request.payload[Weight];
+        let age = request.payload[age];
+
+        let query = 'INSERT INTO `DB_GUI`.`User_info` (`userid`, `fName`, `lName`, `Height`, `Weight`, `Age`)';
+        query += (' VALUES (' + userid + ',"' + fName + '","' + lName + '",' + Height + ',' + Weight + ',' + age + ');');
+        connection.query(query, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply(query);
+        });
     }
 });
 
 //Real Queries
 server.route({
     method: 'GET',
-    path: '/account',
+    path: '/accounts',
     handler: function (request, reply) {
-        connection.connect();
-
         connection.query('SELECT * FROM User_info', function (error, results, fields) {
             if (error)
                 throw error;
-            //Sends back to the client the value of 1 + 1
-            reply('This is it' + results[0].fName);
+            let accNames = '';
+            for (let acc = 0; acc < results.length; acc++) {
+                accNames += results[acc].fName;
+                accNames += ' ';
+                accNames += results[acc].lName;
+                accNames += ' ';
+                accNames += results[acc].Age;
+                accNames += '   ';   
+            }
+            reply(accNames);
+
         });
         //close the connection to MySQL
-        connection.end();
+    }
+});
+
+//Real Queries
+server.route({
+    method: 'GET',
+    path: '/ideal',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Ideal_body', function (error, results, fields) {
+            if (error)
+                throw error;
+            
+            reply(results);
+        });
+        //close the connection to MySQL
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/sleep/insomnia',
+    handler: function (request, reply) {
+        connection.query('SELECT description FROM Sleep WHERE name = "insomnia"', function (error, results, fields) {
+            if (error)
+                throw error;
+
+            reply(results);
+        });
+        //close the connection to MySQL
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/sleep',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Sleep', function (error, results, fields) {
+            if (error)
+                throw error;
+
+            reply(results);
+        });
+        //close the connection to MySQL
     }
 });
 

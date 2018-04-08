@@ -1,5 +1,0 @@
-CREATE DATABASE test;
-USE test;
-CREATE TABLE bob (
-name VARCHAR(20));
-
