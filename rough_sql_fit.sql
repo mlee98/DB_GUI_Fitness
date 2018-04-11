@@ -42,6 +42,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `WorkoutPlan#` INT NOT NULL,
   `PlanDesc` VARCHAR(45) NULL,
@@ -51,6 +52,9 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `Core` VARCHAR(45) NULL,
   PRIMARY KEY (`WorkoutPlan#`))
 ENGINE = InnoDB;
+=======
+
+>>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
 
 
 -- -----------------------------------------------------
@@ -91,6 +95,31 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating Disorders` (
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Sleep` (
+  `SleepID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`SleepID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Disorders` (
+  `DisorderID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`DisorderID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
+  `AllergyID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`AllergyID`))
+ENGINE = InnoDB;
+
+
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Allergies`
@@ -105,11 +134,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Account_Workous`
 -- -----------------------------------------------------
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workous` (
   `UserId` INT NOT NULL,
   `Primary_Area` INT NULL,
   `Share` TINYINT NULL,
   `cardioProg` TINYINT NULL,
+=======
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workouts` (
+  `UserId` INT NOT NULL,
+  `Primary_Area` INT NULL,
+  `Share` TINYINT NULL,
+  `cardioProg` INT NULL,
+>>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
   `upperProg` INT NULL,
   `lowerProg` INT NULL,
   `coreProg` INT NULL,
@@ -159,9 +196,23 @@ COMMIT;
 -- -----------------------------------------------------
 -- Data for table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
+  `WorkoutID` INT NOT NULL,
+  `PlanDesc` VARCHAR(45) NULL,
+  `Cardio` INT NULL,
+  `UpperBody` INT NULL,
+  `LowerBody` INT NULL,
+  `Core` INT NULL,
+  PRIMARY KEY (`WorkoutID`))
+ENGINE = InnoDB;
+
 START TRANSACTION;
 USE `DB_GUI`;
+<<<<<<< HEAD
 INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
+=======
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutID`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', 60, 10, 10, 20);
+>>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
 
 COMMIT;
 
