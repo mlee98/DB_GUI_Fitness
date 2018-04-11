@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Component, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { Tracker } from './domain/models/tracker';
-
 
 const appRoutes: Routes = [
   { path: 'create-account', component: CreateAccountComponent },
@@ -17,7 +17,8 @@ const appRoutes: Routes = [
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  constructor() { }
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private http: HttpClient) { }
   public frontPage: boolean;
   public signIn: boolean;
   public createAccount: boolean;
@@ -31,6 +32,10 @@ export class AppComponent implements OnInit {
     this.frontPage = true;
     this.signIn = false;
     this.createAccount = false;
+
+    this.http.get('https://api.github.com/users/seeschweiler').subscribe(data => {
+      console.log(data);
+    });
   }
 
   public changeToSignIn() {
