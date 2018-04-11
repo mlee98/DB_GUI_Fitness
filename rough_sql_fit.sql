@@ -42,15 +42,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Workouts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
-  `WorkoutPlan#` INT NOT NULL,
-  `Primary Area` VARCHAR(45) NULL,
-  `Exercise_1` VARCHAR(45) NULL,
-  `Exercise_2` VARCHAR(45) NULL,
-  `Exercise_3` VARCHAR(45) NULL,
-  `Exercise_4` VARCHAR(45) NULL,
-  PRIMARY KEY (`WorkoutPlan#`))
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -91,6 +83,31 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating Disorders` (
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Sleep` (
+  `SleepID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`SleepID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Disorders` (
+  `DisorderID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`DisorderID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
+  `AllergyID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Share` TINYINT NOT NULL,
+  PRIMARY KEY (`AllergyID`))
+ENGINE = InnoDB;
+
+
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Allergies`
@@ -105,11 +122,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Account  Workouts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account  Workouts` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workouts` (
   `UserId` INT NOT NULL,
-  `WorkoutPlan` INT NULL,
-  `Completion` TINYINT NULL,
-  `Carryover` TINYINT NULL,
+  `Primary_Area` INT NULL,
+  `Share` TINYINT NULL,
+  `cardioProg` INT NULL,
+  `upperProg` INT NULL,
+  `lowerProg` INT NULL,
+  `coreProg` INT NULL,
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
@@ -142,24 +162,19 @@ COMMIT;
 -- -----------------------------------------------------
 -- Data for table `DB_GUI`.`Workouts`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
+  `WorkoutID` INT NOT NULL,
+  `PlanDesc` VARCHAR(45) NULL,
+  `Cardio` INT NULL,
+  `UpperBody` INT NULL,
+  `LowerBody` INT NULL,
+  `Core` INT NULL,
+  PRIMARY KEY (`WorkoutID`))
+ENGINE = InnoDB;
+
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (1, 'Core', 'Crunches', 'Plank', 'Dips', 'Stairstepper');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (2, 'Core', 'Crunches', 'Flutter Kicks', 'Curls', 'Erg');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (3, 'Core', 'Plank', 'Russian Twists', 'Erg', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (4, 'Core', 'Plank', 'Flutter Kicks', 'Elliptical', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (5, 'Arms', 'Dips', 'Curls', 'Calf Raises', 'Plank');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (6, 'Arms', 'Dips', 'Pushups', 'Leg Presses', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (7, 'Arms', 'Chinups', 'Curls', 'Treadmill', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (8, 'Arms', 'Chinups', 'Pushups', 'Elliptical', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (9, 'Legs', 'Squats', 'Lunges', 'Chinups', 'Crunches');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (10, 'Legs', 'Squats', 'Calf Raises', 'Pushups', 'Flutter Kicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (11, 'Legs', 'Lunges', 'Leg Presses', 'Treadmill', 'Curls');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (12, 'Legs', 'Lunges', 'Calf Raises', 'Stairstepper', 'Dips');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (13, 'Cardio', 'Treadmill', 'Elliptical', 'Pushups', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (14, 'Cardio', 'Treadmill', 'Stairstepper', 'Curls', 'Flutter Kicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (15, 'Cardio', 'Elliptical', 'Stairstepper', 'Crunches', 'Calf Raises');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutID`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', 60, 10, 10, 20);
 
 COMMIT;
 
