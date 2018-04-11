@@ -1,6 +1,8 @@
 'use strict';
 
 const Hapi = require('hapi');
+const async = require('async');
+
 
 const server = new Hapi.Server();
 server.connection({ port: 3000, host: '0.0.0.0' });
@@ -14,7 +16,8 @@ var connection = mysql.createConnection({
     host     : 'mysql',
     user     : 'root',
     password : 'go_away!',
-    database : 'DB_GUI'
+    database: 'DB_GUI',
+    multipleStatements: true
 });
 
 connection.connect();
@@ -72,7 +75,7 @@ server.route({
 
 server.route({
     method: 'POST',
-    path: '/addUser',
+    path: '/accounts/addUser',
     handler: function (request, reply) {
         let userid = request.payload['userid'];
         let fName = request.payload['fName'];
@@ -80,9 +83,10 @@ server.route({
         let Height = request.payload['Height'];
         let Weight = request.payload['Weight'];
         let Age = request.payload['Age'];
+        let UserName = request.payload['UserName'];
 
-        let query = 'INSERT INTO UserInfo (userid, fName, lName, Height, Weight, Age)';
-        query += " VALUES (\'" + userid + "\', \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\')";
+        let query = 'INSERT INTO UserInfo (userid, fName, lName, Height, Weight, Age, UserName)';
+        query += " VALUES (\'" + userid + "\', \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
         connection.query(query, function (error, results, fields) {
             if (error)
                 throw error;
@@ -101,6 +105,8 @@ server.route({
                 throw error;
             let accNames = '';
             for (let acc = 0; acc < results.length; acc++) {
+                accNames += results[acc].UserId;
+                accNames += ' ';
                 accNames += results[acc].fName;
                 accNames += ' ';
                 accNames += results[acc].lName;
@@ -114,6 +120,166 @@ server.route({
         //close the connection to MySQL
     }
 });
+
+server.route({
+    method: 'POST',
+    path: '/accounts/addAllergy',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        let Name = request.payload['Name'];
+        let Share = request.payload['Share'];
+        let query = 'INSERT INTO Account_Allergies (AllergyID, UserId, Name, Share)';
+        query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
+        connection.query(query, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply("Allergy added: " + query);
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/addSleepDisorder',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        let Name = request.payload['Name'];
+        let Share = request.payload['Share'];
+        let query = 'INSERT INTO Account_Sleep (SleepID, UserId, Name, Share)';
+        query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
+        connection.query(query, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply("Sleep Disorder added: " + query);
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/addEatDisorder',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        let Name = request.payload['Name'];
+        let Share = request.payload['Share'];
+        let query = 'INSERT INTO Account_Disorders (DisorderID, UserId, Name, Share)';
+        query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
+        connection.query(query, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply("Eating Disorder added: " + query);
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/removeUser',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        let deleteAccount = 'DELETE FROM UserInfo WHERE UserId = ' + UserId + ';';
+        let deleteDisorders = 'DELETE FROM Account_Disorders WHERE UserId = ' + UserId + ';';
+        let deleteAllergies = 'DELETE FROM Account_Allergies WHERE UserId = ' + UserId + ';';
+        let deleteSleep = 'DELETE FROM Account_Sleep WHERE UserId = ' + UserId + ';';
+        connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteSleep, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply('User Deleted');
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/findSimilarUsers',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        let commonCategory = request.payload['commonCategory'];
+        let condition = request.payload['condition'];
+        let table = '';
+        if (commonCategory == 'Allergy') {
+            table = 'Account_Allergies';
+        }
+        else {
+            if (commonCategory == 'sDisorder') {
+                table = 'Account_Sleep';
+            } else {
+                if (commonCategory == 'eDisorder') {
+                    table = 'Account_Disorders';
+                }
+            }
+        }
+        let query = 'SELECT UserName FROM ' + table + ' NATURAL JOIN UserInfo WHERE Name = "' + condition + '" AND UserId != ' + UserId + ' AND Share = '+ '1';
+        connection.query(query, function (error, users, fields) {
+            if (error)
+                throw error;
+            let usernames = '';
+            for (let i = 0; i < users.length; i++) {
+                usernames += (' ' + users[i].UserName);
+            }
+            reply(usernames);
+        });
+        
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/test',
+    handler: function (request, reply) {
+        
+        let query2 = 'SELECT * FROM Account_Allergies NATURAL JOIN UserInfo WHERE Name = "Citrus" AND UserId != 15';
+        connection.query(query2, function (error, users, fields) {
+            if (error)
+                throw error;
+            reply(users);
+        });
+    }
+});
+
+
+server.route({
+    method: 'GET',
+    path: '/accounts/allergies',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Account_Allergies', function (error, results, fields) {
+            if (error)
+                throw error;
+
+            reply(results);
+        });
+        //close the connection to MySQL
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/accounts/eatDisorders',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Account_Disorders', function (error, results, fields) {
+            if (error)
+                throw error;
+
+            reply(results);
+        });
+        //close the connection to MySQL
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/accounts/sleepDisorders',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Account_Sleep', function (error, results, fields) {
+            if (error)
+                throw error;
+
+            reply(results);
+        });
+        //close the connection to MySQL
+    }
+});
+
 
 //Real Queries
 server.route({
@@ -129,6 +295,8 @@ server.route({
         //close the connection to MySQL
     }
 });
+
+
 
 server.route({
     method: 'GET',
