@@ -1,6 +1,7 @@
+import { AccountRepostitory } from './../domain/account-repository.service';
 import { Account } from './../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
-import { Tracker } from '../domain/models/tracker';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,8 +9,12 @@ import { Tracker } from '../domain/models/tracker';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  constructor() {}
-  @Input() public track: Tracker;
+  constructor(
+    private accountRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
+  @Input()
   public pass: string;
   public username: string;
   public goodLog: number;
@@ -20,19 +25,15 @@ export class SignInComponent implements OnInit {
     this.username = '';
     this.goodLog = 0;
   }
+
+
   public goodLogin() {
-    for (let i = 0; i < this.track.accounts.length; i++) {
-      if (
-        this.track.accounts[i].password === this.pass &&
-        this.track.accounts[i].username === this.username
-      ) {
-        this.goodLog = 2;
-        this.accToPass = this.track.accounts[i];
-        return;
+    this.accountRepository.login(this.username, this.pass).subscribe(data => {
+      const usernameRecieved = data[0].username;
+      const userId = data[0].id;
+      if (usernameRecieved !== '') {
+        this.router.navigateByUrl('account/' + userId);
       }
-    }
-    this.pass = '';
-    this.username = '';
-    this.goodLog = 1;
+    });
   }
 }

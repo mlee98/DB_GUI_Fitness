@@ -1,3 +1,4 @@
+import { ACCOUNTS_ROUTES } from './account-routes';
 import { ProfileComponent } from './profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -27,10 +28,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
-    ),
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'signIn', pathMatch: 'full' }
+    ]),
     FormsModule,
     HttpClientModule
   ],
