@@ -40,15 +40,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DB_GUI`.`Workouts`
+-- Table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `WorkoutPlan#` INT NOT NULL,
-  `Primary Area` VARCHAR(45) NULL,
-  `Exercise_1` VARCHAR(45) NULL,
-  `Exercise_2` VARCHAR(45) NULL,
-  `Exercise_3` VARCHAR(45) NULL,
-  `Exercise_4` VARCHAR(45) NULL,
+  `PlanDesc` VARCHAR(45) NULL,
+  `Cardio` VARCHAR(45) NULL,
+  `UpperBody` VARCHAR(45) NULL,
+  `LowerBody` VARCHAR(45) NULL,
+  `Core` VARCHAR(45) NULL,
   PRIMARY KEY (`WorkoutPlan#`))
 ENGINE = InnoDB;
 
@@ -103,13 +103,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DB_GUI`.`Account  Workouts`
+-- Table `DB_GUI`.`Account_Workous`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account  Workouts` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workous` (
   `UserId` INT NOT NULL,
-  `WorkoutPlan` INT NULL,
-  `Completion` TINYINT NULL,
-  `Carryover` TINYINT NULL,
+  `Primary_Area` INT NULL,
+  `Share` TINYINT NULL,
+  `cardioProg` TINYINT NULL,
+  `upperProg` INT NULL,
+  `lowerProg` INT NULL,
+  `coreProg` INT NULL,
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
@@ -121,6 +124,20 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Ideal_Sleep` (
   `AgeRange` VARCHAR(45) NOT NULL,
   `HoursSleep` VARCHAR(45) NULL,
   PRIMARY KEY (`AgeRange`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Workouts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
+  `WorkoutPlan#` INT NOT NULL,
+  `Primary Area` VARCHAR(45) NULL,
+  `Exercise1` VARCHAR(45) NULL,
+  `Exercise2` VARCHAR(45) NULL,
+  `Exercise3` VARCHAR(45) NULL,
+  `Exercise4` VARCHAR(45) NULL,
+  PRIMARY KEY (`WorkoutPlan#`))
 ENGINE = InnoDB;
 
 
@@ -140,26 +157,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `DB_GUI`.`Workouts`
+-- Data for table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (1, 'Core', 'Crunches', 'Plank', 'Dips', 'Stairstepper');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (2, 'Core', 'Crunches', 'Flutter Kicks', 'Curls', 'Erg');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (3, 'Core', 'Plank', 'Russian Twists', 'Erg', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (4, 'Core', 'Plank', 'Flutter Kicks', 'Elliptical', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (5, 'Arms', 'Dips', 'Curls', 'Calf Raises', 'Plank');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (6, 'Arms', 'Dips', 'Pushups', 'Leg Presses', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (7, 'Arms', 'Chinups', 'Curls', 'Treadmill', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (8, 'Arms', 'Chinups', 'Pushups', 'Elliptical', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (9, 'Legs', 'Squats', 'Lunges', 'Chinups', 'Crunches');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (10, 'Legs', 'Squats', 'Calf Raises', 'Pushups', 'Flutter Kicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (11, 'Legs', 'Lunges', 'Leg Presses', 'Treadmill', 'Curls');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (12, 'Legs', 'Lunges', 'Calf Raises', 'Stairstepper', 'Dips');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (13, 'Cardio', 'Treadmill', 'Elliptical', 'Pushups', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (14, 'Cardio', 'Treadmill', 'Stairstepper', 'Curls', 'Flutter Kicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (15, 'Cardio', 'Elliptical', 'Stairstepper', 'Crunches', 'Calf Raises');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise_1`, `Exercise_2`, `Exercise_3`, `Exercise_4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
+INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
 
 COMMIT;
 
@@ -266,5 +268,30 @@ INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('14-17', '
 INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('18-25', '7-9');
 INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('26-64', '7-9');
 INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('65+', '7-9');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Workouts`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (1, 'Core', 'Crunches', 'Plank', 'Dips', 'Stairstepper');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (2, 'Core', 'Crunches', 'Flutterkicks', 'Curls', 'Erg');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (3, 'Core', 'Plank', 'Russian Twists', 'Erg', 'Lunges');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (4, 'Core', 'Plank', 'Flutterkicks', 'Elliptical', 'Squats');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (5, 'Arms', 'Dips', 'Curls', 'Calf Raises', 'Plank');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (6, 'Arms', 'Dips', 'Pushups', 'Leg Presses', 'Russian Twists');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (7, 'Arms', 'Chinups', 'Curls', 'Treadmill', 'Squats');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (8, 'Arms', 'Chinups', 'Pushups', 'Elliptical', 'Lunges');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (9, 'Legs', 'Squats', 'Lunges', 'Chinups', 'Crunches');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (10, 'Legs', 'Squats', 'Calf Raises', 'Pushups', 'Flutterkicks');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (11, 'Legs', 'Lunges', 'Leg Presses', 'Treadmill', 'Curls');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (12, 'Legs', 'Lunges', 'Calf Raises', 'Stairstepper', 'Dips');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (13, 'Cardio', 'Treadmill', 'Elliptical', 'Pushups', 'Russian Twists');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (14, 'Cardio', 'Treadmill', 'Stairstepper', 'Curls', 'Flutterkicks');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (15, 'Cardio', 'Elliptical', 'Stairstepper', 'Crunches', 'Calf Raises');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
 
 COMMIT;
