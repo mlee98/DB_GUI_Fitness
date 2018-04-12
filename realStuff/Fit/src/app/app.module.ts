@@ -1,30 +1,15 @@
-import { ACCOUNTS_ROUTES } from './account-routes';
-import { ProfileComponent } from './profile/profile.component';
+import { AccountRepostitory } from './domain/account-repository.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { InputComponent } from './input/input.component';
-import { WorkoutComponent } from './workout/workout.component';
+import { AccountModule } from './accounts/account.module';
 
-const appRoutes: Routes = [
-  {path: 'sign-in', component: SignInComponent},
-  {path: 'create-account', component: CreateAccountComponent},
-  {path: 'profile', component: ProfileComponent}
-  ];
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent,
-    CreateAccountComponent,
-    ProfileComponent,
-    InputComponent,
-    WorkoutComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +17,12 @@ const appRoutes: Routes = [
       { path: '', redirectTo: 'signIn', pathMatch: 'full' }
     ]),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AccountModule
   ],
-  providers: [],
+  providers: [
+    AccountRepostitory
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

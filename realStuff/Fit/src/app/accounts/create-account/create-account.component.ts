@@ -1,7 +1,8 @@
-import { Account } from './../domain/models/Account';
+import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Tracker } from '../domain/models/tracker';
 import { EventEmitter } from 'protractor';
+import { AccountRepostitory } from '../../domain/account-repository.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -10,9 +11,12 @@ import { EventEmitter } from 'protractor';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public acocuntRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
   public acc: Account;
-  @Input() public track: Tracker;
   public signIn: boolean;
   public createAcc: boolean;
 
@@ -25,9 +29,13 @@ export class CreateAccountComponent implements OnInit {
     this.createAcc = true;
   }
   public addAcc() {
-    this.track.accounts.push(this.acc);
-    this.acc = {};
+    this.acocuntRepository.createAccount(this.acc).subscribe(data => {
+      if (data[0].success === true) {
+        this.router.navigateByUrl('signIn');
+      }
+    });
   }
+
   public goToSignIn() {
     this.signIn = true;
     this.createAcc = false;

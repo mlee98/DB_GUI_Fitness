@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountRepostitory } from '../../domain/account-repository.service';
 
 @Component({
   selector: 'app-workout',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public acocuntRepository: AccountRepostitory
+  ) { }
 
   ngOnInit() {
   }

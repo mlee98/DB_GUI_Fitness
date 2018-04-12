@@ -13,4 +13,5 @@ export class Account {
   calsEaten?: Array<number>;
   calsBurned?: Array<number>;
   goal?: string;
+  public?: boolean;
 }

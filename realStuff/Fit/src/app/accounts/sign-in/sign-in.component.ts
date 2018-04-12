@@ -1,5 +1,5 @@
-import { AccountRepostitory } from './../domain/account-repository.service';
-import { Account } from './../domain/models/Account';
+import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -29,11 +29,10 @@ export class SignInComponent implements OnInit {
 
   public goodLogin() {
     this.accountRepository.login(this.username, this.pass).subscribe(data => {
-      const usernameRecieved = data[0].username;
-      const userId = data[0].id;
-      if (usernameRecieved !== '') {
-        this.router.navigateByUrl('account/' + userId);
-      }
+      console.log(data);
+       if (data[0].success === true) {
+        this.router.navigateByUrl('account/' + data[0].id);
+       }
     });
   }
 }

@@ -1,3 +1,4 @@
+import { Account } from './models/Account';
 import { catchError } from 'rxjs/operators';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
@@ -26,7 +27,7 @@ export abstract class Repostitory<T> {
   public login(user: string, pass: string): Observable<T[]> {
     // tslint:disable-next-line:prefer-const
     let data = {username: user, password: pass};
-    return this.httpClient.post(`${this.endPoint}`, data, this.httpOptions).pipe(
+    return this.httpClient.post(`${this.endPoint}/signIn`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
@@ -37,6 +38,20 @@ export abstract class Repostitory<T> {
     );
   }
 
+  public createAccount(acc: Account): Observable<T[]> {
+    const data = acc;
+    return this.httpClient.post(`${this.endPoint}/createAccount`, data, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
+
+  public addCals(calEaten: number, calsBurned: number, id: number): Observable<T[]> {
+    const data = {};
+    return this.httpClient.post(`${this.endPoint}/account/${id}/Cals`, data, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
 
   protected handleException(exception: any) {
     // tslint:disable-next-line:prefer-const
