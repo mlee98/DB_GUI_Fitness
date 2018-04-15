@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
   `Weight` VARCHAR(45) NULL,
   `Age` VARCHAR(45) NULL,
   `UserName` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 

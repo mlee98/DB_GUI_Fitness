@@ -1,7 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-const async = require('async');
+const crypto = require('crypto');
 
 
 const server = new Hapi.Server();
@@ -83,13 +83,34 @@ server.route({
         let Weight = request.payload['Weight'];
         let Age = request.payload['Age'];
         let UserName = request.payload['UserName'];
+        let Password = request.payload['Password'];
 
-        let query = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName)';
-        query += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
+        let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
+        
+
+        let query = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Password)';
+        query += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\',\'" + hashedPW + "\' )";
         connection.query(query, function (error, results, fields) {
             if (error)
                 throw error;
             reply("User info added: " + query);
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/login',
+    handler: function (request, reply) {
+        let UserName = request.payload['UserName'];
+        let Password = request.payload['Password'];
+        let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
+
+        let query = "SELECT UserId FROM UserInfo WHERE Username = \'" + UserName + "\' AND Password = \'" + hashedPW + "\'";
+        connection.query(query, function (error, results, fields) {
+            if (error)
+                throw error;
+            reply("You're in " + results);
         });
     }
 });
