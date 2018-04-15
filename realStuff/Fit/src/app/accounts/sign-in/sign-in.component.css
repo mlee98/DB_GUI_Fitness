@@ -1,0 +1,22 @@
+#mass{
+  background-color: rgb(192,219,186);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main{
+  max-width: 100%;
+}
+
+span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+  background-color: black;
+  color: white;
+}

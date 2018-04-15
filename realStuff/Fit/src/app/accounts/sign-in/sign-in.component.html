@@ -1,19 +1,26 @@
-<body class="container" *ngIf="goodLog == 0 || goodLog == 1">
-  <main class="container" id="sI">
-    <form name="login">
+<body id="mass" class="Aligner col-md-12" *ngIf="goodLog == 0 || goodLog == 1">
+  <main class="Aligner-item container" id="sI">
+    <form  name="login">
       <div class="alert alert-danger" *ngIf="goodLog == 1" > bad username/password </div>
+      <span id="head"><h2>Sign In</h2></span>
+      <br />
+      <span id="user">
+      <label class="col-md-1" for="username">Username: </label>
+      <input class="col-md-3" type="text" name="user" id="user" [(ngModel)] = "username" />
+      </span>
       <br>
-      <label for="username">Username: </label>
-      <input type="text" name="user" id="user" [(ngModel)] = "username" />
+
+      <span id="pass">
+      <label class="col-md-1" for="password">Password: </label>
+      <input class="col-md-3" type="text" name="pass" id="pass" [(ngModel)] = "pass"/>
+      </span>
+
       <br>
-      <br>
-      <label for="password">Password: </label>
-      <input type="text" name="pass" id="pass" [(ngModel)] = "pass"/>
-      <br>
-      <br>
-      <a routerLink="profile" class="btn" (click) = "goodLogin()" >
+      <span id="enter">
+      <a routerLink="profile" class="btn btn-primary" (click) = "goodLogin()" >
         Sign In
       </a>
+      </span>
     </form>
   </main>
   </body>
