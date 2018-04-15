@@ -1,23 +1,26 @@
-<html>
-<body class="container">
-  <header class="container">
-    <h1>"Fitness App"</h1>
-  </header>
-  <main class="container" id="index" *ngIf="frontPage">
-    <br>
-    <a routerLink="sign-in" class="btn" (click)="changeToSignIn()">
-      Sign In
-    </a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a routerLink="create-account" class="btn" (click)="changeToCreateAccount()">
-      Create Account
-    </a>
-  </main>
-  <app-sign-in *ngIf="signIn"></app-sign-in>
-  <app-create-account *ngIf="createAccount"></app-create-account>
-</body>
+<div class="row">
+  <span class="float-left col-md-6">
+    <h2>Fitness App</h2>
+  </span>
+  <br />
+  <span class="float-right col-md-6 align-bottom">
+    <ul class="nav justify-content-end align-bottom">
+      <li class="nav-item col-md-3 align-bottom">
+        Sign In
+      </li>
+      <li class="nav-item col-md-4 align-bottom">
+        Create Account
+      </li>
+    </ul>
+  </span>
+</div>
 
-</html>
+<div id="image" class="Aligner">
+  <img class="Aligner-item" src="assets/fitness.jpg">
+</div>
+
+<footer>
+  Copyright: NITB LLC 2018
+</footer>
+
+

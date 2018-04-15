@@ -1,126 +1,37 @@
-*{
-	box-sizing: border-box;
+.row{
+  border-bottom-style:solid;
+  background-color: rgb(192, 219, 186);
+  vertical-align: bottom;
 }
 
-body{
-	vertical-align:center;
-	text-align:center;
-	background-color:black;
+h2{
+  margin-left: 10%;
 }
 
-header{
-	padding-top:3.5%;
-	padding-bottom: 3.5%;
-	background-color:#4d94ff;
-	text-align: center;
-	vertical-align:middle;
-	border-bottom-style: solid;
-	border-bottom-width: 3px;
-	border-right-style: solid;
-	border-right-width: 3px;
-	border-left-style: solid;
-	border-left-width: 3px;
+li{
+  margin-top: 2%;
 }
 
-
-
-#sI{
-	border-right-style: solid;
-	border-right-width: 3px;
-	border-left-style: solid;
-	border-left-width: 3px;
-	height:81%;
-	padding-top:14%;
-	text-align: center;
-	vertical-align:middle;
-	background-color:#f0f5f5;
+#image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
 }
 
-#index{
-	border-right-style: solid;
-	border-right-width: 3px;
-	border-left-style: solid;
-	border-left-width: 3px;
-	height:81%;
-	padding-top:14%;
-	text-align: center;
-	vertical-align:middle;
-	background-color:#f0f5f5;
-}
-
-#profile{
-	border-right-style: solid;
-	border-right-width: 3px;
-	border-left-style: solid;
-	border-left-width: 3px;
-	height:81%;
-	padding-top:14%;
-	text-align: center;
-	vertical-align:middle;
-	background-color:#f0f5f5;
-}
-
-
-
-#creAcc{
-	border-right-style: solid;
-	border-right-width: 3px;
-	border-left-style: solid;
-	border-left-width: 3px;
-	height:92%;
-	padding-top:1%;
-	text-align: center;
-	vertical-align:middle;
-	background-color:#f0f5f5;
+img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-height:100%;
+  opacity: .5;
 }
 
 footer{
-	color: white;
-	background:gray;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 5%;
-}
-
-
-
-#createAccount{
-
-	margin-left:19%;
-	margin-right:20%;
-
-
-}
-
-#createAccount{
-	text-align:left;
-	float:inline-block;
-}
-
-#createAccount label{
-	width:30%;
-}
-
-#createAccount input{
-	width:69%;
-}
-
-.btn{
-	-webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-
-    color: initial;
-	width: 30%;
-	background-color: #d966ff;
-	border: none;
-
-}
-
-a{
-	text-decoration:none;
-	color: white;
+  border-top-style: solid;
+  background-color: rgb(192,219,186);
+  position: absolute;
+  bottom:0;
+  height: 10%;
+  width: 100%;
 }
