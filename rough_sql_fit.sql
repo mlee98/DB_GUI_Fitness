@@ -18,7 +18,7 @@ USE `DB_GUI` ;
 -- Table `DB_GUI`.`UserInfo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
-  `UserId` VARCHAR(45) NOT NULL,
+  `UserId` INT NOT NULL AUTO_INCREMENT,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
