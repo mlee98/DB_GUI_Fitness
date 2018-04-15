@@ -77,7 +77,6 @@ server.route({
     method: 'POST',
     path: '/accounts/addUser',
     handler: function (request, reply) {
-        let userid = request.payload['userid'];
         let fName = request.payload['fName'];
         let lName = request.payload['lName'];
         let Height = request.payload['Height'];
@@ -85,8 +84,8 @@ server.route({
         let Age = request.payload['Age'];
         let UserName = request.payload['UserName'];
 
-        let query = 'INSERT INTO UserInfo (userid, fName, lName, Height, Weight, Age, UserName)';
-        query += " VALUES (\'" + userid + "\', \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
+        let query = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName)';
+        query += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
         connection.query(query, function (error, results, fields) {
             if (error)
                 throw error;
@@ -209,7 +208,7 @@ server.route({
                 }
             }
         }
-        let query = 'SELECT UserName FROM ' + table + ' NATURAL JOIN UserInfo WHERE Name = "' + condition + '" AND UserId != ' + UserId + ' AND Share = '+ '1';
+        let query = 'SELECT UserName FROM ' + table + ' NATURAL JOIN UserInfo WHERE Name = "' + condition + '" AND UserId != ' + UserId + ' AND Share = 1';
         connection.query(query, function (error, users, fields) {
             if (error)
                 throw error;
