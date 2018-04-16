@@ -23,7 +23,7 @@ export class InputComponent implements OnInit {
   public updateCals(calsEaten: number, calsBurned: number) {
     this.acocuntRepository.addCals(calsEaten, calsBurned, this.acc.id).subscribe(data => {
       if (data[0].success === true) {
-        this.router.navigateByUrl('signIn');
+        this.router.navigateByUrl('');
       }
     });
   }
