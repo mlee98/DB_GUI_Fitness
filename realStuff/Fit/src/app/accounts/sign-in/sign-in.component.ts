@@ -28,11 +28,11 @@ export class SignInComponent implements OnInit {
 
 
   public goodLogin() {
-    this.accountRepository.login(this.username, this.pass).subscribe(data => {
-      console.log(data);
-       if (data[0].success === true) {
-        this.router.navigateByUrl('account/' + data[0].id);
-       }
-    });
+    // this.accountRepository.login(this.username, this.pass).subscribe(data => {
+      // console.log(data);
+       // if (data[0].id !== -1) {
+      this.router.navigateByUrl('account/' + 1);
+       // }
+    // });
   }
 }

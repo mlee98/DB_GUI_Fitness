@@ -1,6 +1,7 @@
 import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { AccountRepostitory } from '../../domain/account-repository.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,13 +11,17 @@ import { AccountRepostitory } from '../../domain/account-repository.service';
 export class ProfileComponent implements OnInit {
 
   constructor(
-    public acocuntRepository: AccountRepostitory
+    public acocuntRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router
   ) { }
   @Input() acc: Account;
 
   ngOnInit() {
-    this.acocuntRepository.profile(this.acc.id).subscribe(data => {
-        this.acc = data[0];
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.getAcc(+params.id).subscribe(data => {
+        this.acc = data;
+      });
     });
   }
 }

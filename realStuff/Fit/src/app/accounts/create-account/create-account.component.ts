@@ -17,27 +17,16 @@ export class CreateAccountComponent implements OnInit {
     private router: Router
   ) { }
   public acc: Account;
-  public signIn: boolean;
-  public createAcc: boolean;
 
   ngOnInit() {
     this.acc = {};
     this.acc.disabilities = [];
-    this.acc.calsBurned = [500];
-    this.acc.calsEaten = [800];
-    this.signIn = false;
-    this.createAcc = true;
+    this.acc.calsBurned = [];
+    this.acc.calsEaten = [];
   }
   public addAcc() {
     this.acocuntRepository.createAccount(this.acc).subscribe(data => {
-      if (data[0].success === true) {
         this.router.navigateByUrl('signIn');
-      }
     });
-  }
-
-  public goToSignIn() {
-    this.signIn = true;
-    this.createAcc = false;
   }
 }

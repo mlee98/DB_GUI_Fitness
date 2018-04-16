@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute, Router } from '@angular/router';
 import { CreateAccountComponent } from '../create-account/create-account.component';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { AccountRepostitory } from '../../domain/account-repository.service';
@@ -12,7 +12,9 @@ import { AccountRepostitory } from '../../domain/account-repository.service';
 export class HomepageComponent implements OnInit {
   // tslint:disable-next-line:no-shadowed-variable
   constructor(
-    public acocuntRepository: AccountRepostitory
+    public acocuntRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router
   ) { }
   public frontPage: boolean;
   public signIn: boolean;
@@ -28,13 +30,11 @@ export class HomepageComponent implements OnInit {
   }
 
   public changeToSignIn() {
-    this.frontPage = false;
-    this.signIn = true;
+    this.router.navigateByUrl('signIn');
   }
 
   public changeToCreateAccount() {
-    this.frontPage = false;
-    this.createAccount = true;
+    this.router.navigateByUrl('createAccount');
   }
 
 }

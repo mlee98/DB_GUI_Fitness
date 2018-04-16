@@ -16,14 +16,16 @@ export class InputComponent implements OnInit {
     private router: Router
   ) { }
   public acc: Account;
+  public calsEaten: number;
+  public calsBurned: number;
 
   ngOnInit() {
   }
 
-  public updateCals(calsEaten: number, calsBurned: number) {
-    this.acocuntRepository.addCals(calsEaten, calsBurned, this.acc.id).subscribe(data => {
+  public updateCals() {
+    this.acocuntRepository.addCals(this.calsEaten, this.calsBurned, this.acc.id).subscribe(data => {
       if (data[0].success === true) {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('account/' + 1);
       }
     });
   }
