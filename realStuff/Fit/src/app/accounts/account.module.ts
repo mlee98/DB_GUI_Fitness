@@ -9,6 +9,7 @@ import { ACCOUNTS_ROUTES } from './account-routes';
 import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     InputComponent,
     WorkoutComponent,
     HomepageComponent,
+    SearchComponent,
   ],
   exports: [
       HomepageComponent

@@ -1,6 +1,6 @@
 <html>
 	<body class="container" >
-		<main class="container" id="creAcc" *ngIf="createAcc">
+		<main class="container" id="creAcc">
 			<form name="createAccount" id="createAccount">
 
 				<label for="user">Username: </label>
@@ -28,10 +28,6 @@
 				<input class="text" name="weight" type="text" [(ngModel)] = "acc.weight">
 				<br>
 				<br>
-				<label for="Sleep">Avg Hours of Sleep / Night: </label>
-				<input class="text" name="sleep" type="text" [(ngModel)] = "acc.sleepPerNight">
-				<br>
-				<br>
 				<label for="disabilities">Disabilites: </label>
 				<select multiple name="disabilities" [(ngModel)]="acc.disabilities">
 					<option>peanutz</option>
@@ -54,12 +50,9 @@
 					<option>Gain Muscle</option>
 				</select>
 			</form>
-			<button class="btn btn-primary" (click)="addAcc();goToSignIn()">
+			<button class="btn btn-primary" (click)="addAcc()">
 				Create Account
 			</button>
     </main>
-    <app-sign-in *ngIf="signIn" >
-      here
-    </app-sign-in>
 	</body>
 </html>

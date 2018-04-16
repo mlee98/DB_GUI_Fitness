@@ -37,6 +37,12 @@ export abstract class Repostitory<T> {
       catchError(this.handleException)
     );
   }
+  public search(account: Account): Observable<T[]> {
+    // tslint:disable-next-line:prefer-const
+    return this.httpClient.post(`${this.endPoint}/signIn`, account, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
 
   public profile(id: number): Observable<T[]> {
     return this.httpClient.get(`${this.endPoint}/${id}`,  this.httpOptions).pipe(

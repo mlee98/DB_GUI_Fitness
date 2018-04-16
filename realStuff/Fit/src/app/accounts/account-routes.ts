@@ -1,3 +1,4 @@
+import { SearchComponent } from './search/search.component';
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { InputComponent } from './input/input.component';
@@ -31,5 +32,9 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'account/:accountId/workout',
     component: WorkoutComponent
+  },
+  {
+    path: 'account/:accountId/search',
+    component: SearchComponent
   }
 ];

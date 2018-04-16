@@ -13,4 +13,6 @@ export class Account {
   calsBurned?: Array<number>;
   goal?: string;
   public?: boolean;
+  age?: number;
+
 }
