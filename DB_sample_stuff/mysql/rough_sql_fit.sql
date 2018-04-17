@@ -18,7 +18,7 @@ USE `DB_GUI` ;
 -- Table `DB_GUI`.`UserInfo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
-  `UserId` VARCHAR(45) NOT NULL,
+  `UserId` INT AUTO_INCREMENT,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
@@ -33,9 +33,10 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
-  `Username` VARCHAR(45) NOT NULL,
+  `UserId` INT NOT NULL,
+  `UserName` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NULL,
-  PRIMARY KEY (`Username`))
+  PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
 

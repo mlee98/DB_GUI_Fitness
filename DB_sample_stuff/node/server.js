@@ -22,57 +22,6 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-        console.log('Server processing a / request');
-        reply('Hello, world!');
-    }
-});
-
-//A new route to test connectivity to MySQL
-server.route({
-    method: 'GET',
-    path: '/getData',
-    handler: function (request, reply) {
-        console.log('Server processing a /getData request');
-
-        //Creates the connection
-        connection.connect();
-
-        //Does a simple select, not from a table, but essentially just uses MySQL
-        //to add 1 + 1.
-        //function (error, results, fields){...} is a call-back function that the
-        //MySQL lib uses to send info back such as if there was an error, and/or the
-        //actual results.
-        connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-            if (error)
-                throw error;
-            //Sends back to the client the value of 1 + 1
-            reply ('The solution is ' + results[0].solution);
-
-            //for exemplar purposes, stores the returned value in a variable to be
-            //printed to log
-            var solution = results[0].solution;
-            console.log('The solution is: ', solution);
-        });
-        //close the connection to MySQL
-        connection.end();
-    }
-});
-
-server.route({
-    method: 'POST',
-    path: '/user',
-    handler: function (request, reply) {
-        reply('User Added: ' + request.payload['lName'] + ', '
-            + request.payload['fName']);
-    }
-});
-
-
 server.route({
     method: 'POST',
     path: '/accounts/addUser',
@@ -87,13 +36,24 @@ server.route({
 
         let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
         
+        let getUserId = "SELECT UserId FROM UserInfo WHERE UserName = \'" + UserName + "\'";
 
-        let query = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Password)';
-        query += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\',\'" + hashedPW + "\' )";
-        connection.query(query, function (error, results, fields) {
+        let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName)';
+        uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
+        connection.query(uInfoTable, function (error, r1, fields) {
             if (error)
                 throw error;
-            reply("User info added: " + query);
+            connection.query(getUserId, function (error, r2, fields) {
+                if (error)
+                    throw error;
+                let userID = r2[0].UserId;
+                let loginTable = "INSERT INTO Login (UserId, UserName, Password) VALUES(" + userID + ", \'" + UserName + "\', \'" + hashedPW + "\')";
+                connection.query(loginTable, function (error, r3, fields) {
+                    if (error)
+                        throw error;
+                    reply(userID);
+                });
+            });
         });
     }
 });
@@ -106,11 +66,20 @@ server.route({
         let Password = request.payload['Password'];
         let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
 
-        let query = "SELECT UserId FROM UserInfo WHERE Username = \'" + UserName + "\' AND Password = \'" + hashedPW + "\'";
+        let query = "SELECT * FROM Login";
+        let loginMessage = '';
         connection.query(query, function (error, results, fields) {
             if (error)
                 throw error;
-            reply("You're in " + results);
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].UserName === UserName && results[i].Password === hashedPW) {
+                    loginMessage = "You're in!"
+                    break;
+                }
+                loginMessage = "Username or Password incorrect. Try again";
+            }
+
+            reply(loginMessage);
         });
     }
 });
@@ -137,7 +106,58 @@ server.route({
             reply(accNames);
 
         });
-        //close the connection to MySQL
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/profile',
+    handler: function (request, reply) {
+        let UserId = request.payload['UserId'];
+        connection.query('SELECT * FROM UserInfo WHERE UserId = ' + UserId, function (error, results, fields) {
+            if (error)
+                throw error;
+            let accNames = '';
+            for (let acc = 0; acc < results.length; acc++) {
+                accNames += results[acc].UserId;
+                accNames += ' ';
+                accNames += results[acc].fName;
+                accNames += ' ';
+                accNames += results[acc].lName;
+                accNames += ' ';
+                accNames += results[acc].Height;
+                accNames += ' ';
+                accNames += results[acc].Weight;
+                accNames += ' ';
+                accNames += results[acc].Age;
+                accNames += '   ';
+            }
+            reply(accNames);
+
+        });
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/accounts/loginInfo',
+    handler: function (request, reply) {
+        connection.query('SELECT * FROM Login', function (error, results, fields) {
+            if (error)
+                throw error;
+            let accNames = '';
+            for (let acc = 0; acc < results.length; acc++) {
+                accNames += results[acc].UserId;
+                accNames += ' ';
+                accNames += results[acc].UserName;
+                accNames += ' ';
+                accNames += results[acc].Password;
+                accNames += '   ';
+            }
+            reply(accNames);
+
+        });
+       
     }
 });
 
@@ -201,7 +221,8 @@ server.route({
         let deleteDisorders = 'DELETE FROM Account_Disorders WHERE UserId = ' + UserId + ';';
         let deleteAllergies = 'DELETE FROM Account_Allergies WHERE UserId = ' + UserId + ';';
         let deleteSleep = 'DELETE FROM Account_Sleep WHERE UserId = ' + UserId + ';';
-        connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteSleep, function (error, results, fields) {
+        let deleteLogin = 'DELETE FROM Login WHERE UserId = ' + UserId;
+        connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteSleep + deleteLogin, function (error, results, fields) {
             if (error)
                 throw error;
             reply('User Deleted');
