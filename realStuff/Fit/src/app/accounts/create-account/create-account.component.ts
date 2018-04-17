@@ -10,23 +10,49 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
-
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   public acc: Account;
+  public missingFields: boolean;
 
   ngOnInit() {
     this.acc = {};
     this.acc.disabilities = [];
     this.acc.calsBurned = [];
     this.acc.calsEaten = [];
+    this.acc.username = '';
+    this.acc.goal = '';
+    this.acc.age = 0;
+    this.acc.height = '';
+    this.acc.name = '';
+    this.acc.password = '';
+    this.acc.username = '';
+    this.acc.weight = '';
+    this.missingFields = false;
   }
   public addAcc() {
-    this.acocuntRepository.createAccount(this.acc).subscribe(data => {
+    if (this.missingFields === false) {
+      this.acocuntRepository.createAccount(this.acc).subscribe(data => {
         this.router.navigateByUrl('signIn');
-    });
+      });
+    }
+  }
+  public submitCheck() {
+    if (
+      // this.acc.age === 0 ||
+      this.acc.username === '' ||
+      this.acc.goal === '' ||
+      this.acc.height === '' ||
+      this.acc.name === '' ||
+      this.acc.password === '' ||
+      this.acc.username === '' ||
+      this.acc.weight === ''
+    ) {
+      return false;
+    }
+    return true;
   }
 }

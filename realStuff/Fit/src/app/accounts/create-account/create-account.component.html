@@ -4,7 +4,7 @@
 			<form name="createAccount" id="createAccount">
 
 				<label for="user">Username: </label>
-				<input name="username" class="text" type="text" [(ngModel)] = "acc.username">
+				<input name="username" class="text" type="text" required [(ngModel)] = "acc.username" *ngIf="missingFields">
 				<br>
 				<br>
 				<label for="password">Password: </label>
@@ -50,7 +50,7 @@
 					<option>Gain Muscle</option>
 				</select>
 			</form>
-			<button class="btn btn-primary" (click)="addAcc()">
+			<button class="btn btn-primary" (click)="addAcc()" [disabled]="!submitCheck()">
 				Create Account
 			</button>
     </main>
