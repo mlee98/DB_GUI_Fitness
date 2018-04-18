@@ -1,7 +1,7 @@
 import { Account } from './../../domain/models/Account';
 import { Component, OnInit } from '@angular/core';
-import { AccountRepostitory } from '../..';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccountRepostitory } from '../../domain';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -42,8 +42,8 @@ export class SearchComponent implements OnInit {
   }
 
   public search() {
-     this.accountRepository.search(this.searchAcc).subscribe(data => {
+     // this.accountRepository.search(this.searchAcc).subscribe(data => {
         // this.resultList = data;
-     });
+     // });
   }
 }
