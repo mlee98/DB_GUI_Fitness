@@ -1,0 +1,10 @@
+body{
+  background-color: rgb(192,219,186);
+  height: 100vh;
+}
+
+.btn{
+  background-color: black;
+  border-style: none;
+}
+

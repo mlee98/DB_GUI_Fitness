@@ -14,7 +14,7 @@ import { AccountModule } from './accounts/account.module';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'signIn', pathMatch: 'full' }
+      { path: '', redirectTo: 'profile', pathMatch: 'full' }
     ]),
     FormsModule,
     HttpClientModule,

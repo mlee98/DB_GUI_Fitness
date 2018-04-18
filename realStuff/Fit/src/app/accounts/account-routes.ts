@@ -21,7 +21,8 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-    path: 'account/[accountId]',
+    // path: 'account/[accountId]',
+    path: 'profile',
     component: ProfileComponent
   },
 /*  {

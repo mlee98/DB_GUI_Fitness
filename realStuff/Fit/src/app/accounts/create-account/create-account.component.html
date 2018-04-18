@@ -1,38 +1,38 @@
 <html>
-	<body class="container" >
-		<main class="container" id="creAcc" *ngIf="createAcc">
+	<body>
+		<main id="creAcc" *ngIf="createAcc">
+      <div style="text-align:center"><h3>Create Account</h3></div>
+      <br />
+      <div class="container">
 			<form name="createAccount" id="createAccount">
+        <div id="login">
+				<label for="user" class="col-md-3">Username: </label>
+				<input name="username" class="text col-md-3" type="text" [(ngModel)] = "acc.username">
+				<br>
+				<br>
+				<label for="password" class="col-md-3">Password: </label>
+				<input name="password" class="text col-md-3" type="text" [(ngModel)] = "acc.password">
+				<br>
+				<br>
+				<label for="password" class="col-md-3">Verify Password: </label>
+        <input type="text" class="col-md-3">
+      </div>
+    <hr>
+      <div id="info">
+				<label class="text col-md-3" for="Name">Name: </label>
+				<input class="text col-md-3" name="name" type="text" [(ngModel)] = "acc.name">
 
-				<label for="user">Username: </label>
-				<input name="username" class="text" type="text" [(ngModel)] = "acc.username">
 				<br>
 				<br>
-				<label for="password">Password: </label>
-				<input name="password" class="text" type="text" [(ngModel)] = "acc.password">
+				<label class="text col-md-3" for="height">Height: </label>
+				<input class="text col-md-3" name="height" type="text" [(ngModel)] = "acc.height">
 				<br>
 				<br>
-				<label for="password">Verify Password: </label>
-				<input type="text">
+				<label class="text col-md-3" for="weight">Weight: </label>
+				<input class="text col-md-3" name="weight" type="text" [(ngModel)] = "acc.weight">
 				<br>
 				<br>
-				<label for="Name">Name: </label>
-				<input class="text" name="name" type="text" [(ngModel)] = "acc.name">
-
-				<br>
-				<br>
-				<label for="height">Height: </label>
-				<input class="text" name="height" type="text" [(ngModel)] = "acc.height">
-				<br>
-				<br>
-				<label for="weight">Weight: </label>
-				<input class="text" name="weight" type="text" [(ngModel)] = "acc.weight">
-				<br>
-				<br>
-				<label for="Sleep">Avg Hours of Sleep / Night: </label>
-				<input class="text" name="sleep" type="text" [(ngModel)] = "acc.sleepPerNight">
-				<br>
-				<br>
-				<label for="disabilities">Disabilites: </label>
+				<label class="text col-md-3" for="disabilities">Disabilites: </label>
 				<select multiple name="disabilities" [(ngModel)]="acc.disabilities">
 					<option>peanutz</option>
 					<option>sleep apnia</option>
@@ -44,19 +44,27 @@
 					<option>kosher</option>
 					<option>halal</option>
 					<option>vegetarian</option>
-				</select>
+        </select>
+      </div>
+      <hr>
 				<br>
-				<br>
-				<label for="goal">Goal: </label>
-				<select name="goal" [(ngModel)] = "acc.goal">
+        <br>
+      <div id="goal">
+				<label class="text col-md-3" for="goal">Goal: </label>
+				<select class="text col-md-3" name="goal" [(ngModel)] = "acc.goal">
 					<option>Lose Weight</option>
 					<option>Gain Weight</option>
 					<option>Gain Muscle</option>
-				</select>
-			</form>
+        </select>
+      </div>
+      </form>
+      <br />
+      <div style="text-align:center">
 			<button class="btn btn-primary" (click)="addAcc();goToSignIn()">
 				Create Account
-			</button>
+      </button>
+      </div>
+    </div>
     </main>
     <app-sign-in *ngIf="signIn" >
       here
