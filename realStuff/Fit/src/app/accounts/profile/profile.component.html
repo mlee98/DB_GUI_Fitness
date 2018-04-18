@@ -10,32 +10,37 @@
       <div>
         <h5>height · weight · gender</h5>
       </div>
-		</header>
+    </header>
+    <br />
 		<main class="container" id="profile">
         <div id="tabs" class="container">
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item">
-                <a href="#food" class="nav-link active col-md-3"  data-toggle="tab" role="tab" aria-controls="fall" id="fallTab">Today's Food</a>
+                <a href="#food" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="food" id="fallTab">Today's Food</a>
               </li>
               <li class="nav-item">
-                <a href="#workout" class="nav-link col-md-3"  data-toggle="tab" role="tab" aria-controls="spring">Today's Workout</a>
+                <a href="#workout" class="nav-link"  data-toggle="tab" role="tab" aria-controls="workout">Today's Workout</a>
               </li>
               <li class="nav-item">
-                  <a href="#past" class="nav-link col-md-3"  data-toggle="tab" role="tab" aria-controls="spring">Past Workout</a>
+                <a href="#past" class="nav-link"  data-toggle="tab" role="tab" aria-controls="past">Past Workout</a>
                 </li>
             </ul>
 
-            <div class="tab-content" id="tabCont">
+          <div class="tab-content" id="tabCont">
             <br>
-              <div class="tab-pane active"  role="tabpanel" id="fall">
+            <div class="tab-pane active container"  role="tabpanel" id="food">
+              <app-food-today></app-food-today>
+            </div>
 
+              <div class="tab-pane"  role="tabpanel" id="workout">
 
               </div>
-              <div class="tab-pane"  role="tabpanel" id="spring">
+              <div class="tab-pane"  role="tabpanel" id="past">
 
               </div>
             </div>
           </div>
+
 
 		</main>
 	</body>

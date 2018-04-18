@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-// import { SearchComponent } from './search/search.component';
-=======
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
+
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -10,7 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
 import { InputComponent } from './input/input.component';
 import { WorkoutComponent } from './workout/workout.component';
-import { SearchComponent } from './search/search.component';
+// import { SearchComponent } from './search/search.component';
 export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'homepage',
@@ -25,12 +22,7 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-<<<<<<< HEAD
-    // path: 'account/[accountId]',
-    path: 'profile',
-=======
     path: 'account/:account',
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
     component: ProfileComponent
   },
   {
@@ -40,12 +32,10 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'account/:accountId/workout',
     component: WorkoutComponent
-<<<<<<< HEAD
-=======
-  },
-   {
-    path: 'account/:accountId/search',
-    component: SearchComponent
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
-  }
+   }
+  // ,
+  //  {
+  //   path: 'account/:accountId/search',
+  //   component: SearchComponent
+  // }
 ];
