@@ -22,11 +22,11 @@ export class SearchComponent implements OnInit {
   public fakeAcc: Account;
 
   ngOnInit() {
-    // this.activedRoute.params.subscribe((params: any) => {
-    //  this.accountRepository.getAcc(+params.id).subscribe(data => {
-        // this.userAcc = data;
-    //  });
-    // });
+     this.activedRoute.params.subscribe((params: any) => {
+      this.accountRepository.getAcc(+params.id).subscribe(data => {
+         this.userAcc = data;
+      });
+     });
     this.searchAcc = this.userAcc;
     this.resultList = [];
     this.fakeAcc = {};

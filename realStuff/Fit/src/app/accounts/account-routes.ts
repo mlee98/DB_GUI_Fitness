@@ -31,5 +31,9 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'account/:accountId/workout',
     component: WorkoutComponent
+  },
+  {
+    path: 'account/:accountId/search',
+    component: SearchComponent
   }
 ];

@@ -7,7 +7,7 @@ import { Account } from './models/Account';
 import { Repostitory } from './repository.service';
 
 @Injectable()
-export class AccountRepostitory extends Repostitory<any> {
+export class AccountRepostitory extends Repostitory<Account> {
 
   protected endPoint = 'http://localhost:4200/';
 
