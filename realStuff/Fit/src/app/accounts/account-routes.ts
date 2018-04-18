@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// import { SearchComponent } from './search/search.component';
-=======
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -25,12 +21,7 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-<<<<<<< HEAD
-    // path: 'account/[accountId]',
-    path: 'profile',
-=======
-    path: 'account/:account',
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
+    path: 'account/:accountId',
     component: ProfileComponent
   },
   {
@@ -40,12 +31,5 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'account/:accountId/workout',
     component: WorkoutComponent
-<<<<<<< HEAD
-=======
-  },
-   {
-    path: 'account/:accountId/search',
-    component: SearchComponent
->>>>>>> 4309686264de6c099e0f019cedfabaa0c5bc6861
   }
 ];

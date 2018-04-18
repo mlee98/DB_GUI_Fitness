@@ -2,6 +2,7 @@ import { Account } from './../../domain/models/Account';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
