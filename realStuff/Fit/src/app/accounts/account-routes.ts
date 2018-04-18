@@ -1,4 +1,4 @@
-import { SearchComponent } from './search/search.component';
+// import { SearchComponent } from './search/search.component';
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { InputComponent } from './input/input.component';
@@ -22,12 +22,8 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-<<<<<<< HEAD
     // path: 'account/[accountId]',
     path: 'profile',
-=======
-    path: 'account/:accountId',
->>>>>>> eec88b6ed544c26f9784f02840a97ae66e59a394
     component: ProfileComponent
   },
   {
@@ -37,9 +33,5 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'account/:accountId/workout',
     component: WorkoutComponent
-  },
-  {
-    path: 'account/:accountId/search',
-    component: SearchComponent
   }
 ];

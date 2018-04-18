@@ -15,14 +15,16 @@
         <div id="tabs" class="container">
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item">
-                <a href="#fall" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="fall" id="fallTab">Fall 2017</a>
+                <a href="#food" class="nav-link active col-md-3"  data-toggle="tab" role="tab" aria-controls="fall" id="fallTab">Today's Food</a>
               </li>
               <li class="nav-item">
-                <a href="#spring" class="nav-link"  data-toggle="tab" role="tab" aria-controls="spring">Spring 2018</a>
+                <a href="#workout" class="nav-link col-md-3"  data-toggle="tab" role="tab" aria-controls="spring">Today's Workout</a>
               </li>
+              <li class="nav-item">
+                  <a href="#past" class="nav-link col-md-3"  data-toggle="tab" role="tab" aria-controls="spring">Past Workout</a>
+                </li>
             </ul>
 
-<<<<<<< HEAD
             <div class="tab-content" id="tabCont">
             <br>
               <div class="tab-pane active"  role="tabpanel" id="fall">
@@ -30,47 +32,10 @@
 
               </div>
               <div class="tab-pane"  role="tabpanel" id="spring">
+
               </div>
             </div>
           </div>
-=======
-					<h6 class="float-left">Calories Consumed: {{acc.calsEaten[0]}} </h6>
-					<br>
-					<h6 class="float-left">Calories Burnt:  {{acc.calsBurned[0]}} </h6>
-					<br>
-					<hr>
-					<h5 class="float-left">Net Calories: {{30}} </h5>
-				</span>
-				<span class="col-md-1"></span>
-				<span id="calBurnt" class="col-md-5 text-align-left float-right">
-					<h3 class="text-align-vertical">Today's Workouts</h3>
-					<ul>
-						<li class="float-left">Workout 1: 500 cal</li>
-						<br>
-						<li class="float-left">Workout 2: 850 cal</li>
-						<br>
-						<hr>
-						<h5 class="float-left">Calories Burnt: 1350 cal</h5>
-					</ul>
-				</span>
-			</span>
-
-			<br>
-			<br>
-			<button routerLink="workout" class="btn">
-				See Past Workouts
-			</button>
-			<br>
-			<br>
-			<button routerLink="input" class="btn">
-				Input
-			</button>
-			<br>
-			<br>
-			<button routerLink="search" class="btn">
-        Search
-      </button>
->>>>>>> eec88b6ed544c26f9784f02840a97ae66e59a394
 
 		</main>
 	</body>
