@@ -7,11 +7,12 @@ export class Account {
   name?: string;
   height?: string;
   weight?: string;
-  sleepPerNight?: number;
   disabilities?: Array<string>;
   workouts?: Array<Workout>;
   calsEaten?: Array<number>;
   calsBurned?: Array<number>;
   goal?: string;
   public?: boolean;
+  age?: number;
+
 }
