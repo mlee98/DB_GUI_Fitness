@@ -22,12 +22,7 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-<<<<<<< HEAD
-    // path: 'account/[accountId]',
-    path: 'profile',
-=======
-    path: 'account/:accountId',
->>>>>>> eec88b6ed544c26f9784f02840a97ae66e59a394
+    path: 'account/:account',
     component: ProfileComponent
   },
   {
