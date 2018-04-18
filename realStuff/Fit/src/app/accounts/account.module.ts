@@ -10,7 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FoodTodayComponent } from './food-today/food-today.component';
-// import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   imports: [
@@ -25,7 +25,9 @@ import { FoodTodayComponent } from './food-today/food-today.component';
     InputComponent,
     WorkoutComponent,
     HomepageComponent,
-    FoodTodayComponent
+    FoodTodayComponent,
+    SearchComponent
+
   ],
   exports: [
       HomepageComponent

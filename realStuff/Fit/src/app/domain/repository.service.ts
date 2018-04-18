@@ -18,33 +18,33 @@ export abstract class Repostitory<T> {
 
   constructor(protected httpClient: HttpClient) {}
 
-  public get(): Observable<T[]> {
+  public get(): Observable<T> {
     return this.httpClient.get(`${this.endPoint}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public getAcc(id: number): Observable<T[]> {
+  public getAcc(id: number): Observable<T> {
     return this.httpClient.get(`${this.endPoint}/accounts/${id}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public login(user: string, pass: string): Observable<T[]> {
+  public login(user: string, pass: string): Observable<T> {
     // tslint:disable-next-line:prefer-const
     let data = {username: user, password: pass};
     return this.httpClient.post(`${this.endPoint}/signIn`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
-  public search(account: Account): Observable<T[]> {
+  public search(account: Account): Observable<T> {
     // tslint:disable-next-line:prefer-const
     return this.httpClient.post(`${this.endPoint}/signIn`, account, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public profile(id: number): Observable<T[]> {
+  public profile(id: number): Observable<T> {
     return this.httpClient.get(`${this.endPoint}/${id}`,  this.httpOptions).pipe(
       catchError(this.handleException)
     );

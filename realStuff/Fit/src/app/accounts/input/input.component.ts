@@ -24,8 +24,8 @@ export class InputComponent implements OnInit {
 
   public updateCals() {
     this.acocuntRepository.addCals(this.calsEaten, this.calsBurned, this.acc.id).subscribe(data => {
-      if (data[0].success === true) {
-        this.router.navigateByUrl('account/' + 1);
+      if (data[0].id > 0) {
+        this.router.navigateByUrl('account/' + data[0].id);
       }
     });
   }

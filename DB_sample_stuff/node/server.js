@@ -30,14 +30,15 @@ server.route({
         let Weight = request.payload['Weight'];
         let Age = request.payload['Age'];
         let UserName = request.payload['UserName'];
+        let Disability = request.payload['Disability'];
         let Password = request.payload['Password'];
 
         let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
         
         let getUserId = "SELECT UserId FROM UserInfo WHERE UserName = \'" + UserName + "\'";
 
-        let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName)';
-        uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\')";
+        let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Disability)';
+        uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\'," + Disability + ")";
 
         connection.getConnection(function (err, connection) {
             //run the query
@@ -195,7 +196,7 @@ server.route({
         let UserId = request.payload['UserId'];
         let Name = request.payload['Name'];
         let Share = request.payload['Share'];
-        let query = 'INSERT INTO Account_Allergies (AllergyID, UserId, Name, Share)';
+        let query = 'INSERT INTO Account_Allergies (AllergyId, UserId, Name, Share)';
         query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
         connection.getConnection(function (err, connection) {
             //run the query
@@ -211,37 +212,16 @@ server.route({
     }
 });
 
+
+
 server.route({
     method: 'POST',
-    path: '/accounts/addSleepDisorder',
+    path: '/accounts/addDisorder',
     handler: function (request, reply) {
         let UserId = request.payload['UserId'];
         let Name = request.payload['Name'];
         let Share = request.payload['Share'];
-        let query = 'INSERT INTO Account_Sleep (SleepID, UserId, Name, Share)';
-        query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
-        connection.getConnection(function (err, connection) {
-            //run the query
-            connection.query(query, function (error, results, fields) {
-                if (error)
-                    throw error;
-                reply("Sleep Disorder added: " + query);
-            });
-
-            connection.release();//release the connection
-        });
-        
-    }
-});
-
-server.route({
-    method: 'POST',
-    path: '/accounts/addEatDisorder',
-    handler: function (request, reply) {
-        let UserId = request.payload['UserId'];
-        let Name = request.payload['Name'];
-        let Share = request.payload['Share'];
-        let query = 'INSERT INTO Account_Disorders (DisorderID, UserId, Name, Share)';
+        let query = 'INSERT INTO Account_Disorders (DisorderId, UserId, Name, Share)';
         query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
         connection.getConnection(function (err, connection) {
             //run the query
@@ -265,11 +245,10 @@ server.route({
         let deleteAccount = 'DELETE FROM UserInfo WHERE UserId = ' + UserId + ';';
         let deleteDisorders = 'DELETE FROM Account_Disorders WHERE UserId = ' + UserId + ';';
         let deleteAllergies = 'DELETE FROM Account_Allergies WHERE UserId = ' + UserId + ';';
-        let deleteSleep = 'DELETE FROM Account_Sleep WHERE UserId = ' + UserId + ';';
         let deleteLogin = 'DELETE FROM Login WHERE UserId = ' + UserId;
         connection.getConnection(function (err, connection) {
             //run the query
-            connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteSleep + deleteLogin, function (error, results, fields) {
+            connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteLogin, function (error, results, fields) {
                 if (error)
                     throw error;
                 reply('User Deleted');
@@ -293,13 +272,9 @@ server.route({
             table = 'Account_Allergies';
         }
         else {
-            if (commonCategory == 'sDisorder') {
-                table = 'Account_Sleep';
-            } else {
-                if (commonCategory == 'eDisorder') {
-                    table = 'Account_Disorders';
-                }
-            }
+            if (commonCategory == 'eDisorder') {
+                table = 'Account_Disorders';
+            } 
         }
         let query = 'SELECT UserName FROM ' + table + ' NATURAL JOIN UserInfo WHERE Name = "' + condition + '" AND UserId != ' + UserId + ' AND Share = 1';
         connection.getConnection(function (err, connection) {
@@ -339,7 +314,6 @@ server.route({
             connection.release();//release the connection
         });
         
-        //close the connection to MySQL
     }
 });
 
@@ -363,25 +337,6 @@ server.route({
     }
 });
 
-server.route({
-    method: 'GET',
-    path: '/accounts/sleepDisorders',
-    handler: function (request, reply) {
-        connection.getConnection(function (err, connection) {
-            //run the query
-            connection.query('SELECT * FROM Account_Sleep', function (error, results, fields) {
-                if (error)
-                    throw error;
-
-                reply(results);
-            });
-
-            connection.release();//release the connection
-        });
-        
-        //close the connection to MySQL
-    }
-});
 
 
 //Real Queries
@@ -399,52 +354,10 @@ server.route({
             });
             connection.release();//release the connection
         });
-        
-        //close the connection to MySQL
     }
 });
 
 
-
-server.route({
-    method: 'GET',
-    path: '/sleep/insomnia',
-    handler: function (request, reply) {
-        connection.getConnection(function (err, connection) {
-            //run the query
-            connection.query('SELECT description FROM Sleep WHERE name = "insomnia"', function (error, results, fields) {
-                if (error)
-                    throw error;
-
-                reply(results);
-            });
-
-            connection.release();//release the connection
-        });
-        
-        //close the connection to MySQL
-    }
-});
-
-server.route({
-    method: 'GET',
-    path: '/sleep',
-    handler: function (request, reply) {
-        connection.getConnection(function (err, connection) {
-            //run the query
-            connection.query('SELECT * FROM Sleep', function (error, results, fields) {
-                if (error)
-                    throw error;
-
-                reply(results);
-            });
-
-            connection.release();//release the connection
-        });
-        
-        //close the connection to MySQL
-    }
-});
 
 server.start((err) => {
 

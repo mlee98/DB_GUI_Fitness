@@ -17,32 +17,21 @@ USE `DB_GUI` ;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Disorders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Disorders` (
-  `Type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Type`))
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`UserInfo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
-  `UserId` INT NOT NULL,
+  `UserId` INT NOT NULL AUTO_INCREMENT,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
   `Weight` VARCHAR(45) NULL,
   `Age` VARCHAR(45) NULL,
   `UserName` VARCHAR(45) NULL,
-  `Disability` VARCHAR(45) NULL,
-  `Disorders_Type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`UserId`, `Disorders_Type`),
-  INDEX `fk_UserInfo_Disorders1_idx` (`Disorders_Type` ASC),
-  CONSTRAINT `fk_UserInfo_Disorders1`
-    FOREIGN KEY (`Disorders_Type`)
-    REFERENCES `DB_GUI`.`Disorders` (`Type`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `Disability` TINYINT NULL,
+  PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
 
@@ -70,14 +59,7 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `UpperBody` VARCHAR(45) NULL,
   `LowerBody` VARCHAR(45) NULL,
   `Core` VARCHAR(45) NULL,
-  `Workouts_WorkoutPlan#` INT NOT NULL,
-  PRIMARY KEY (`WorkoutPlan#`, `Workouts_WorkoutPlan#`),
-  INDEX `fk_Fitness_Tracker_Workouts1_idx` (`Workouts_WorkoutPlan#` ASC),
-  CONSTRAINT `fk_Fitness_Tracker_Workouts1`
-    FOREIGN KEY (`Workouts_WorkoutPlan#`)
-    REFERENCES `DB_GUI`.`Workouts` (`WorkoutPlan#`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`WorkoutPlan#`))
 ENGINE = InnoDB;
 
 
@@ -112,28 +94,7 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workous` (
   `upperProg` INT NULL,
   `lowerProg` INT NULL,
   `coreProg` INT NULL,
-  `Fitness_Tracker_WorkoutPlan#` INT NOT NULL,
-  `Diet_Plan_Plan#` VARCHAR(45) NOT NULL,
-  `Ideal_body_Height` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`UserId`, `Fitness_Tracker_WorkoutPlan#`, `Diet_Plan_Plan#`),
-  INDEX `fk_Account_Workous_Fitness_Tracker1_idx` (`Fitness_Tracker_WorkoutPlan#` ASC),
-  INDEX `fk_Account_Workous_Diet_Plan1_idx` (`Diet_Plan_Plan#` ASC),
-  INDEX `fk_Account_Workous_Ideal_body1_idx` (`Ideal_body_Height` ASC),
-  CONSTRAINT `fk_Account_Workous_Fitness_Tracker1`
-    FOREIGN KEY (`Fitness_Tracker_WorkoutPlan#`)
-    REFERENCES `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Account_Workous_Diet_Plan1`
-    FOREIGN KEY (`Diet_Plan_Plan#`)
-    REFERENCES `DB_GUI`.`Diet_Plan` (`Plan#`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Account_Workous_Ideal_body1`
-    FOREIGN KEY (`Ideal_body_Height`)
-    REFERENCES `DB_GUI`.`Ideal_body` (`Height`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
 
@@ -141,35 +102,28 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
-  `Username` VARCHAR(45) NOT NULL,
+  `UserName` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NULL,
-  `Userid` INT NULL,
-  `UserInfo_UserId` INT NOT NULL,
-  `Account_Workous_UserId` INT NOT NULL,
-  PRIMARY KEY (`Username`, `UserInfo_UserId`, `Account_Workous_UserId`),
-  INDEX `fk_Login_UserInfo_idx` (`UserInfo_UserId` ASC),
-  INDEX `fk_Login_Account_Workous1_idx` (`Account_Workous_UserId` ASC),
-  CONSTRAINT `fk_Login_UserInfo`
-    FOREIGN KEY (`UserInfo_UserId`)
-    REFERENCES `DB_GUI`.`UserInfo` (`UserId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Login_Account_Workous1`
-    FOREIGN KEY (`Account_Workous_UserId`)
-    REFERENCES `DB_GUI`.`Account_Workous` (`UserId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `UserId` INT NOT NULL,
+  PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Eating Disorders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating Disorders` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating_Disorders` (
   `Name` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(240) NULL,
-  `Type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Type`))
+  PRIMARY KEY (`Name`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Disorders` (
+  `DisorderId` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(240) NULL,
+  `Share` TINYINT NULL,
+  PRIMARY KEY (`DisorderId`))
 ENGINE = InnoDB;
 
 
@@ -179,8 +133,15 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Allergies` (
   `Name` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(240) NULL,
-  `Allergies` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Allergies`))
+  PRIMARY KEY (`Name`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
+  `AllergyId` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(240) NULL,
+  `Share` TINYINT NULL,
+  PRIMARY KEY (`AllergyId`))
 ENGINE = InnoDB;
 
 
@@ -257,7 +218,8 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Normal` (
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
-  `Snack` VARCHAR(45) NULL)
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal#`))
 ENGINE = InnoDB;
 
 
@@ -269,7 +231,8 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`NoCarbs` (
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
-  `Snack` VARCHAR(45) NULL)
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal#`))
 ENGINE = InnoDB;
 
 
@@ -291,12 +254,7 @@ COMMIT;
 -- -----------------------------------------------------
 -- Data for table `DB_GUI`.`UserInfo`
 -- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`, `Disability`, `Disorders_Type`) VALUES (123, 'Jane', 'Doe', '5.7', '160', '28', NULL, NULL, DEFAULT);
-INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`, `Disability`, `Disorders_Type`) VALUES (456, 'John', 'Doe', '6.3', '210', '25', NULL, NULL, DEFAULT);
 
-COMMIT;
 
 
 -- -----------------------------------------------------
@@ -329,7 +287,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`, `Workouts_WorkoutPlan#`) VALUES (1, 'Weight Loss', '60', '10', '10', '20', DEFAULT);
+INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
 
 COMMIT;
 
@@ -386,10 +344,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Binge Eating Disorder', 'The consumption of large quantities of food in a short period of time, typically as part of an eating disorder.', 'Eating Disorder');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Night Eating Disorder', 'Night eating syndrome (NES) is a condition that combines overeating at night with sleep problems.', 'Eating Disorder');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Bulima Nervosa', 'This is a serious, potentially life-threatening eating disorder characterized by a cycle of bingeing and compensatory behaviors such as self-induced vomiting designed to undo or compensate for the effects of binge eating.', 'Eating Disorder');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Anoxeria Nervosa', 'This is a psychological and potentially life-threatening eating disorder. Those suffering from this eating disorder are typically suffering from an extremely low body weight relative to their height and body type.', 'Eating Disorder');
+INSERT INTO `DB_GUI`.`Eating_Disorders` (`Name`, `Description`) VALUES ('Binge Eating Disorder', 'The consumption of large quantities of food in a short period of time, typically as part of an eating disorder.');
+INSERT INTO `DB_GUI`.`Eating_Disorders` (`Name`, `Description`) VALUES ('Night Eating Disorder', 'Night eating syndrome (NES) is a condition that combines overeating at night with sleep problems.');
+INSERT INTO `DB_GUI`.`Eating_Disorders` (`Name`, `Description`) VALUES ('Bulima Nervosa', 'This is a serious, potentially life-threatening eating disorder characterized by a cycle of bingeing and compensatory behaviors such as self-induced vomiting designed to undo or compensate for the effects of binge eating.');
+INSERT INTO `DB_GUI`.`Eating_Disorders` (`Name`, `Description`) VALUES ('Anoxeria Nervosa', 'This is a psychological and potentially life-threatening eating disorder. Those suffering from this eating disorder are typically suffering from an extremely low body weight relative to their height and body type.');
 
 COMMIT;
 
@@ -399,14 +357,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Lactose', 'Milk,Cheese,Yogurt,Butter', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Nut', 'Almonds,Peanuts,Cashew,Pine Nuts,Pecans,Pistachio', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Peanuts', 'All products made of peanuts.', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Citrus', 'Lemon,Orange,Lime,Grapefruit,Clementimes', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Fish', 'Salmon,Tuna,Cod,Bass,Mussels,Oysters,Flounder,Haddock,Perch,Tilipia', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Shellfish', 'Shrimp,Crawfish,Crab,Prawns', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Eggs', 'all products that are made up of eggs.', 'Allergy');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Soy', 'Soybeans,Soy Sauce,Tofu', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Lactose', 'Milk,Cheese,Yogurt,Butter');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Nut', 'Almonds,Peanuts,Cashew,Pine Nuts,Pecans,Pistachio');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Peanuts', 'All products made of peanuts.');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Citrus', 'Lemon,Orange,Lime,Grapefruit,Clementimes');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Fish', 'Salmon,Tuna,Cod,Bass,Mussels,Oysters,Flounder,Haddock,Perch,Tilipia');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Shellfish', 'Shrimp,Crawfish,Crab,Prawns');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Eggs', 'all products that are made up of eggs.');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Soy', 'Soybeans,Soy Sauce,Tofu');
 
 COMMIT;
 
