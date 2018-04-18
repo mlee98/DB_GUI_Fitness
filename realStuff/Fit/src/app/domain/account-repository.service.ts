@@ -9,7 +9,7 @@ import { Repostitory } from './repository.service';
 @Injectable()
 export class AccountRepostitory extends Repostitory<any> {
 
-  protected endPoint = 'https://2e2de8ba-9af9-46bf-843c-8e68426e412e.mock.pstmn.io';
+  protected endPoint = 'http://localhost:4200/';
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient);
