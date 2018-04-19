@@ -9,6 +9,7 @@ import { ACCOUNTS_ROUTES } from './account-routes';
 import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FoodTodayComponent } from './food-today/food-today.component';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -24,7 +25,9 @@ import { SearchComponent } from './search/search.component';
     InputComponent,
     WorkoutComponent,
     HomepageComponent,
+    FoodTodayComponent,
     SearchComponent
+
   ],
   exports: [
       HomepageComponent

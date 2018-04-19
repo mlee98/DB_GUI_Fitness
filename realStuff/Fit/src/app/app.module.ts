@@ -9,7 +9,7 @@ import { AccountModule } from './accounts/account.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
