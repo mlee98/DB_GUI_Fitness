@@ -32,23 +32,19 @@ export abstract class Repostitory<T> {
 
   public login(user: string, pass: string): Observable<T> {
     // tslint:disable-next-line:prefer-const
-    let data = {username: user, password: pass};
+    let data1 = {'username' : user, 'password' : pass};
+    const data = JSON.stringify(data1);
     return this.httpClient.post(`${this.endPoint}/signIn`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
   public search(account: Account): Observable<T> {
     // tslint:disable-next-line:prefer-const
-    return this.httpClient.post(`${this.endPoint}/signIn`, account, this.httpOptions).pipe(
+    return this.httpClient.post(`${this.endPoint}/search`, account, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public profile(id: number): Observable<T> {
-    return this.httpClient.get(`${this.endPoint}/${id}`,  this.httpOptions).pipe(
-      catchError(this.handleException)
-    );
-  }
 
   public createAccount(acc: Account): Observable<T[]> {
     const data = acc;

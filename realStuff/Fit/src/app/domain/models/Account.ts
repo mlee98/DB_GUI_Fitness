@@ -14,5 +14,4 @@ export class Account {
   goal?: string;
   public?: boolean;
   age?: number;
-
 }
