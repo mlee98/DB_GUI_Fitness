@@ -1,6 +1,6 @@
 <html>
 	<body>
-		<main id="creAcc" *ngIf="createAcc">
+		<main id="creAcc">
       <div style="text-align:center"><h3>Create Account</h3></div>
       <br />
       <div class="container">
@@ -59,8 +59,8 @@
       </div>
       </form>
       <br />
-      <div style="text-align:center">
-			<button class="btn btn-primary" (click)="addAcc();goToSignIn()">
+      <div id="button1" style="text-align:center">
+			<button class="btn btn-primary" (click)="addAcc();">
 				Create Account
       </button>
       </div>
