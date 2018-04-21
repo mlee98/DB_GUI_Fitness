@@ -2,7 +2,7 @@ import { AccountRepostitory } from './domain/account-repository.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AccountModule } from './accounts/account.module';
@@ -18,7 +18,8 @@ import { AccountModule } from './accounts/account.module';
     ]),
     FormsModule,
     HttpClientModule,
-    AccountModule
+    AccountModule,
+    ReactiveFormsModule
   ],
   providers: [
     AccountRepostitory
