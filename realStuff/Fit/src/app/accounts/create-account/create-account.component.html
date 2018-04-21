@@ -71,7 +71,7 @@
           <br>
           <br>
           <label class="text col-md-3" for="disabilities">Disabilites: </label>
-          <select multiple name="disabilities" [(ngModel)]="acc.disabilities">
+          <select multiple name="disabilities" [(ngModel)]="acc.disabilities" size="1" class="col-md-3">
             <option>peanutz</option>
             <option>sleep apnia</option>
             <option>lactose intolerant</option>
@@ -85,8 +85,6 @@
           </select>
         </div>
         <hr>
-        <br>
-        <br>
         <div id="goal">
           <label class="text col-md-3" for="goal">Goal: </label>
           <select class="text col-md-3" name="goal" [(ngModel)]="acc.goal">
@@ -100,6 +98,8 @@
         <button class="btn btn-primary">
           Create Account
         </button>
+        <br />
+        <br />
       </div>
     </form>
     </div>
