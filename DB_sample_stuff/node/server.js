@@ -18,6 +18,7 @@ var connection = mysql.createPool({
     database: 'DB_GUI',
     multipleStatements: true,
 });
+
 await connection.connect();
 
 
@@ -150,7 +151,9 @@ const init = async () => {
                             loginMessage.id = -1;
                         }
 
-                        reply(loginMessage);
+                        // sends JWT to client side
+                        var token = getToken(UserName, Password);
+                        reply(token);
                     });
 
                     connection.release();//release the connection
