@@ -2,3 +2,31 @@ body{
   background-color: rgb(192,219,186);
   height: 100vh;
 }
+
+#header{
+  width: 30%;
+  margin-left: 5%;
+  margin-right: 0%;
+}
+aside{
+  width:30%;
+  margin-top: 2%;
+}
+
+#border{
+  margin-left: 12.5%;
+  border-style: solid;
+  background-color: white;
+  width: 75%;
+}
+
+#tabCont{
+	border-top: none;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+    padding: 10px;
+}

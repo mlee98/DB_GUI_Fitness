@@ -4,14 +4,20 @@
   </head>
 	<body>
     <br />
-		<header class="container" style="text-align: left">
+    <div id="border">
+    <aside class="float-right" id="buttons">
+        <button (click)="changeToSearch()">Search</button>
+        <button (click)="changeToSignIn()">Log Out</button>
+    </aside>
+		<div id="header" style="text-align: left">
       <h1>Name</h1>
-      <br />
+
       <div>
         <h5>height · weight · gender</h5>
       </div>
-    </header>
+    </div>
     <br />
+
 		<main class="container" id="profile">
         <div id="tabs" class="container">
             <ul class="nav nav-tabs" role="tablist" >
@@ -40,8 +46,8 @@
               </div>
             </div>
           </div>
-
-
-		</main>
+          <br />
+    </main>
+  </div>
 	</body>
 </html>

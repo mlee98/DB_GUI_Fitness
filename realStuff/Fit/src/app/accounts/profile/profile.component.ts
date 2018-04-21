@@ -26,4 +26,14 @@ export class ProfileComponent implements OnInit {
       });
     });
   }
+
+
+  public changeToSignIn() {
+   this.router.navigateByUrl('signIn');
+  }
+
+  public changeToSearch() {
+    this.router.navigateByUrl('signIn');
+   }
 }
+
