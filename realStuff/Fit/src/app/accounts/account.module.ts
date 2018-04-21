@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FoodTodayComponent } from './food-today/food-today.component';
 import { SearchComponent } from './search/search.component';
+import { WorkoutTodayComponent } from './workout-today/workout-today.component';
+import { WorkoutPastComponent } from './workout-past/workout-past.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { SearchComponent } from './search/search.component';
     WorkoutComponent,
     HomepageComponent,
     FoodTodayComponent,
-    SearchComponent
+    SearchComponent,
+    WorkoutTodayComponent,
+    WorkoutPastComponent
 
   ],
   exports: [

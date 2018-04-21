@@ -14,16 +14,16 @@
     <br />
 		<main class="container" id="profile">
         <div id="tabs" class="container">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs" role="tablist" >
               <li class="nav-item">
-                <a href="#food" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="food" id="fallTab">Today's Food</a>
+                <a href="#food" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="food" id="foodTab">Today's Food</a>
               </li>
               <li class="nav-item">
-                <a href="#workout" class="nav-link"  data-toggle="tab" role="tab" aria-controls="workout">Today's Workout</a>
+                <a href="#workout" class="nav-link"  data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
               </li>
               <li class="nav-item">
-                <a href="#past" class="nav-link"  data-toggle="tab" role="tab" aria-controls="past">Past Workout</a>
-                </li>
+                <a href="#past" class="nav-link"  data-toggle="tab" role="tab" aria-controls="past" id="pastTab">Past Workout</a>
+              </li>
             </ul>
 
           <div class="tab-content" id="tabCont">
@@ -33,10 +33,10 @@
             </div>
 
               <div class="tab-pane"  role="tabpanel" id="workout">
-
+               <app-workout-today></app-workout-today>
               </div>
               <div class="tab-pane"  role="tabpanel" id="past">
-
+                <app-workout-past></app-workout-past>
               </div>
             </div>
           </div>
