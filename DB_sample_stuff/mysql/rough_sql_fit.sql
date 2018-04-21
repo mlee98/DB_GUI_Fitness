@@ -39,13 +39,13 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Workouts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
-  `WorkoutPlan#` INT NOT NULL,
+  `WorkoutPlan` INT NOT NULL,
   `Primary Area` VARCHAR(45) NULL,
   `Exercise1` VARCHAR(45) NULL,
   `Exercise2` VARCHAR(45) NULL,
   `Exercise3` VARCHAR(45) NULL,
   `Exercise4` VARCHAR(45) NULL,
-  PRIMARY KEY (`WorkoutPlan#`))
+  PRIMARY KEY (`WorkoutPlan`))
 ENGINE = InnoDB;
 
 
@@ -67,9 +67,9 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Diet_Plan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Diet_Plan` (
-  `Plan#` VARCHAR(45) NOT NULL,
+  `Plan` VARCHAR(45) NOT NULL,
   `Name` VARCHAR(45) NULL,
-  PRIMARY KEY (`Plan#`))
+  PRIMARY KEY (`Plan`))
 ENGINE = InnoDB;
 
 
@@ -149,12 +149,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`VeganPlan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`VeganPlan` (
-  `Meal#` INT NOT NULL,
+  `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -162,12 +162,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Nut-free`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Nut-free` (
-  `Meal#` INT NOT NULL,
+  `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -175,12 +175,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`HighProtein`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`HighProtein` (
-  `Meal#` INT NOT NULL,
+  `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -188,12 +188,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`LowFat`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`LowFat` (
-  `Meal#` INT NOT NULL,
+  `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -201,12 +201,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Gluten-Free`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Gluten-Free` (
-  `Meal#` INT NOT NULL,
+  `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -214,12 +214,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Normal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Normal` (
-  `Meal#` INT NOT NULL AUTO_INCREMENT,
+  `Meal` INT NOT NULL AUTO_INCREMENT,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -227,12 +227,12 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`NoCarbs`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`NoCarbs` (
-  `Meal#` INT NOT NULL AUTO_INCREMENT,
+  `Meal` INT NOT NULL AUTO_INCREMENT,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
   `Dinner` VARCHAR(45) NULL,
   `Snack` VARCHAR(45) NULL,
-  PRIMARY KEY (`Meal#`))
+  PRIMARY KEY (`Meal`))
 ENGINE = InnoDB;
 
 
@@ -262,22 +262,22 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (1, 'Core', 'Crunches', 'Plank', 'Dips', 'Stairstepper');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (2, 'Core', 'Crunches', 'Flutterkicks', 'Curls', 'Erg');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (3, 'Core', 'Plank', 'Russian Twists', 'Erg', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (4, 'Core', 'Plank', 'Flutterkicks', 'Elliptical', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (5, 'Arms', 'Dips', 'Curls', 'Calf Raises', 'Plank');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (6, 'Arms', 'Dips', 'Pushups', 'Leg Presses', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (7, 'Arms', 'Chinups', 'Curls', 'Treadmill', 'Squats');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (8, 'Arms', 'Chinups', 'Pushups', 'Elliptical', 'Lunges');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (9, 'Legs', 'Squats', 'Lunges', 'Chinups', 'Crunches');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (10, 'Legs', 'Squats', 'Calf Raises', 'Pushups', 'Flutterkicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (11, 'Legs', 'Lunges', 'Leg Presses', 'Treadmill', 'Curls');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (12, 'Legs', 'Lunges', 'Calf Raises', 'Stairstepper', 'Dips');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (13, 'Cardio', 'Treadmill', 'Elliptical', 'Pushups', 'Russian Twists');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (14, 'Cardio', 'Treadmill', 'Stairstepper', 'Curls', 'Flutterkicks');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (15, 'Cardio', 'Elliptical', 'Stairstepper', 'Crunches', 'Calf Raises');
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (1, 'Core', 'Crunches', 'Plank', 'Dips', 'Stairstepper');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (2, 'Core', 'Crunches', 'Flutterkicks', 'Curls', 'Erg');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (3, 'Core', 'Plank', 'Russian Twists', 'Erg', 'Lunges');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (4, 'Core', 'Plank', 'Flutterkicks', 'Elliptical', 'Squats');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (5, 'Arms', 'Dips', 'Curls', 'Calf Raises', 'Plank');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (6, 'Arms', 'Dips', 'Pushups', 'Leg Presses', 'Russian Twists');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (7, 'Arms', 'Chinups', 'Curls', 'Treadmill', 'Squats');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (8, 'Arms', 'Chinups', 'Pushups', 'Elliptical', 'Lunges');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (9, 'Legs', 'Squats', 'Lunges', 'Chinups', 'Crunches');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (10, 'Legs', 'Squats', 'Calf Raises', 'Pushups', 'Flutterkicks');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (11, 'Legs', 'Lunges', 'Leg Presses', 'Treadmill', 'Curls');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (12, 'Legs', 'Lunges', 'Calf Raises', 'Stairstepper', 'Dips');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (13, 'Cardio', 'Treadmill', 'Elliptical', 'Pushups', 'Russian Twists');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (14, 'Cardio', 'Treadmill', 'Stairstepper', 'Curls', 'Flutterkicks');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (15, 'Cardio', 'Elliptical', 'Stairstepper', 'Crunches', 'Calf Raises');
+INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
 
 COMMIT;
 
@@ -287,7 +287,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
+INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
 
 COMMIT;
 
@@ -297,13 +297,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('1', 'Normal');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('2', 'Nut-free');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('3', 'Lowfat');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('4', 'Gluten-free');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('5', 'No Carbs');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('6', 'High Protein');
-
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('1', 'Normal');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('2', 'Nut-free');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('3', 'Lowfat');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('4', 'Gluten-free');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('5', 'No Carbs');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan`, `Name`) VALUES ('6', 'High Protein');
 COMMIT;
 
 
@@ -374,11 +373,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`VeganPlan` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Vegan Pancakes', 'Salad', 'Zucchini', 'Almonds');
-INSERT INTO `DB_GUI`.`VeganPlan` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Quinoa Breakfast Cereal', 'Tempeh Bowl', 'Veggie Kabobs', 'Apple');
-INSERT INTO `DB_GUI`.`VeganPlan` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Flourless Pumpkin Muffins', 'Crispy Tofu Bowl', 'Pesto Pasta', 'Grapes');
-INSERT INTO `DB_GUI`.`VeganPlan` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Vegan French Toast', 'Curried Lentils', 'Spring Minestrone', 'Carrots');
-INSERT INTO `DB_GUI`.`VeganPlan` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Avocado Toast', 'Avocado Salad', 'Mushroom Burger', 'Strawberries');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Vegan Pancakes', 'Salad', 'Zucchini', 'Almonds');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Quinoa Breakfast Cereal', 'Tempeh Bowl', 'Veggie Kabobs', 'Apple');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Flourless Pumpkin Muffins', 'Crispy Tofu Bowl', 'Pesto Pasta', 'Grapes');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Vegan French Toast', 'Curried Lentils', 'Spring Minestrone', 'Carrots');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Avocado Toast', 'Avocado Salad', 'Mushroom Burger', 'Strawberries');
 
 COMMIT;
 
@@ -388,11 +387,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Breakfast Tacos', 'Sunbutter and banana sandwhich', 'Roasted Vegetable Enchiladas', 'Pretzels');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Breakfast Soup', 'Pasta Salad', 'Lemon and Herb Lamb Chops', 'Roasted Chickpeas');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Waffles', 'Cold Noddle Salad', 'Chicken and Sausage with Bowties', 'Popcorn');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Crepes', 'Tortilla Wrap', 'Cranberry Glazed Turkey Breast', 'Rice Crackers');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Doughnuts', 'Quesadillas', 'Honey Mustard Garlic Rack-of-Lamb', 'Sunchips');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Breakfast Tacos', 'Sunbutter and banana sandwhich', 'Roasted Vegetable Enchiladas', 'Pretzels');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Breakfast Soup', 'Pasta Salad', 'Lemon and Herb Lamb Chops', 'Roasted Chickpeas');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Waffles', 'Cold Noddle Salad', 'Chicken and Sausage with Bowties', 'Popcorn');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Crepes', 'Tortilla Wrap', 'Cranberry Glazed Turkey Breast', 'Rice Crackers');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Doughnuts', 'Quesadillas', 'Honey Mustard Garlic Rack-of-Lamb', 'Sunchips');
 
 COMMIT;
 
@@ -402,11 +401,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`HighProtein` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Baked Eggs Avocados', 'Portobello Stuffed Pizza', 'Protein-Style Thai Turkey Wraps', 'Jerky');
-INSERT INTO `DB_GUI`.`HighProtein` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Feta Egg Toast', 'Chickpea Spinach Salad', 'Best Healthy Turkey Chili', 'Trail Mix');
-INSERT INTO `DB_GUI`.`HighProtein` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Poached Eggs with Tomato', 'Avocado Greek Yogurt Chicken Salad', 'Sesame Beef', 'Tuna');
-INSERT INTO `DB_GUI`.`HighProtein` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Cottage Cheese with Fruit and Toast', 'Salmon Quinoa Bowl', 'Mexican Tuna Salad With Avocado', 'Peanut Butter Celery Sticks');
-INSERT INTO `DB_GUI`.`HighProtein` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Peanut Butter Oats', 'Southwestern Veggie Hummus Wraps', 'Greek-Braised Cod With Tomatoes and Kalamata Olives', 'Turkey Roll ups');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Baked Eggs Avocados', 'Portobello Stuffed Pizza', 'Protein-Style Thai Turkey Wraps', 'Jerky');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Feta Egg Toast', 'Chickpea Spinach Salad', 'Best Healthy Turkey Chili', 'Trail Mix');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Poached Eggs with Tomato', 'Avocado Greek Yogurt Chicken Salad', 'Sesame Beef', 'Tuna');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Cottage Cheese with Fruit and Toast', 'Salmon Quinoa Bowl', 'Mexican Tuna Salad With Avocado', 'Peanut Butter Celery Sticks');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Peanut Butter Oats', 'Southwestern Veggie Hummus Wraps', 'Greek-Braised Cod With Tomatoes and Olives', 'Turkey Roll ups');
 
 COMMIT;
 
@@ -416,11 +415,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`LowFat` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Zucchini Breakfast Bowl', 'Asian Noodle Salad', 'Pepperoni Pizza', 'Peanut Butter & Celery');
-INSERT INTO `DB_GUI`.`LowFat` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Apple Breakfast Porridge', 'Mediterranean Orzo Salad', 'Lemon-Olive Grilled Chicken', 'Cottage Cheese');
-INSERT INTO `DB_GUI`.`LowFat` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Breakfast Salad', 'Spinach Artichoke Quiche Cup', 'Shrimp à la Grecque', 'Rice Cake and Almond Butter');
-INSERT INTO `DB_GUI`.`LowFat` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Blueberry Oatmeal', 'Baked Tofu Sushi Bowl', 'Teriyaki Chicken and Soba Noodles', 'Choclate Banana');
-INSERT INTO `DB_GUI`.`LowFat` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'BLT Breakfast Salad', 'Tuna and Chickpea Pita Sandwiches', 'Roast Dijon Chicken and Vegetables', 'Almonds');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Zucchini Breakfast Bowl', 'Asian Noodle Salad', 'Pepperoni Pizza', 'Peanut Butter & Celery');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Apple Breakfast Porridge', 'Mediterranean Orzo Salad', 'Lemon-Olive Grilled Chicken', 'Cottage Cheese');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Breakfast Salad', 'Spinach Artichoke Quiche Cup', 'Shrimp à la Grecque', 'Rice Cake and Almond Butter');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Blueberry Oatmeal', 'Baked Tofu Sushi Bowl', 'Teriyaki Chicken and Soba Noodles', 'Choclate Banana');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'BLT Breakfast Salad', 'Tuna and Chickpea Pita Sandwiches', 'Roast Dijon Chicken and Vegetables', 'Almonds');
 
 COMMIT;
 
@@ -430,11 +429,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Muffins', 'Gluten-free Quinoa Burgers', 'Vegan Chili', 'Apples');
-INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Scones', 'Portobello and Zucchini Taco', 'Zucchini Crust Pizza', 'Frozen Grapes');
-INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Chocolate Chip Pancakes', 'Creamy Cashew Potato and Pasta Salad', 'Buffalo Chicken Tenders', 'Carrots');
-INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Waffles', 'Grilled Stuff Bacon Cheeseburger', 'Greek Stuffed Chicken', 'Cucumbers');
-INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Quinoa Bowl', 'BLT Chopped Salad', 'Cranberry Balasmic Chicken', 'Celery');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Muffins', 'Gluten-free Quinoa Burgers', 'Vegan Chili', 'Apples');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Scones', 'Portobello and Zucchini Taco', 'Zucchini Crust Pizza', 'Frozen Grapes');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Chocolate Chip Pancakes', 'Creamy Cashew Potato and Pasta Salad', 'Buffalo Chicken Tenders', 'Carrots');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Waffles', 'Grilled Stuff Bacon Cheeseburger', 'Greek Stuffed Chicken', 'Cucumbers');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Quinoa Bowl', 'BLT Chopped Salad', 'Cranberry Balasmic Chicken', 'Celery');
 
 COMMIT;
 
@@ -444,11 +443,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Normal` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Pancakes', 'Turkey Sandwhich', 'Pizza', 'Apples');
-INSERT INTO `DB_GUI`.`Normal` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Waffles', 'Chicken Salad', 'Tacos', 'Chips');
-INSERT INTO `DB_GUI`.`Normal` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Crepes', 'Chorizo Risotto', 'Burritos', 'Popcorn');
-INSERT INTO `DB_GUI`.`Normal` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'French Toast', 'Lamb Kabobs', 'Stir Fry', 'Watermelon');
-INSERT INTO `DB_GUI`.`Normal` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Bacon and Eggs', 'Crab', 'Steak and Potatoes', 'Strawberries');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Pancakes', 'Turkey Sandwhich', 'Pizza', 'Apples');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Waffles', 'Chicken Salad', 'Tacos', 'Chips');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Crepes', 'Chorizo Risotto', 'Burritos', 'Popcorn');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'French Toast', 'Lamb Kabobs', 'Stir Fry', 'Watermelon');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Bacon and Eggs', 'Crab', 'Steak and Potatoes', 'Strawberries');
 
 COMMIT;
 
@@ -458,10 +457,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`NoCarbs` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Flourless Egg and Cottage Cheese Savory Breakfast Muffins', 'Caprese Avocado Salad', 'Barbacoa', 'Black Pepper Beef Jerky');
-INSERT INTO `DB_GUI`.`NoCarbs` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Cream Cheese Pancakes', 'Shrimp & Cauliflower Salad', 'Roast Beef Salad', 'Cloud Bread');
-INSERT INTO `DB_GUI`.`NoCarbs` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Cream Cheese Pancakes', 'California Turkey and Bacon Lettuce Wraps', 'BBQ Chicken Cobb Salad', 'Crispy Parmesan Tomato Chips');
-INSERT INTO `DB_GUI`.`NoCarbs` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Spinach, Mushroom and Feta Crustless Quiche', 'Chicken and Asparagus Lemon Stir Fry', 'Veggie “Sushi” Rolls', 'Avocado Crisps');
-INSERT INTO `DB_GUI`.`NoCarbs` (`Meal#`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Coconut Chia Pudding', 'Salmon Chickpea Salad', 'Grilled Halloumi Salad', 'Cheesy Jalapeno Mushroom Bites');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Flourless Egg and Cheese Breakfast Muffins', 'Caprese Avocado Salad', 'Barbacoa', 'Black Pepper Beef Jerky');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Cream Cheese Pancakes', 'Shrimp & Cauliflower Salad', 'Roast Beef Salad', 'Cloud Bread');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Cream Cheese Pancakes', 'California Turkey and Bacon Lettuce Wraps', 'BBQ Chicken Cobb Salad', 'Crispy Parmesan Tomato Chips');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Spinach, Mushroom and Feta Crustless Quiche', 'Chicken and Asparagus Lemon Stir Fry', 'Veggie “Sushi” Rolls', 'Avocado Crisps');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Coconut Chia Pudding', 'Salmon Chickpea Salad', 'Grilled Halloumi Salad', 'Cheesy Jalapeno Mushroom Bites');
 
 COMMIT;
