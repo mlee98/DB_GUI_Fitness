@@ -5,7 +5,12 @@ const crypto = require('crypto');
 
 
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: '0.0.0.0' });
+server.connection({
+    port: 3000, host: '0.0.0.0',
+    routes: {
+        cors: true
+    }
+});
 
 //Initialize the mysql variable and create the connection object with necessary values
 //Uses the https://www.npmjs.com/package/mysql package.
@@ -17,7 +22,7 @@ var connection = mysql.createPool({
     user     : 'root',
     password : 'go_away!',
     database: 'DB_GUI',
-    multipleStatements: true
+    multipleStatements: true,
 });
 
 server.route({
@@ -66,14 +71,14 @@ server.route({
 
 server.route({
     method: 'POST',
-    path: '/accounts/login',
+    path: '/signIn',
     handler: function (request, reply) {
-        let UserName = request.payload['UserName'];
-        let Password = request.payload['Password'];
+        let UserName = request.payload['username'];
+        let Password = request.payload['password'];
         let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
 
         let query = "SELECT * FROM Login";
-        let loginMessage = '';
+        let loginMessage = {};
         connection.getConnection(function (err, connection) {
             //run the query
             connection.query(query, function (error, results, fields) {
@@ -81,10 +86,10 @@ server.route({
                     throw error;
                 for (let i = 0; i < results.length; i++) {
                     if (results[i].UserName === UserName && results[i].Password === hashedPW) {
-                        loginMessage = "You're in!"
+                        loginMessage.id = 5;
                         break;
                     }
-                    loginMessage = "Username or Password incorrect. Try again";
+                    loginMessage.id = -1;
                 }
 
                 reply(loginMessage);
@@ -126,7 +131,7 @@ server.route({
 });
 
 server.route({
-    method: 'POST',
+    method: 'GET',
     path: '/accounts/profile',
     handler: function (request, reply) {
         let UserId = request.payload['UserId'];

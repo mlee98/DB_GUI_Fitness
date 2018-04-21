@@ -1,18 +1,22 @@
 import { Workout } from './Workouts';
+import { Meal } from './Meal';
 
 export class Account {
   id?: number;
   username?: string;
   password?: string;
-  name?: string;
-  height?: string;
+  fName?: string;
+  lName?: string;
+  height?: number;
   weight?: string;
   disabilities?: Array<string>;
   workouts?: Array<Workout>;
+  breakfast?: Array<Meal>;
+  lunch?: Array<Meal>;
+  dinner?: Array<Meal>;
   calsEaten?: Array<number>;
   calsBurned?: Array<number>;
   goal?: string;
   public?: boolean;
   age?: number;
-
 }

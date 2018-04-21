@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from 'protractor';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-account',
@@ -13,8 +14,10 @@ export class CreateAccountComponent implements OnInit {
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private form: FormBuilder,
   ) {}
+  public ngForm: FormGroup;
   public acc: Account;
   public missingFields: boolean;
 
@@ -25,13 +28,13 @@ export class CreateAccountComponent implements OnInit {
     this.acc.calsEaten = [];
     this.acc.username = '';
     this.acc.goal = '';
-    this.acc.age = 0;
-    this.acc.height = '';
-    this.acc.name = '';
+    this.acc.fName = '';
+    this.acc.lName = '';
     this.acc.password = '';
     this.acc.username = '';
     this.acc.weight = '';
     this.missingFields = false;
+    this.createForm();
   }
   public addAcc() {
     if (this.missingFields === false) {
@@ -42,11 +45,12 @@ export class CreateAccountComponent implements OnInit {
   }
   public submitCheck() {
     if (
-      // this.acc.age === 0 ||
+      this.acc.age === 0 ||
       this.acc.username === '' ||
       this.acc.goal === '' ||
-      this.acc.height === '' ||
-      this.acc.name === '' ||
+      this.acc.height === 0 ||
+      this.acc.fName === '' ||
+      this.acc.lName === '' ||
       this.acc.password === '' ||
       this.acc.username === '' ||
       this.acc.weight === ''
@@ -54,5 +58,16 @@ export class CreateAccountComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  public createForm() {
+    if (this.ngForm.valid) {
+      console.log('form submitted');
+      this.ngForm = this.form.group({
+        name: ['', Validators.required ]
+     });
+    } else {
+      // validate all form fields
+    }
   }
 }

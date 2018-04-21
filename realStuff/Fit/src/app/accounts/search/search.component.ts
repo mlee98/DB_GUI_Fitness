@@ -31,8 +31,9 @@ export class SearchComponent implements OnInit {
     this.resultList = [];
     this.fakeAcc = {};
     this.fakeAcc.age = 25;
-    this.fakeAcc.height = '10';
-    this.fakeAcc.name = 'Rob';
+    this.fakeAcc.height = 10;
+    this.fakeAcc.fName = 'Rob';
+    this.fakeAcc.lName = 'K';
     this.fakeAcc.weight = '195';
     this.fakeAcc.disabilities = [];
     this.fakeAcc.calsBurned = [];
