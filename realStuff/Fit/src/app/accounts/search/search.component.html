@@ -1,25 +1,24 @@
 <body>
   <div class="container">
-    <h3>Search For Similar Users!</h3>
+    <br />
+    <br />
+    <div id="search" class="container">
+    <h3 class="mt-2">Search For Similar Users!</h3>
     <div class="row">
-      <label for="drop" class="col-sm-2 mb-3">Gender:</label>
+      <label for="drop" class="col-md-2 mb-3">Gender:</label>
       <select id="drop" class="custom select col-md-3 mb-3" data toggle="dropdown">
         <option selected></option>
         <option value="male"> male </option>
         <option value="female"> female </option>
       </select>
-    </div>
-    <div class="row">
       <label for="drop" class="col-sm-2 mb-3">Age:</label>
       <input type="text" class="col-md-3 mb-3">
     </div>
     <div class="row">
       <label for="drop" class="col-sm-2 mb-3">Weight:</label>
       <input type="text" class="col-md-3 mb-3">
-    </div>
-    <div class="row">
       <label for="disabilities" class="col-sm-2">Disabilites: </label>
-      <select multiple name="disabilities" class="col-md-3 mb-3">
+      <select multiple name="disabilities" class="col-md-3 mb-3" size="1">
         <option>peanutz</option>
         <option>sleep apnia</option>
         <option>lactose intolerant</option>
@@ -40,13 +39,19 @@
         <option>Gain Weight</option>
         <option>Gain Muscle</option>
       </select>
-    </div>
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <button class="btn primary" (click)="search()" class="col-md-1 mb-3">
+
+      <div class="col-md-2"></div>
+      <button class="btn primary" (click)="search()" class="col-md-1 mb-3 mr-3">
         Search
       </button>
+
+      <button class="btn primary" (click)="search()" class="col-md-1 mb-3">
+          Reset
+      </button>
     </div>
+  </div>
+  <br />
+  <div id="results">
     <h3>Results</h3>
     <div class="row">
       <div class="col">
@@ -81,5 +86,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </body>

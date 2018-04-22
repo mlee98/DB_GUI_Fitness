@@ -1,3 +1,14 @@
 body{
   background-color: rgb(192,219,186);
 }
+
+#search{
+  background-color: white;
+  border-style: solid;
+  text-align: center;
+}
+
+#results{
+  background-color: white;
+  border-style: solid;
+}
