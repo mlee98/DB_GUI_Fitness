@@ -20,10 +20,8 @@ export class CreateAccountComponent implements OnInit {
   ) {}
   public ngForm: FormGroup;
   public acc: Account;
-  public missingFields: boolean;
 
   ngOnInit() {
-    this.missingFields = true;
     this.acc = {};
     this.acc.disabilities = [];
     this.acc.calsBurned = [];
@@ -37,17 +35,11 @@ export class CreateAccountComponent implements OnInit {
     this.acc.weight = '';
   }
   public addAcc() {
-    if (this.missingFields === false) {
       this.acocuntRepository.createAccount(this.acc).subscribe(data => {
         this.router.navigateByUrl('signIn');
       });
-    }
   }
   public submitCheck() {
-    console.log(this.missingFields);
-    console.log(this.acc.username === '');
-    console.log(this.acc.goal === '');
-
     if (
       this.acc.age === 0 ||
       this.acc.username === '' ||
