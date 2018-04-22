@@ -4,7 +4,8 @@ const Hapi = require('hapi');
 const crypto = require('crypto');
 
 
-const server = Hapi.Server({
+const server = new Hapi.Server();
+server.connection({
     port: 3000, host: '0.0.0.0',
     routes: {
         cors: true
@@ -15,7 +16,6 @@ const server = Hapi.Server({
 //Uses the https://www.npmjs.com/package/mysql package.
 var mysql      = require('mysql');
 var connection = mysql.createPool({
-
     //host will be the name of the service from the docker-compose file. 
     host     : 'mysql',
     user     : 'root',
@@ -26,21 +26,9 @@ var connection = mysql.createPool({
 
 
 server.route({
-    method: 'GET',
-    path: '/hello',
-    handler: function (request, h) {
-        connection.getConnection(function(err,connection) {
-            connection.release();
-        });
-        return 'hello world';
-    }
-});
-
-
-server.route({
     method: 'POST',
     path: '/accounts/addUser',
-    handler: function (request, h) {
+    handler: function (request, reply) {
         let fName = request.payload['fName'];
         let lName = request.payload['lName'];
         let Height = request.payload['Height'];
@@ -71,14 +59,14 @@ server.route({
                         if (error)
                             throw error;
                         
-                        return(userID);
+                        reply(userID);
                     });
                 });
             });
 
-            
+            connection.release();
         });
-        connection.release();
+        
         
     }
 });
@@ -119,7 +107,7 @@ server.route({
 server.route({
     method: 'GET',
     path: '/accounts',
-    handler: function (request, h) {
+    handler: function (request, reply) {
         connection.getConnection(function (err, connection) {
             //run the query
             connection.query('SELECT * FROM UserInfo', function (error, results, fields) {
@@ -136,32 +124,10 @@ server.route({
                     accNames += results[acc].Age;
                     accNames += '   ';
                 }
-                return h.response(accNames);
+                reply(accNames);
             });
             connection.release();//release the connection
         });
-    }
-});
-
-
-server.route({
-    method: 'GET',
-    path: '/accounts/{UserId}',
-    handler: function (request, h) {
-        let UserId = encodeURIComponent(request.params.UserId);
-        connection.getConnection(function (err, h) {
-            //run the query
-            connection.query('SELECT * FROM UserInfo WHERE UserId = ' + UserId, function (error, results, fields) {
-                if (error)
-                    throw error;
-                
-                return 'bob'; 
-
-            });
-
-            connection.release();
-        });
-        
     }
 });
 
@@ -362,19 +328,12 @@ server.route({
     }
 });
 
+server.start((err) => {
 
-
-async function start() {
-
-    try {
-        await server.start();
+    if (err) {
+        throw err;
     }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
+    console.log(`Server running at: ${server.info.uri}`);
+});
 
-    console.log('Server running at:', server.info.uri);
-};
 
-start();

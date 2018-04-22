@@ -161,7 +161,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Nut-free`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Nut-free` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Nut_free` (
   `Meal` INT NOT NULL,
   `Breakfast` VARCHAR(45) NULL,
   `Lunch` VARCHAR(45) NULL,
@@ -387,11 +387,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Breakfast Tacos', 'Sunbutter and banana sandwhich', 'Roasted Vegetable Enchiladas', 'Pretzels');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Breakfast Soup', 'Pasta Salad', 'Lemon and Herb Lamb Chops', 'Roasted Chickpeas');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Waffles', 'Cold Noddle Salad', 'Chicken and Sausage with Bowties', 'Popcorn');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Crepes', 'Tortilla Wrap', 'Cranberry Glazed Turkey Breast', 'Rice Crackers');
-INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Doughnuts', 'Quesadillas', 'Honey Mustard Garlic Rack-of-Lamb', 'Sunchips');
+INSERT INTO `DB_GUI`.`Nut_free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Breakfast Tacos', 'Sunbutter and banana sandwhich', 'Roasted Vegetable Enchiladas', 'Pretzels');
+INSERT INTO `DB_GUI`.`Nut_free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Breakfast Soup', 'Pasta Salad', 'Lemon and Herb Lamb Chops', 'Roasted Chickpeas');
+INSERT INTO `DB_GUI`.`Nut_free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Waffles', 'Cold Noddle Salad', 'Chicken and Sausage with Bowties', 'Popcorn');
+INSERT INTO `DB_GUI`.`Nut_free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Crepes', 'Tortilla Wrap', 'Cranberry Glazed Turkey Breast', 'Rice Crackers');
+INSERT INTO `DB_GUI`.`Nut_free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Doughnuts', 'Quesadillas', 'Honey Mustard Garlic Rack-of-Lamb', 'Sunchips');
 
 COMMIT;
 
