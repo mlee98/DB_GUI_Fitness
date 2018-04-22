@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
         if (data.id === -1) {
           this.goodLog = 1;
         } else {
-          this.router.navigateByUrl('accounts/' + 5);
+          this.router.navigateByUrl('accounts/' + data.id);
         }
      });
   }
