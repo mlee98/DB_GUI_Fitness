@@ -1,31 +1,25 @@
-<div class="container">
-  <h3>Search For Similar Users!</h3>
-  <div class="row">
-    <div class="col">
-      <label for="drop">Gender</label>
-      <select id="drop" class="custom select" data toggle="dropdown">
+<body>
+  <div class="container">
+    <h3>Search For Similar Users!</h3>
+    <div class="row">
+      <label for="drop" class="col-sm-2 mb-3">Gender:</label>
+      <select id="drop" class="custom select col-md-3 mb-3" data toggle="dropdown">
         <option selected></option>
         <option value="male"> male </option>
         <option value="female"> female </option>
       </select>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label for="drop" class="mt-3">Age</label>
-      <input type="text">
+    <div class="row">
+      <label for="drop" class="col-sm-2 mb-3">Age:</label>
+      <input type="text" class="col-md-3 mb-3">
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label for="drop" class="mt-3">Weight</label>
-      <input type="text">
+    <div class="row">
+      <label for="drop" class="col-sm-2 mb-3">Weight:</label>
+      <input type="text" class="col-md-3 mb-3">
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label for="disabilities">Disabilites: </label>
-      <select multiple name="disabilities">
+    <div class="row">
+      <label for="disabilities" class="col-sm-2">Disabilites: </label>
+      <select multiple name="disabilities" class="col-md-3 mb-3">
         <option>peanutz</option>
         <option>sleep apnia</option>
         <option>lactose intolerant</option>
@@ -38,47 +32,49 @@
         <option>vegetarian</option>
       </select>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label for="goal">Goal: </label>
-      <select name="goal">
+    <div class="row">
+      <label for="goal" class="col-sm-2">Goal: </label>
+      <select name="goal" class="col-md-3 mb-3">
         <option>Lose Weight</option>
         <option>Gain Weight</option>
         <option>Gain Muscle</option>
       </select>
     </div>
-  </div>
-  <button class="btn primary">
-    Search
-  </button>
-  <div class="row">
-    <div class="col">
-      <div *ngFor="let i of resultList">
-        <div class="card mb 3 mt 3 bg-light">
-          <div class="card-header">
-            {{i.name}}
-          </div>
-          <div class="card-body bg-light clearfix">
-            <div class="row">
-              <span class="text-muted m-2">
-                Age: {{ i.age }}
-              </span>
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <button class="btn primary" (click)="search()" class="col-md-1 mb-3">
+        Search
+      </button>
+    </div>
+    <h3>Results</h3>
+    <div class="row">
+      <div class="col">
+        <div *ngFor="let i of resultList">
+          <div class="card mb-3 mt-3 bg-light">
+            <div class="card-header">
+              {{i.fName}} {{i.lName}}
             </div>
-            <div class="row">
-              <span class="text-muted m-2">
-                Height: {{ i.height }}
-              </span>
-            </div>
-            <div class="row">
-              <span class="text-muted m-2">
-                Weight: {{ i.weight }}
-              </span>
-              <div class="col">
-                <button class="btn-primary mt-2 float-right">
-                  Workout/Diet
-                </button>
+            <div class="card-body bg-light clearfix">
+              <div class="row">
+                <span class="text-muted m-2">
+                  Age: {{ i.age }}
+                </span>
+              </div>
+              <div class="row">
+                <span class="text-muted m-2">
+                  Height: {{ i.height }}
+                </span>
+              </div>
+              <div class="row">
+                <span class="text-muted m-2">
+                  Weight: {{ i.weight }}
+                </span>
+                <div class="col">
+                  <button class="btn-primary mt-2 float-right">
+                    Workout/Diet
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -86,3 +82,4 @@
       </div>
     </div>
   </div>
+</body>
