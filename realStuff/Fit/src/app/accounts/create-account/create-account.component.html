@@ -7,7 +7,7 @@
     </div>
     <br />
     <div class="container">
-      <form class="form" #form="ngForm" (ngSubmit)="addAcc()">
+      <form class="form">
         <div id="login">
           <label for="user" class="col-md-3">Username: </label>
           <input id="username" name="username" class="col-md-3" type="text"
@@ -97,7 +97,7 @@
         </div>
       <br />
       <div id="button1" style="text-align:center">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" [disabled]="submitCheck()" (click)="addAcc();">
           Create Account
         </button>
       </div>

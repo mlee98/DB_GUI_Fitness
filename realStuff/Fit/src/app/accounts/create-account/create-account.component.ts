@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from 'protractor';
@@ -22,6 +23,7 @@ export class CreateAccountComponent implements OnInit {
   public missingFields: boolean;
 
   ngOnInit() {
+    this.missingFields = true;
     this.acc = {};
     this.acc.disabilities = [];
     this.acc.calsBurned = [];
@@ -33,8 +35,6 @@ export class CreateAccountComponent implements OnInit {
     this.acc.password = '';
     this.acc.username = '';
     this.acc.weight = '';
-    this.missingFields = false;
-    this.createForm();
   }
   public addAcc() {
     if (this.missingFields === false) {
@@ -44,6 +44,10 @@ export class CreateAccountComponent implements OnInit {
     }
   }
   public submitCheck() {
+    console.log(this.missingFields);
+    console.log(this.acc.username === '');
+    console.log(this.acc.goal === '');
+
     if (
       this.acc.age === 0 ||
       this.acc.username === '' ||
@@ -55,19 +59,8 @@ export class CreateAccountComponent implements OnInit {
       this.acc.username === '' ||
       this.acc.weight === ''
     ) {
-      return false;
+      return true;
     }
-    return true;
-  }
-
-  public createForm() {
-    if (this.ngForm.valid) {
-      console.log('form submitted');
-      this.ngForm = this.form.group({
-        name: ['', Validators.required ]
-     });
-    } else {
-      // validate all form fields
-    }
+    return false;
   }
 }
