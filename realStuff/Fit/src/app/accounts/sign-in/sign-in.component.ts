@@ -30,8 +30,8 @@ export class SignInComponent implements OnInit {
   public goodLogin() {
     this.accountRepository.login(this.username, this.pass).subscribe(data => {
        console.log(data);
-        if (data.id !== -1) {
-      this.router.navigateByUrl('signIn');
+        if (data.id === -1) {
+          this.router.navigateByUrl('signIn');
         } else {
           this.router.navigateByUrl('accounts/' + data.id);
         }
