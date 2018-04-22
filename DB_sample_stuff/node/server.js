@@ -4,8 +4,7 @@ const Hapi = require('hapi');
 const crypto = require('crypto');
 
 
-const server = new Hapi.Server();
-server.connection({
+const server = Hapi.Server({
     port: 3000, host: '0.0.0.0',
     routes: {
         cors: true
@@ -25,10 +24,23 @@ var connection = mysql.createPool({
     multipleStatements: true,
 });
 
+
+server.route({
+    method: 'GET',
+    path: '/hello',
+    handler: function (request, h) {
+        connection.getConnection(function(err,connection) {
+            connection.release();
+        });
+        return 'hello world';
+    }
+});
+
+
 server.route({
     method: 'POST',
     path: '/accounts/addUser',
-    handler: function (request, reply) {
+    handler: function (request, h) {
         let fName = request.payload['fName'];
         let lName = request.payload['lName'];
         let Height = request.payload['Height'];
@@ -58,13 +70,15 @@ server.route({
                     connection.query(loginTable, function (error, r3, fields) {
                         if (error)
                             throw error;
-                        reply(userID);
+                        
+                        return(userID);
                     });
                 });
             });
 
-            connection.release();//release the connection
+            
         });
+        connection.release();
         
     }
 });
@@ -105,7 +119,7 @@ server.route({
 server.route({
     method: 'GET',
     path: '/accounts',
-    handler: function (request, reply) {
+    handler: function (request, h) {
         connection.getConnection(function (err, connection) {
             //run the query
             connection.query('SELECT * FROM UserInfo', function (error, results, fields) {
@@ -122,44 +136,30 @@ server.route({
                     accNames += results[acc].Age;
                     accNames += '   ';
                 }
-                reply(accNames);
-
+                return h.response(accNames);
             });
             connection.release();//release the connection
         });
     }
 });
 
+
 server.route({
     method: 'GET',
-    path: '/accounts/profile',
-    handler: function (request, reply) {
-        let UserId = request.payload['UserId'];
-        connection.getConnection(function (err, connection) {
+    path: '/accounts/{UserId}',
+    handler: function (request, h) {
+        let UserId = encodeURIComponent(request.params.UserId);
+        connection.getConnection(function (err, h) {
             //run the query
             connection.query('SELECT * FROM UserInfo WHERE UserId = ' + UserId, function (error, results, fields) {
                 if (error)
                     throw error;
-                let accNames = '';
-                for (let acc = 0; acc < results.length; acc++) {
-                    accNames += results[acc].UserId;
-                    accNames += ' ';
-                    accNames += results[acc].fName;
-                    accNames += ' ';
-                    accNames += results[acc].lName;
-                    accNames += ' ';
-                    accNames += results[acc].Height;
-                    accNames += ' ';
-                    accNames += results[acc].Weight;
-                    accNames += ' ';
-                    accNames += results[acc].Age;
-                    accNames += '   ';
-                }
-                reply(accNames);
+                
+                return 'bob'; 
 
             });
 
-            connection.release();//release the connection
+            connection.release();
         });
         
     }
@@ -187,7 +187,7 @@ server.route({
 
             });
 
-            connection.release();//release the connection
+            connection.release();
         });
         
        
@@ -364,10 +364,17 @@ server.route({
 
 
 
-server.start((err) => {
+async function start() {
 
-    if (err) {
-        throw err;
+    try {
+        await server.start();
     }
-    console.log(`Server running at: ${server.info.uri}`);
-});
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+
+    console.log('Server running at:', server.info.uri);
+};
+
+start();
