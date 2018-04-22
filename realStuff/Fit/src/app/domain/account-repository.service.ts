@@ -9,7 +9,7 @@ import { Repostitory } from './repository.service';
 @Injectable()
 export class AccountRepostitory extends Repostitory<Account> {
 
-  protected endPoint = 'http://localhost:3000/';
+  protected endPoint = '192.168.99.100:3000/';
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient);
