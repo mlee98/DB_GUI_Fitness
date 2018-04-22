@@ -31,9 +31,9 @@ export class SignInComponent implements OnInit {
     this.accountRepository.login(this.username, this.pass).subscribe(data => {
        console.log(data);
         if (data.id === -1) {
-          this.router.navigateByUrl('signIn');
+          this.goodLog = 1;
         } else {
-          this.router.navigateByUrl('accounts/' + data.id);
+          this.router.navigateByUrl('accounts/' + 5);
         }
      });
   }
