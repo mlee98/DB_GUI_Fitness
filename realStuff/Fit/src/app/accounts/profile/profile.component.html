@@ -1,15 +1,17 @@
 <html>
-  <head>
-    <title>Profile</title>
-  </head>
-	<body>
-    <br />
-    <div id="border">
+
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+  <br />
+  <div id="border">
     <aside class="float-right" id="buttons">
-        <button (click)="changeToSearch()">Search</button>
-        <button (click)="changeToSignIn()">Log Out</button>
+      <button (click)="changeToSearch()">Search</button>
+      <button (click)="changeToSignIn()">Log Out</button>
     </aside>
-		<div id="header" style="text-align: left">
+    <div id="header" style="text-align: left">
       <h1>Name</h1>
 
       <div>
@@ -18,36 +20,42 @@
     </div>
     <br />
 
-		<main class="container" id="profile">
-        <div id="tabs" class="container">
-            <ul class="nav nav-tabs" role="tablist" >
-              <li class="nav-item">
-                <a href="#food" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="food" id="foodTab">Today's Food</a>
-              </li>
-              <li class="nav-item">
-                <a href="#workout" class="nav-link"  data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
-              </li>
-              <li class="nav-item">
-                <a href="#past" class="nav-link"  data-toggle="tab" role="tab" aria-controls="past" id="pastTab">Past Workout</a>
-              </li>
-            </ul>
+    <main class="container" id="profile">
+      <div id="tabs" class="container">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a href="#food" class="nav-link" data-toggle="tab" role="tab" aria-controls="food" id="foodTab">Today's Food</a>
+          </li>
+          <li class="nav-item">
+            <a href="#workout" class="nav-link" data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
+          </li>
+          <li class="nav-item">
+            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab">Past Food</a>
+          </li>
+          <li class="nav-item">
+            <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" id="pastWorkoutTab">Past Workout</a>
+          </li>
+        </ul>
 
-          <div class="tab-content" id="tabCont">
-            <br>
-            <div class="tab-pane active container"  role="tabpanel" id="food">
-              <app-food-today></app-food-today>
-            </div>
-
-              <div class="tab-pane"  role="tabpanel" id="workout">
-               <app-workout-today></app-workout-today>
-              </div>
-              <div class="tab-pane"  role="tabpanel" id="past">
-                <app-workout-past></app-workout-past>
-              </div>
-            </div>
+        <div class="tab-content" id="tabCont">
+          <br>
+          <div class="tab-pane active container" role="tabpanel" id="food">
+            <app-food-today></app-food-today>
           </div>
-          <br />
+          <div class="tab-pane" role="tabpanel" id="workout">
+            <app-workout-today></app-workout-today>
+          </div>
+          <div class="tab-pane" role="tabpanel" id="pastFood">
+            add past food component
+          </div>
+          <div class="tab-pane" role="tabpanel" id="pastWorkout">
+            <app-workout-past></app-workout-past>
+          </div>
+        </div>
+      </div>
+      <br />
     </main>
   </div>
-	</body>
+</body>
+
 </html>
