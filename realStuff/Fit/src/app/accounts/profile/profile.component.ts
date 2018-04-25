@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
 
   public changeToSearch() {
  this.router.navigateByUrl('/account/1/search');
-
    }
 }
 
