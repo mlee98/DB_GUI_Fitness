@@ -18,13 +18,14 @@ USE `DB_GUI` ;
 -- Table `DB_GUI`.`UserInfo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
-  `UserId` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
   `Weight` VARCHAR(45) NULL,
   `Age` VARCHAR(45) NULL,
   `UserName` VARCHAR(45) NULL,
+  `Disability` VARCHAR(45) NULL,
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
@@ -33,17 +34,16 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
-  `UserId` INT NOT NULL,
   `Username` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NULL,
-  PRIMARY KEY (`UserId`))
+  `Userid` INT NULL,
+  PRIMARY KEY (`Username`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
-<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `WorkoutPlan#` INT NOT NULL,
   `PlanDesc` VARCHAR(45) NULL,
@@ -53,9 +53,6 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   `Core` VARCHAR(45) NULL,
   PRIMARY KEY (`WorkoutPlan#`))
 ENGINE = InnoDB;
-=======
-
->>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
 
 
 -- -----------------------------------------------------
@@ -78,48 +75,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DB_GUI`.`Sleep`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Sleep` (
-  `Name` VARCHAR(45) NOT NULL,
-  `Description` VARCHAR(500) NULL,
-  PRIMARY KEY (`Name`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `DB_GUI`.`Eating Disorders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating Disorders` (
   `Name` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(240) NULL,
-  PRIMARY KEY (`Name`))
+  `Type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Type`))
 ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Sleep` (
-  `SleepID` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
-  `Share` TINYINT NOT NULL,
-  PRIMARY KEY (`SleepID`))
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Disorders` (
-  `DisorderID` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
-  `Share` TINYINT NOT NULL,
-  PRIMARY KEY (`DisorderID`))
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
-  `AllergyID` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
-  `Share` TINYINT NOT NULL,
-  PRIMARY KEY (`AllergyID`))
-ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
@@ -128,40 +91,23 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Allergies` (
   `Name` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(240) NULL,
-  PRIMARY KEY (`Name`))
+  `Allergies` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Allergies`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Account_Workous`
 -- -----------------------------------------------------
-<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workous` (
   `UserId` INT NOT NULL,
   `Primary_Area` INT NULL,
   `Share` TINYINT NULL,
   `cardioProg` TINYINT NULL,
-=======
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workouts` (
-  `UserId` INT NOT NULL,
-  `Primary_Area` INT NULL,
-  `Share` TINYINT NULL,
-  `cardioProg` INT NULL,
->>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
   `upperProg` INT NULL,
   `lowerProg` INT NULL,
   `coreProg` INT NULL,
   PRIMARY KEY (`UserId`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Ideal_Sleep`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Ideal_Sleep` (
-  `AgeRange` VARCHAR(45) NOT NULL,
-  `HoursSleep` VARCHAR(45) NULL,
-  PRIMARY KEY (`AgeRange`))
 ENGINE = InnoDB;
 
 
@@ -179,6 +125,159 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Diet_Plan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Diet_Plan` (
+  `Plan#` VARCHAR(45) NOT NULL,
+  `Name` VARCHAR(45) NULL,
+  PRIMARY KEY (`Plan#`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`VeganPlan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`VeganPlan` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Nut-free`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Nut-free` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`HighProtein`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`HighProtein` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`LowFat`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`LowFat` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Gluten-Free`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Gluten-Free` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Normal`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Normal` (
+  `Meal` INT NOT NULL AUTO_INCREMENT,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`NoCarbs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`NoCarbs` (
+  `Meal` INT NOT NULL AUTO_INCREMENT,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Lactose`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Lactose` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Citrus-free`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Citrus-free` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Eggfree`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eggfree` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Fishfree`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fishfree` (
+  `Meal` INT NOT NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`Meal`))
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -188,8 +287,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`) VALUES ('123', 'Jane', 'Doe', '5.7', '160', '28', NULL);
-INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`) VALUES ('456', 'John', 'Doe', '6.3', '210', '25', NULL);
+INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`, `Disability`) VALUES (123, 'Jane', 'Doe', '5.7', '160', '28', NULL, NULL);
+INSERT INTO `DB_GUI`.`UserInfo` (`UserId`, `fName`, `lName`, `Height`, `Weight`, `Age`, `UserName`, `Disability`) VALUES (456, 'John', 'Doe', '6.3', '210', '25', NULL, NULL);
 
 COMMIT;
 
@@ -197,23 +296,9 @@ COMMIT;
 -- -----------------------------------------------------
 -- Data for table `DB_GUI`.`Fitness_Tracker`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
-  `WorkoutID` INT NOT NULL,
-  `PlanDesc` VARCHAR(45) NULL,
-  `Cardio` INT NULL,
-  `UpperBody` INT NULL,
-  `LowerBody` INT NULL,
-  `Core` INT NULL,
-  PRIMARY KEY (`WorkoutID`))
-ENGINE = InnoDB;
-
 START TRANSACTION;
 USE `DB_GUI`;
-<<<<<<< HEAD
 INSERT INTO `DB_GUI`.`Fitness_Tracker` (`WorkoutPlan#`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', '60', '10', '10', '20');
-=======
-INSERT INTO `DB_GUI`.`Workouts` (`WorkoutID`, `PlanDesc`, `Cardio`, `UpperBody`, `LowerBody`, `Core`) VALUES (1, 'Weight Loss', 60, 10, 10, 20);
->>>>>>> f553efa8fe0a1230ab7348c3af70031c4b7d3033
 
 COMMIT;
 
@@ -256,21 +341,7 @@ COMMIT;
 START TRANSACTION;
 USE `DB_GUI`;
 INSERT INTO `DB_GUI`.`Disorders` (`Type`) VALUES ('Eating_Disorders');
-INSERT INTO `DB_GUI`.`Disorders` (`Type`) VALUES ('Sleep_Disorders');
 INSERT INTO `DB_GUI`.`Disorders` (`Type`) VALUES ('Allergies');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `DB_GUI`.`Sleep`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Sleep` (`Name`, `Description`) VALUES ('Insomnia', 'Inability to sleep');
-INSERT INTO `DB_GUI`.`Sleep` (`Name`, `Description`) VALUES ('Sleep apnea', 'Sleep apnea is a common condition in the United States. It can occur when the upper airway becomes blocked repeatedly during sleep, reducing or completely stopping airflow. This is known as obstructive sleep apnea. If the brain does not send the signals needed to breathe, the condition may be called central sleep apnea.');
-INSERT INTO `DB_GUI`.`Sleep` (`Name`, `Description`) VALUES ('Restless leg syndrome', 'A disorder characterized by an unpleasant tickling or twitching sensation in the leg muscles when sitting or lying down, which is relieved only by moving the legs.');
-INSERT INTO `DB_GUI`.`Sleep` (`Name`, `Description`) VALUES ('Sleep walking', 'A phenomenon of combined sleep and wakefulness.');
 
 COMMIT;
 
@@ -280,10 +351,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`) VALUES ('Binge Eating Disorder', 'The consumption of large quantities of food in a short period of time, typically as part of an eating disorder.');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`) VALUES ('Night Eating Disorder', 'Night eating syndrome (NES) is a condition that combines overeating at night with sleep problems.');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`) VALUES ('Bulima Nervosa', 'This is a serious, potentially life-threatening eating disorder characterized by a cycle of bingeing and compensatory behaviors such as self-induced vomiting designed to undo or compensate for the effects of binge eating.');
-INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`) VALUES ('Anoxeria Nervosa', 'This is a psychological and potentially life-threatening eating disorder. Those suffering from this eating disorder are typically suffering from an extremely low body weight relative to their height and body type.');
+INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Binge Eating Disorder', 'The consumption of large quantities of food in a short period of time, typically as part of an eating disorder.', 'Eating Disorder');
+INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Night Eating Disorder', 'Night eating syndrome (NES) is a condition that combines overeating at night with sleep problems.', 'Eating Disorder');
+INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Bulima Nervosa', 'This is a serious, potentially life-threatening eating disorder characterized by a cycle of bingeing and compensatory behaviors such as self-induced vomiting designed to undo or compensate for the effects of binge eating.', 'Eating Disorder');
+INSERT INTO `DB_GUI`.`Eating Disorders` (`Name`, `Description`, `Type`) VALUES ('Anoxeria Nervosa', 'This is a psychological and potentially life-threatening eating disorder. Those suffering from this eating disorder are typically suffering from an extremely low body weight relative to their height and body type.', 'Eating Disorder');
 
 COMMIT;
 
@@ -293,33 +364,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Lactose', 'Milk,Cheese,Yogurt,Butter');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Nut', 'Almonds,Peanuts,Cashew,Pine Nuts,Pecans,Pistachio');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Peanuts', 'All products made of peanuts.');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Citrus', 'Lemon,Orange,Lime,Grapefruit,Clementimes');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Fish', 'Salmon,Tuna,Cod,Bass,Mussels,Oysters,Flounder,Haddock,Perch,Tilipia');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Shellfish', 'Shrimp,Crawfish,Crab,Prawns');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Eggs', 'all products that are made up of eggs.');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Soy', 'Soybeans,Soy Sauce,Tofu');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Corn', 'All products that are made up of corn.');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Spices', 'Cinammon,Tumeric,Pepper,Salt,Celery,Mustard,Anis,Coriander,Cumin,Fennel,Parsley,Ragweed,Echinacea,Artichoke,Dandelions,Hibiscus');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Gelatin', 'All products that contain gelatin.');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Meat', 'Beef,Pork,Chicken,Turkey,Lamb,Goat,Fish');
-INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`) VALUES ('Seeds', 'Seasme,Sunflower,Poppy,Pumpkin');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `DB_GUI`.`Ideal_Sleep`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('6-13', '10-11');
-INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('14-17', '8.5-9.5');
-INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('18-25', '7-9');
-INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('26-64', '7-9');
-INSERT INTO `DB_GUI`.`Ideal_Sleep` (`AgeRange`, `HoursSleep`) VALUES ('65+', '7-9');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Lactose', 'Milk,Cheese,Yogurt,Butter', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Nut', 'Almonds,Peanuts,Cashew,Pine Nuts,Pecans,Pistachio', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Peanuts', 'All products made of peanuts.', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Citrus', 'Lemon,Orange,Lime,Grapefruit,Clementimes', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Fish', 'Salmon,Tuna,Cod,Bass,Mussels,Oysters,Flounder,Haddock,Perch,Tilipia', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Shellfish', 'Shrimp,Crawfish,Crab,Prawns', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Eggs', 'all products that are made up of eggs.', 'Allergy');
+INSERT INTO `DB_GUI`.`Allergies` (`Name`, `Description`, `Allergies`) VALUES ('Soy', 'Soybeans,Soy Sauce,Tofu', 'Allergy');
 
 COMMIT;
 
@@ -347,3 +399,173 @@ INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `E
 INSERT INTO `DB_GUI`.`Workouts` (`WorkoutPlan#`, `Primary Area`, `Exercise1`, `Exercise2`, `Exercise3`, `Exercise4`) VALUES (16, 'Cardio', 'Elliptical', 'Erg', 'Plank', 'Leg Presses');
 
 COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Diet_Plan`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('1', 'Normal');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('2', 'Nut-free');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('3', 'Lowfat');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('4', 'Gluten-free');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('5', 'No Carbs');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Plan#`, `Name`) VALUES ('6', 'High Protein');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`VeganPlan`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Vegan Pancakes', 'Salad', 'Zucchini', 'Almonds');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Quinoa Breakfast Cereal', 'Tempeh Bowl', 'Veggie Kabobs', 'Apple');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Flourless Pumpkin Muffins', 'Crispy Tofu Bowl', 'Pesto Pasta', 'Grapes');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Vegan French Toast', 'Curried Lentils', 'Spring Minestrone', 'Carrots');
+INSERT INTO `DB_GUI`.`VeganPlan` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Avocado Toast', 'Avocado Salad', 'Mushroom Burger', 'Strawberries');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Nut-free`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Breakfast Tacos', 'Sunbutter and banana sandwhich', 'Roasted Vegetable Enchiladas', 'Pretzels');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Breakfast Soup', 'Pasta Salad', 'Lemon and Herb Lamb Chops', 'Roasted Chickpeas');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Waffles', 'Cold Noddle Salad', 'Chicken and Sausage with Bowties', 'Popcorn');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Crepes', 'Tortilla Wrap', 'Cranberry Glazed Turkey Breast', 'Rice Crackers');
+INSERT INTO `DB_GUI`.`Nut-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Doughnuts', 'Quesadillas', 'Honey Mustard Garlic Rack-of-Lamb', 'Sunchips');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`HighProtein`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Baked Eggs Avocados', 'Portobello Stuffed Pizza', 'Protein-Style Thai Turkey Wraps', 'Jerky');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Feta Egg Toast', 'Chickpea Spinach Salad', 'Best Healthy Turkey Chili', 'Trail Mix');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Poached Eggs with Tomato', 'Avocado Greek Yogurt Chicken Salad', 'Sesame Beef', 'Tuna');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Cottage Cheese with Fruit and Toast', 'Salmon Quinoa Bowl', 'Mexican Tuna Salad With Avocado', 'Peanut Butter Celery Sticks');
+INSERT INTO `DB_GUI`.`HighProtein` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Peanut Butter Oats', 'Southwestern Veggie Hummus Wraps', 'Greek-Braised Cod With Tomatoes and Kalamata Olives', 'Turkey Roll ups');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`LowFat`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Zucchini Breakfast Bowl', 'Asian Noodle Salad', 'Pepperoni Pizza', 'Peanut Butter & Celery');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Apple Breakfast Porridge', 'Mediterranean Orzo Salad', 'Lemon-Olive Grilled Chicken', 'Cottage Cheese');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Breakfast Salad', 'Spinach Artichoke Quiche Cup', 'Shrimp à la Grecque', 'Rice Cake and Almond Butter');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Blueberry Oatmeal', 'Baked Tofu Sushi Bowl', 'Teriyaki Chicken and Soba Noodles', 'Choclate Banana');
+INSERT INTO `DB_GUI`.`LowFat` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'BLT Breakfast Salad', 'Tuna and Chickpea Pita Sandwiches', 'Roast Dijon Chicken and Vegetables', 'Almonds');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Gluten-Free`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Muffins', 'Gluten-free Quinoa Burgers', 'Vegan Chili', 'Apples');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Scones', 'Portobello and Zucchini Taco', 'Zucchini Crust Pizza', 'Frozen Grapes');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Chocolate Chip Pancakes', 'Creamy Cashew Potato and Pasta Salad', 'Buffalo Chicken Tenders', 'Carrots');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Waffles', 'Grilled Stuff Bacon Cheeseburger', 'Greek Stuffed Chicken', 'Cucumbers');
+INSERT INTO `DB_GUI`.`Gluten-Free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Quinoa Bowl', 'BLT Chopped Salad', 'Cranberry Balasmic Chicken', 'Celery');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Normal`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Pancakes', 'Turkey Sandwhich', 'Pizza', 'Apples');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Waffles', 'Chicken Salad', 'Tacos', 'Chips');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Crepes', 'Chorizo Risotto', 'Burritos', 'Popcorn');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'French Toast', 'Lamb Kabobs', 'Stir Fry', 'Watermelon');
+INSERT INTO `DB_GUI`.`Normal` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Bacon and Eggs', 'Crab', 'Steak and Potatoes', 'Strawberries');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`NoCarbs`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Flourless Egg and Cottage Cheese Savory Breakfast Muffins', 'Caprese Avocado Salad', 'Barbacoa', 'Black Pepper Beef Jerky');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Cream Cheese Pancakes', 'Shrimp & Cauliflower Salad', 'Roast Beef Salad', 'Cloud Bread');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Cream Cheese Pancakes', 'California Turkey and Bacon Lettuce Wraps', 'BBQ Chicken Cobb Salad', 'Crispy Parmesan Tomato Chips');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Spinach, Mushroom and Feta Crustless Quiche', 'Chicken and Asparagus Lemon Stir Fry', 'Veggie “Sushi” Rolls', 'Avocado Crisps');
+INSERT INTO `DB_GUI`.`NoCarbs` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Coconut Chia Pudding', 'Salmon Chickpea Salad', 'Grilled Halloumi Salad', 'Cheesy Jalapeno Mushroom Bites');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Lactose`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Lactose` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Almond Butter Toast', 'Blueberry Pork Corn Tacos', 'Lighter Chicken Pot Pie', 'Apples');
+INSERT INTO `DB_GUI`.`Lactose` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Oatmeal', 'Shrimp & Avocado Taco Salad', 'Cashew Alfredo Pasta', 'Almonds');
+INSERT INTO `DB_GUI`.`Lactose` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Spiced Pumpkin Tea Bread', 'Spicy Noodles', 'Baja Fish Tacos', 'Grapes');
+INSERT INTO `DB_GUI`.`Lactose` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Fresh Fruit Muesli', 'Cajun Chickpea Sweet Potato Burgers', 'Thai Basil Chicken Stirfry', 'Popcorn');
+INSERT INTO `DB_GUI`.`Lactose` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Quinoa Porridge', 'Tropical Rice Bowls', 'Pulled Tandoori Chicken', 'Cashews');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Citrus-free`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Citrus-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Eggs Benedict', 'Pesto Pizza', 'Chicken Salad with brussel sprouts', 'Almonds');
+INSERT INTO `DB_GUI`.`Citrus-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Eggplant and Walnut Frittata', 'Sausage and Tomato Pasta', 'Spinach Ricotta Lasagna', 'Apples');
+INSERT INTO `DB_GUI`.`Citrus-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Grilled Banana-Pear Pancake', 'Chickpea,Avocado, & Feta Salad', 'Sausage and Cheese Spaghetti', 'Grapes');
+INSERT INTO `DB_GUI`.`Citrus-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'French Baked Toast', 'Pesto Chicken Pasta', 'Egg Fried Rice', 'Greek Yogurt');
+INSERT INTO `DB_GUI`.`Citrus-free` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Blue Cheese Quiche', 'Loaded Baked Potato', 'Shakshuka', 'Watermelon');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Eggfree`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Eggfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Cremay Coconut-Citrus Waffle', 'Chicken Caesar Ciabatta Sandwhich', 'Autumn Pear Salad', 'Apples');
+INSERT INTO `DB_GUI`.`Eggfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Sunflower Granola', 'Kale Salad with Vinaigrette', 'Butternut Squash', 'Almonds');
+INSERT INTO `DB_GUI`.`Eggfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Cucumber Toast', 'Southwest Hummus Wraps', 'Bacon Ranch Turkey Wrap', 'Sweet Potato Chips');
+INSERT INTO `DB_GUI`.`Eggfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Blueberry-Orange Parfaits', 'Three Bean Salad', 'Cobb Salad Pita Pockets', 'Grapes');
+INSERT INTO `DB_GUI`.`Eggfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Pomegranate-Farro Salad', 'Chicken Pesto Sandwhich', 'Sesame Noodles', 'Celery and Carrots');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `DB_GUI`.`Fishfree`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `DB_GUI`;
+INSERT INTO `DB_GUI`.`Fishfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (1, 'Goat Cheese Oatmeal', 'Southwest Black Bean Pasta', 'Steak and Garlic Potatos', 'Grapes');
+INSERT INTO `DB_GUI`.`Fishfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (2, 'Blueberry Power Smoothie', 'BLT Croissant Sandwhich', 'Kale Mushroom Frittata', 'Chips');
+INSERT INTO `DB_GUI`.`Fishfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (3, 'Greek Cucumber and Chickpea Bowl', 'Hummus and Veggie Wraps', 'Chicken Chili', 'Applesauce');
+INSERT INTO `DB_GUI`.`Fishfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (4, 'Bacon Veggie Skillet', 'Cucumber Turkey Wraps', 'Mac and Cheese Soup', 'Greek Yogurt');
+INSERT INTO `DB_GUI`.`Fishfree` (`Meal`, `Breakfast`, `Lunch`, `Dinner`, `Snack`) VALUES (5, 'Softened Plums with Vanilla Yogurt', 'Chicken Salad Sandwhich', 'Baked Cheese Crepes', 'Carrots');
+
+COMMIT;
+
