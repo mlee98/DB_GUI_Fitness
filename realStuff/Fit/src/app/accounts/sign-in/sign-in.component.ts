@@ -2,6 +2,7 @@ import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeRepostitory } from '../../domain/home.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   constructor(
-    private accountRepository: AccountRepostitory,
+    private homeRepository: HomeRepostitory,
     private activedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -28,7 +29,7 @@ export class SignInComponent implements OnInit {
 
 
   public goodLogin() {
-    this.accountRepository.login(this.username, this.pass).subscribe(data => {
+    this.homeRepository.login(this.username, this.pass).subscribe(data => {
        console.log(data);
         if (data.id === -1) {
           this.goodLog = 1;

@@ -5,6 +5,7 @@ import { EventEmitter } from 'protractor';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { HomeRepostitory } from '../../domain/home.service';
 
 @Component({
   selector: 'app-create-account',
@@ -13,7 +14,7 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 })
 export class CreateAccountComponent implements OnInit {
   constructor(
-    public acocuntRepository: AccountRepostitory,
+    public HomeRepository: HomeRepostitory,
     private activedRoute: ActivatedRoute,
     private router: Router,
     private form: FormBuilder,
@@ -35,7 +36,7 @@ export class CreateAccountComponent implements OnInit {
     this.acc.weight = '';
   }
   public addAcc() {
-      this.acocuntRepository.createAccount(this.acc).subscribe(data => {
+      this.HomeRepository.createAccount(this.acc).subscribe(data => {
         this.router.navigateByUrl('signIn');
       });
   }
