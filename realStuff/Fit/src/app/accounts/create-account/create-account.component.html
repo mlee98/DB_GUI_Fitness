@@ -10,18 +10,16 @@
       <form class="form">
         <div id="login">
           <label for="user" class="col-md-3">Username: </label>
-          <input id="username" name="username" class="col-md-3" type="text"
-          [(ngModel)]="acc.username" required  #myUsernameControl="ngModel">
+          <input id="username" name="username" class="col-md-3" type="text" [(ngModel)]="acc.username" required #myUsernameControl="ngModel">
           <div *ngIf="myUsernameControl.invalid && (myUsernameControl.dirty || myUsernameControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myUsernameControl.valid"user>Username is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myUsernameControl.valid" user>Username is required</div>
           </div>
           <br>
           <br>
           <label for="password" class="col-md-3">Password: </label>
-          <input name="password" class="text col-md-3" type="text" [(ngModel)]="acc.password"
-          required #myPasswordControl="ngModel">
+          <input name="password" class="text col-md-3" type="text" [(ngModel)]="acc.password" required #myPasswordControl="ngModel">
           <div *ngIf="myPasswordControl.invalid && (myPasswordControl.dirty || myPasswordControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myPasswordControl.valid"user>Password is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myPasswordControl.valid" user>Password is required</div>
           </div>
           <br>
           <br>
@@ -31,42 +29,37 @@
         <hr>
         <div id="info">
           <label class="text col-md-3" for="Name">First Name: </label>
-          <input class="text col-md-3" name="fname" type="text" [(ngModel)]="acc.fName"
-          required #myFNameControl="ngModel">
+          <input class="text col-md-3" name="fname" type="text" [(ngModel)]="acc.fName" required #myFNameControl="ngModel">
           <div *ngIf="myFNameControl.invalid && (myFNameControl.dirty || myFNameControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myFNameControl.valid"user>First Name is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myFNameControl.valid" user>First Name is required</div>
           </div>
           <br>
           <br>
           <label class="text col-md-3" for="Name"> Last Name: </label>
-          <input class="text col-md-3" name="lname" type="text" [(ngModel)]="acc.lName"
-          required #myLNameControl="ngModel">
+          <input class="text col-md-3" name="lname" type="text" [(ngModel)]="acc.lName" required #myLNameControl="ngModel">
           <div *ngIf="myLNameControl.invalid && (myLNameControl.dirty || myLNameControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myLNameControl.valid"user>Last Name is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myLNameControl.valid" user>Last Name is required</div>
           </div>
           <br>
           <br>
           <label class="text col-md-3" for="height">Height: </label>
-          <input class="text col-md-3" name="height" type="text" [(ngModel)]="acc.height"
-          required #myHeightControl="ngModel">
+          <input class="text col-md-3" name="height" type="text" [(ngModel)]="acc.height" required #myHeightControl="ngModel">
           <div *ngIf="myHeightControl.invalid && (myHeightControl.dirty || myHeightControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myHeightControl.valid"user>Height is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myHeightControl.valid" user>Height is required</div>
           </div>
           <br>
           <br>
           <label class="text col-md-3" for="weight">Weight: </label>
-          <input class="text col-md-3" name="weight" type="text" [(ngModel)]="acc.weight"
-          required #myWeightControl="ngModel">
+          <input class="text col-md-3" name="weight" type="text" [(ngModel)]="acc.weight" required #myWeightControl="ngModel">
           <div *ngIf="myWeightControl.invalid && (myWeightControl.dirty || myWeightControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myWeightControl.valid"user>Weight is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myWeightControl.valid" user>Weight is required</div>
           </div>
           <br>
           <br>
           <label class="text col-md-3" for="age">Age: </label>
-          <input class="text col-md-3" name="age" type="text" [(ngModel)]="acc.age"
-          required #myAgeControl="ngModel">
+          <input class="text col-md-3" name="age" type="text" [(ngModel)]="acc.age" required #myAgeControl="ngModel">
           <div *ngIf="myAgeControl.invalid && (myAgeControl.dirty || myAgeControl.touched)">
-          <div class="alert alert-danger col-md-6" *ngIf="!myAgeControl.valid"user>Age is required</div>
+            <div class="alert alert-danger col-md-6" *ngIf="!myAgeControl.valid" user>Age is required</div>
           </div>
           <br>
           <br>
@@ -94,15 +87,15 @@
             <option>Gain Muscle</option>
           </select>
         </div>
-      <br />
-      <div id="button1" style="text-align:center">
-        <button class="btn btn-primary" [disabled]="submitCheck()" (click)="addAcc()">
-          Create Account
-        </button>
         <br />
-        <br />
-      </div>
-    </form>
+        <div id="button1" style="text-align:center">
+          <button class="btn btn-primary" [disabled]="submitCheck()" (click)="addAcc()">
+            Create Account
+          </button>
+          <br />
+          <br />
+        </div>
+      </form>
     </div>
   </main>
 </body>

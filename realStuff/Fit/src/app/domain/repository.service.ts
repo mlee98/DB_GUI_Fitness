@@ -29,6 +29,22 @@ export abstract class Repostitory<T> {
       catchError(this.handleException)
     );
   }
+  public getWorkoutToday(id: number): Observable<T> {
+    return this.httpClient.get(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+  public postWorkoutToday(id: number): Observable<T> {
+    return this.httpClient.post(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
+  public getWorkoutPast(id: number): Observable<T> {
+    return this.httpClient.get(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
 
   public login(user: string, pass: string): Observable<T> {
     // tslint:disable-next-line:prefer-const
