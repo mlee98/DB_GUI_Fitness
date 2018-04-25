@@ -1,6 +1,11 @@
-body{
-  background-color: rgb(192,219,186);
+html{
+  height: 100vh;
+  background: linear-gradient(rgb(192,219,186), white, rgb(192,219,186));
 }
+body{
+  background: linear-gradient(to right, rgb(192,219,186),white, white, white, white white, rgb(192,219,186));
+}
+
 
 #header{
   width: 30%;

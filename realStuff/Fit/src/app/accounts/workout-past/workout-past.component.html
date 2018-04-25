@@ -2,13 +2,13 @@
   <table class="table ">
     <thead class="col-md-12" style="display:table-header-group">
       <tr class="col-md-12">
-        <th class="col-md-2 float-left" id="date" align="left">
+        <th id="date" align="left">
           <h5>Date</h5>
         </th>
-        <th class="col-md-2 float-left" id="core" align="left">
+        <th id="core" align="left">
           <h5>Core Area</h5>
         </th>
-        <th class="col-md-8 float-left" id="excer" align="left">
+        <th id="excer" align="left">
           <h5>Exercises</h5>
         </th>
       </tr>
@@ -17,17 +17,17 @@
 
     </tfoot>
     <tbody>
-      <tr>
-        <td headers="date" >04/21/18</td>
-        <td headers="core" >Legs</td>
-        <td headers="excer" >squats -- leg press -- leg extensions -- leg pull</td>
-      </tr>
-      <tr>
-        <td headers="date" >04/21/18</td>
-        <td headers="core" >Legs</td>
-        <td headers="excer" >squats -- leg press -- leg extensions -- leg pull</td>
+      <tr *ngFor="let workout of workouts">
+          <td id= "date">
+            {{ workout.date | date:'LLL dd, yyyy' }}
+          </td>
+          <td id="area">
+            {{ workout.type }}
+          </td>
+          <td id="exercises">
+            {{ workout.exercises[0].name }}  -- {{ workout.exercises[1].name }} -- {{ workout.exercises[2].name }} -- {{ workout.exercises[3].name }}
+          </td>
       </tr>
     </tbody>
   </table>
-  need to ask lawrimore about this
 </div>

@@ -1,8 +1,10 @@
+import { Exercise } from './Exercise';
+
 export class Workout {
+  date?: Date;
   wid?: number;
   workoutName?: string;
   type?: string;
-  reps: number;
-  distance: number;
-  calsBurned?: number;
+// calsBurned: number;
+  exercises?: Array<Exercise>;
 }
