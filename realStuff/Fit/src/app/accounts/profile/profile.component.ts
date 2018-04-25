@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private router: Router
   ) { }
- @Input() acc: Account;
+  public acc: Account;
 
   ngOnInit() {
     this.activedRoute.params.subscribe((params: any) => {

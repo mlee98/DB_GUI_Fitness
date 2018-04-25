@@ -26,6 +26,7 @@ export abstract class Repostitory<T> {
   }
 
   public getAcc(id: number): Observable<Account> {
+    console.log('the id ' + id);
     return this.httpClient.get(`${this.endPoint}accounts/${id}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
