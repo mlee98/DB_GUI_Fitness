@@ -1,3 +1,4 @@
+import { Workout } from './models/Workouts';
 import { Account } from './models/Account';
 import { catchError } from 'rxjs/operators';
 // tslint:disable-next-line:import-blacklist
@@ -24,29 +25,29 @@ export abstract class Repostitory<T> {
     );
   }
 
-  public getAcc(id: number): Observable<T> {
+  public getAcc(id: number): Observable<Account> {
     return this.httpClient.get(`${this.endPoint}accounts/${id}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
-  public getWorkoutToday(id: number): Observable<T> {
+  public getWorkoutToday(id: number): Observable<Workout[]> {
     return this.httpClient.get(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
-  public postWorkoutToday(id: number): Observable<T> {
+  public postWorkoutToday(id: number, workout: Workout): Observable<Workout> {
     return this.httpClient.post(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public getWorkoutPast(id: number): Observable<T> {
+  public getWorkoutPast(id: number): Observable<Workout> {
     return this.httpClient.get(`${this.endPoint}accounts/${id}/workoutToday`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
 
-  public login(user: string, pass: string): Observable<T> {
+  public login(user: string, pass: string): Observable<Account> {
     // tslint:disable-next-line:prefer-const
     let data1 = {'username' : user, 'password' : pass};
     const data = JSON.stringify(data1);
@@ -54,7 +55,7 @@ export abstract class Repostitory<T> {
       catchError(this.handleException)
     );
   }
-  public search(account: Account): Observable<T> {
+  public search(account: Account): Observable<Account[]> {
     // tslint:disable-next-line:prefer-const
     return this.httpClient.post(`${this.endPoint}search`, account, this.httpOptions).pipe(
       catchError(this.handleException)

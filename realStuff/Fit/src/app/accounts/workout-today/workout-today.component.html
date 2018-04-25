@@ -4,24 +4,12 @@
       <h4>Core Area</h4>
     </div>
     <div class="card-body">
-      <span class="float-left">
-        Exercise 1 -- reps
-        <br />
-        Exercise 2 -- reps
-        <br />
-        Exercise 3 -- reps
-        <br />
-        Exercise 4 -- reps
-        <br />
+      <span class="float-left" *ngFor="let i of workouts">
+          <div *ngFor="let x of i.exercises">
+              {{x.name}}
+          </div>
       </span>
 
     </div>
-
-
   </div>
-
-
-
-
-
 </div>
