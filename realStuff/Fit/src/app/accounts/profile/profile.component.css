@@ -1,9 +1,9 @@
 html{
   height: 100vh;
-  background: linear-gradient(rgb(192,219,186), white, rgb(192,219,186));
+  background: linear-gradient(to right, #dba9fc ,white, white, white, white, white, #dba9fc);
 }
 body{
-  background: linear-gradient(to right, rgb(192,219,186),white, white, white, white white, rgb(192,219,186));
+  background: linear-gradient(to right, #dba9fc,white, white, white, white, white, #dba9fc);
 }
 
 
