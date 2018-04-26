@@ -1,3 +1,4 @@
+import { HomeRepostitory } from './domain/home.service';
 import { AccountRepostitory } from './domain/account-repository.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,8 @@ import { AccountModule } from './accounts/account.module';
     ReactiveFormsModule
   ],
   providers: [
-    AccountRepostitory
+    AccountRepostitory,
+    HomeRepostitory
   ],
   bootstrap: [AppComponent]
 })
