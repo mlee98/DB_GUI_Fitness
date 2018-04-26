@@ -1,7 +1,7 @@
 import { Workout } from './../../domain/models/Workouts';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountRepostitory } from '../../domain';
+import { AccountRepostitory } from '../../domain/account-repository.service';
 
 @Component({
   selector: 'app-workout-today',

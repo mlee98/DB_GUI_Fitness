@@ -25,7 +25,7 @@ export class WorkoutPastComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.tempWork = {};
+   /* this.tempWork = {};
     this.tempExer = {};
     this.tempExer1 = {};
     this.tempExer2 = {};
@@ -44,7 +44,7 @@ export class WorkoutPastComponent implements OnInit {
     this.tempWork.exercises.push(this.tempExer2);
     this.tempExer3.name = 'Chest Flys';
     this.tempWork.exercises.push(this.tempExer3);
-    this.workouts.push(this.tempWork);
+    this.workouts.push(this.tempWork);*/
   }
 
 }
