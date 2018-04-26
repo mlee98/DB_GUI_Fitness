@@ -6,11 +6,18 @@
     <div class="card-body">
       <span class="float-left" *ngFor="let i of workouts">
           <div *ngFor="let x of i.exercises">
-              {{x.name}}
+              {{x.name}}  {{x.reps}} {{type[i]}}
               <br>
+              <button (click)="selectWorkout(i)">
+                Pick Workout
+              </button>
           </div>
       </span>
 
+    </div>
+    <div class="card-body">
+        <label *ngFor="let i of pickedWorkout.exercises"> {{i}}</label>
+        <input class="col-md-3">
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Workout } from './../../domain/models/Workouts';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Account } from '../../domain/models/Account';
 
 @Component({
   selector: 'app-workout-today',
@@ -16,13 +17,47 @@ export class WorkoutTodayComponent implements OnInit {
     private router: Router
   ) { }
   public workouts: Workout[];
+  public pickedWorkout: Workout;
+  public percent: number;
+  public goal: number;
+  public type: string[];
   ngOnInit() {
     this.workouts = [];
+    this.pickedWorkout = {};
     this.activedRoute.params.subscribe((params: any) => {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
        });
      });
+  }
+  public selectWorkout(num: number) {
+    this.pickedWorkout = this.workouts[num];
+    for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
+      if (this.pickedWorkout.reps[i] > 10) {
+        this.type[i] = 'reps';
+      } else {
+        this.type[i] = 'minutes';
+      }
+    }
+    for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
+      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * this.percent);
+    }
+  }
+
+  public addWorkout() {
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.postWorkoutToday(+params.id, this.pickedWorkout).subscribe(data => {
+        this.router.navigateByUrl('signIn');
+      });
+    });
+  }
+
+  public updatePercent() {
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
+        this.router.navigateByUrl('signIn');
+      });
+    });
   }
 
 }
