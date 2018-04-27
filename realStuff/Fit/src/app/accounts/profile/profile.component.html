@@ -11,7 +11,7 @@
       <button (click)="changeToSearch()">Search</button>
       <button (click)="changeToSignIn()">Log Out</button>
     </aside>
-    <div id="header" style="text-align: left">
+    <div *ngIf="" id="header" style="text-align: left">
       <h1>{{acc.fName}} {{acc.lName}} </h1>
 
       <div>
