@@ -11,11 +11,11 @@
       <button (click)="changeToSearch()">Search</button>
       <button (click)="changeToSignIn()">Log Out</button>
     </aside>
-    <div id="header" style="text-align: left">
-      <h1>Name</h1>
+    <div *ngIf="acc" id="header" style="text-align: left">
+      <h1>{{acc.fName}} {{acc.lName}}</h1>
 
       <div>
-        <h5>height · weight </h5>
+          <h5>Age: {{acc.age}} · Height: {{acc.height}} · Weight: {{acc.weight}} lbs </h5>
       </div>
     </div>
 

@@ -21,19 +21,19 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: CreateAccountComponent
   },
   {
-    path: 'accounts/:accountId',
+    path: 'accounts/:id',
     component: ProfileComponent
   },
   {
-    path: 'accounts/:accountId/input',
+    path: 'accounts/:id/input',
     component: InputComponent
   },
   {
-    path: 'accounts/:accountId/workout',
+    path: 'accounts/:id/workout',
     component: WorkoutComponent
   },
   {
-    path: 'accounts/:accountId/search',
+    path: 'accounts/:id/search',
     component: SearchComponent
   }
 ];

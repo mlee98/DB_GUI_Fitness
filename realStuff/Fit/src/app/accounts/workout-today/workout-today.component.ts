@@ -21,12 +21,14 @@ export class WorkoutTodayComponent implements OnInit {
   public percent: number;
   public goal: number;
   public type: string[];
+  public num: number[];
   ngOnInit() {
     this.workouts = [];
     this.pickedWorkout = {};
     this.activedRoute.params.subscribe((params: any) => {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
+          console.log(this.workouts);
        });
      });
   }
@@ -47,7 +49,6 @@ export class WorkoutTodayComponent implements OnInit {
   public addWorkout() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutToday(+params.id, this.pickedWorkout).subscribe(data => {
-        this.router.navigateByUrl('signIn');
       });
     });
   }
@@ -55,9 +56,7 @@ export class WorkoutTodayComponent implements OnInit {
   public updatePercent() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
-        this.router.navigateByUrl('signIn');
       });
     });
   }
-
 }
