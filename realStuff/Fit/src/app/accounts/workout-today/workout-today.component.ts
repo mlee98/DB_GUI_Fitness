@@ -26,6 +26,7 @@ export class WorkoutTodayComponent implements OnInit {
   public showInputs: boolean;
 
   ngOnInit() {
+    this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
     this.showInputs = false;
