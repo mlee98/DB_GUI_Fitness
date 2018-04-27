@@ -43,6 +43,7 @@ export class WorkoutTodayComponent implements OnInit {
     this.repsRecord = this.pickedWorkout.reps;
     const obj = new Date();
     this.pickedWorkout.date =  obj.toString();
+    console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
         this.type[i] = 'reps';
