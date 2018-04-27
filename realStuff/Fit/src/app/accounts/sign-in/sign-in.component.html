@@ -1,5 +1,8 @@
-<body id="mass" class="Aligner col-md-12" *ngIf="goodLog == 0 || goodLog == 1">
-  <main class="Aligner-item container col-md-6 float-left" id="sI">
+<body id="mass"  *ngIf="goodLog == 0 || goodLog == 1">
+    <aside>
+        <img src="assets/runner.jpg">
+      </aside>
+  <main class="Aligner-item container float-left" id="sI">
     <form name="login">
       <div class="alert alert-danger" *ngIf="goodLog == 1"> bad username/password </div>
       <span id="head">
@@ -7,14 +10,14 @@
       </span>
       <br />
       <span id="user">
-        <label class="col-md-1" for="username">Username: </label>
-        <input class="col-md-3" type="text" name="user" id="user" [(ngModel)]="username" />
+        <label class="col-md-3 mr-1" for="username">Username:    </label>
+        <input class="col-md-6" type="text" name="user" id="user" [(ngModel)]="username" />
       </span>
       <br>
 
       <span id="pass">
-        <label class="col-md-1" for="password">Password: </label>
-        <input class="col-md-3" type="text" name="pass" id="pass" [(ngModel)]="pass" />
+        <label class="col-md-3" for="password">Password: </label>
+        <input class="col-md-6" type="text" name="pass" id="pass" [(ngModel)]="pass" />
       </span>
 
       <br>
@@ -25,4 +28,5 @@
       </span>
     </form>
   </main>
+
 </body>
