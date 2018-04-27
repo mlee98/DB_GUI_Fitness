@@ -23,6 +23,7 @@ export class WorkoutTodayComponent implements OnInit {
   public type: string[];
   public repsRecord: number[];
   public showInputs: boolean;
+  public pipe: DatePipe;
 
   ngOnInit() {
     this.type = [];
@@ -40,8 +41,8 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
-    const obj = new Date('yyyy/MM/dd');
-    this.pickedWorkout.date =  obj.toDateString();
+    const obj = new Date();
+    this.pickedWorkout.date =  this.pipe.transform(obj, 'YYYY-MM-DD');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
@@ -76,7 +77,7 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(newPercent);
     if (this.pickedWorkout.goal === 80 ) {
 
-    } else if (this.pickedWorkout.goal) {
+    } else if (this.pickedWorkout.goal === 100) {
 
     } else {
     }
