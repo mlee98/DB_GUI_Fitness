@@ -12,10 +12,10 @@
       <button (click)="changeToSignIn()">Log Out</button>
     </aside>
     <div *ngIf="acc" id="header" style="text-align: left">
-      <h1>{{acc.fName}} </h1> <h2>{{acc.lName}}</h2>
+      <h1>{{acc.fName}} {{acc.lName}}</h1>
 
       <div>
-          <h5>{{acc.age}} · {{acc.height}} · {{acc.weight}} lbs </h5>
+          <h5>Age: {{acc.age}} · Height: {{acc.height}} · Weight: {{acc.weight}} lbs </h5>
       </div>
     </div>
     <br />
