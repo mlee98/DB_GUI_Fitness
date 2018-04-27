@@ -63,8 +63,18 @@
           </div>
           <br>
           <br>
-          <label class="text col-md-3" for="disabilities">Disabilites: </label>
+          <label class="text col-md-3" for="public">public profile: </label>
+          <select class="selectpicker" multiple [(ngModel)]="acc.public" required #myPublicControl="ngModel">
+            <option>True</option>
+            <option>False</option>
+            </select>
+          <div *ngIf="myPublicControl.invalid && (myPublicControl.dirty || myPublicControl.touched)">
+            <div class="alert alert-danger col-md-6" *ngIf="!myPublicControl.valid" user>Public profile is required</div>
+          </div>
+          <br>
+          <br>
 
+          <label class="text col-md-3" for="disabilities">Disabilites: </label>
           <select class="selectpicker" multiple>
             <option>peanutz</option>
             <option>sleep apnia</option>
