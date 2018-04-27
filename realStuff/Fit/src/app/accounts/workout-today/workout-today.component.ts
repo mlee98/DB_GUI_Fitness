@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-workout-today',
@@ -21,7 +22,8 @@ export class WorkoutTodayComponent implements OnInit {
   public percent: number;
   public goal: number;
   public type: string[];
-  public num: number[];
+  public repsRecord: number[];
+
   ngOnInit() {
     this.workouts = [];
     this.pickedWorkout = {};
@@ -33,7 +35,10 @@ export class WorkoutTodayComponent implements OnInit {
      });
   }
   public selectWorkout(work: Workout) {
+    console.log(work);
     this.pickedWorkout = work;
+    this.repsRecord = this.pickedWorkout.reps;
+    this.pickedWorkout.date = new Date();
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
         this.type[i] = 'reps';
@@ -54,6 +59,8 @@ export class WorkoutTodayComponent implements OnInit {
   }
 
   public updatePercent() {
+    console.log(this.repsRecord);
+    console.log(this.pickedWorkout.reps);
     /*this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
       });
