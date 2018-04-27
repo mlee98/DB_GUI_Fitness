@@ -6,7 +6,7 @@
     <div class="card-body">
       <span class="float-left" *ngFor="let i of workouts">
           <div *ngFor="let x of i.exercises">
-              {{x.name}}  {{x.reps}} {{type[i]}}
+              {{x.name}}  {{x.reps}}
               <br>
               <button (click)="selectWorkout(i)">
                 Pick Workout
