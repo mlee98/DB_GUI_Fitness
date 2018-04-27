@@ -1,4 +1,3 @@
-import { Exercise } from './../../domain/models/Exercise';
 import { Component, OnInit } from '@angular/core';
 import { Workout } from '../../domain/models/Workouts';
 
@@ -13,14 +12,6 @@ export class WorkoutPastComponent implements OnInit {
   public workouts: Array<Workout>;
 
   public tempWork: Workout;
-
-  public tempExer: Exercise;
-
-  public tempExer1: Exercise;
-
-  public tempExer2: Exercise;
-
-  public tempExer3: Exercise;
 
   constructor() { }
 

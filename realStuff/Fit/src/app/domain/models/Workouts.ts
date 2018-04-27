@@ -1,4 +1,3 @@
-import { Exercise } from './Exercise';
 
 export class Workout {
   date?: Date;
