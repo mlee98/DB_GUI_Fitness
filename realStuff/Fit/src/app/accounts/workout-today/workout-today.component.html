@@ -16,7 +16,7 @@
     <div *ngIf="showInputs" class="card-body">
         <div *ngFor="let index of [0,1,2,3]">
           <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} reps)</label>
-          <input class="col-md-3" value="0" [(ngModel)]= "pickedWorkout.reps[index]"> <p> Completed</p>
+          <input class="col-md-3" value=0 [(ngModel)]= "repsRecord[index]"> <p> Completed</p>
         </div>
       <button (click)="updatePercent()">
         Submit Reps
