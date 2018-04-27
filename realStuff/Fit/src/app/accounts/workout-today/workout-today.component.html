@@ -3,7 +3,7 @@
     <div class="card-header" style="text-align: center">
       <h4>Core Area</h4>
     </div>
-    <div *ngIf="workouts" class="card-body">
+    <div *ngIf="!pickedWorkout" class="card-body">
       <span class="float-left" *ngFor="let i of workouts">
         <div *ngFor="let index of [0,1,2,3]">
           {{i.exercises[index]}} {{i.reps[index]}}
@@ -16,7 +16,7 @@
     <div *ngIf="pickedWorkout" class="card-body">
         <div *ngFor="let index of [0,1,2,3]">
           <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} reps)</label>
-          <input class="col-md-3" [(ngModel)]= "pickedWorkout.reps[index]">
+          <input class="col-md-3" value="0" [(ngModel)]= "pickedWorkout.reps[index]"> <p> Completed</p>
         </div>
       <button (click)="updatePercent()">
         Submit Reps
