@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,6 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     AccountModule,
     ReactiveFormsModule,
-    DatePipe
   ],
   providers: [
     AccountRepostitory,
