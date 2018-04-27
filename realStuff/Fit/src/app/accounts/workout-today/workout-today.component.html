@@ -3,19 +3,24 @@
     <div class="card-header" style="text-align: center">
       <h4>Core Area</h4>
     </div>
-    <div *ngIf="workouts" class="card-body">
+    <div *ngIf="!showInputs" class="card-body">
       <span class="float-left" *ngFor="let i of workouts">
-          <div *ngFor="let index of [0,1,2,3]">
-          {{i.exercises[index]}}     {{i.reps[index]}}
-          <button (click)="selectWorkout(index);addWorkout()">
-              Pick Workout
-            </button>
+        <div *ngFor="let index of [0,1,2,3]">
+          {{i.exercises[index]}} {{i.reps[index]}}
         </div>
+        <button (click)="selectWorkout(i);addWorkout()">
+          Pick Workout
+        </button>
       </span>
     </div>
-    <div *ngIf="pickedWorkout" class="card-body">
-        <label *ngFor="let i of pickedWorkout.exercises"> {{i}}</label>
-        <input class="col-md-3">
+    <div *ngIf="showInputs" class="card-body">
+        <div *ngFor="let index of [0,1,2,3]">
+          <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} {{type[index]}})</label>
+          <input class="col-md-3" value="0" [(ngModel)]= "repsRecord[index]"> <p> Completed</p>
+        </div>
+      <button (click)="updatePercent()">
+        Submit Reps
+      </button>
     </div>
   </div>
 </div>

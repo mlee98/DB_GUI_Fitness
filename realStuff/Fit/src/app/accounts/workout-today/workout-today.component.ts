@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-workout-today',
@@ -21,10 +22,14 @@ export class WorkoutTodayComponent implements OnInit {
   public percent: number;
   public goal: number;
   public type: string[];
-  public num: number[];
+  public repsRecord: number[];
+  public showInputs: boolean;
+
   ngOnInit() {
+    this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
+    this.showInputs = false;
     this.activedRoute.params.subscribe((params: any) => {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
@@ -32,8 +37,13 @@ export class WorkoutTodayComponent implements OnInit {
        });
      });
   }
-  public selectWorkout(num: number) {
-    this.pickedWorkout = this.workouts[num];
+  public selectWorkout(work: any) {
+    console.log(work);
+    this.pickedWorkout = work;
+    this.repsRecord = this.pickedWorkout.reps;
+    const obj = new Date('yyyy/MM/dd');
+    this.pickedWorkout.date =  obj.toDateString();
+    console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
         this.type[i] = 'reps';
@@ -42,8 +52,9 @@ export class WorkoutTodayComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
-      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * this.percent);
+      this.pickedWorkout.reps[i] = Math.ceil(this.pickedWorkout.reps[i] * (this.pickedWorkout.todo / 100));
     }
+    this.showInputs = true;
   }
 
   public addWorkout() {
@@ -54,8 +65,17 @@ export class WorkoutTodayComponent implements OnInit {
   }
 
   public updatePercent() {
+    console.log(this.repsRecord);
+    console.log(this.pickedWorkout.reps);
+    console.log(this.pickedWorkout);
+    let newPercent = 0;
+    for (let i = 0; i < this.repsRecord.length; i++) {
+        newPercent = newPercent + (this.repsRecord[i] / this.pickedWorkout.reps[i]);
+    }
+    newPercent = newPercent / 4;
+    this.pickedWorkout.goal = (newPercent + this.pickedWorkout.goal) / 2;
     this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
+      this.acocuntRepository.postWorkoutPercent(+params.id, this.percent, this.pickedWorkout).subscribe(data => {
       });
     });
   }

@@ -1,7 +1,6 @@
-import { Exercise } from './Exercise';
 
 export class Workout {
-  date?: Date;
+  date?: string;
   wid?: number;
   type?: string;
   exercises?: Array<string>;
