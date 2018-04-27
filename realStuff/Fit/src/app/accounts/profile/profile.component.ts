@@ -17,11 +17,13 @@ export class ProfileComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private router: Router
   ) { }
+
   public acc: Account;
 
   ngOnInit() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getAcc(+params.id).subscribe(data => {
+        console.log(+params.id);
         this.acc = data;
       });
     });

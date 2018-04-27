@@ -1,6 +1,6 @@
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeRepostitory } from '../../domain/home.service';
 
@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit {
   public username: string;
   public goodLog: number;
   public accToPass: Account;
+  public id: number;
 
   ngOnInit() {
     this.pass = '';
