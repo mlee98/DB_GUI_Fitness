@@ -41,8 +41,8 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
-    const obj = new Date();
-    this.pickedWorkout.date =  obj.toString();
+    const obj = new Date('yyyy/MM/dd');
+    this.pickedWorkout.date =  obj.toDateString();
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
@@ -67,6 +67,7 @@ export class WorkoutTodayComponent implements OnInit {
   public updatePercent() {
     console.log(this.repsRecord);
     console.log(this.pickedWorkout.reps);
+    console.log(this.pickedWorkout);
     let newPercent = 0;
     for (let i = 0; i < this.repsRecord.length; i++) {
         newPercent = newPercent + (this.repsRecord[i] / this.pickedWorkout.reps[i]);
