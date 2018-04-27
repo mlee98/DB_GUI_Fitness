@@ -15,7 +15,8 @@ export class WorkoutTodayComponent implements OnInit {
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public pipe: DatePipe,
   ) { }
   public workouts: Workout[];
   public pickedWorkout: Workout;
@@ -23,7 +24,6 @@ export class WorkoutTodayComponent implements OnInit {
   public type: string[];
   public repsRecord: number[];
   public showInputs: boolean;
-  public pipe: DatePipe;
 
   ngOnInit() {
     this.type = [];
