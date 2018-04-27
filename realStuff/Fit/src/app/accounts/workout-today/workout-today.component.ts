@@ -37,7 +37,7 @@ export class WorkoutTodayComponent implements OnInit {
        });
      });
   }
-  public selectWorkout(work: Workout) {
+  public selectWorkout(work: any) {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
@@ -50,7 +50,7 @@ export class WorkoutTodayComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
-      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * this.percent);
+      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * 0.80);
     }
     this.showInputs = true;
   }
