@@ -46,7 +46,7 @@ export class WorkoutTodayComponent implements OnInit {
 
   public addWorkout() {
     this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.postWorkoutToday(+params.id, this.pickedWorkout).subscribe(data => {
+      this.acocuntRepository.postWorkoutToday(+params.id.id, this.pickedWorkout).subscribe(data => {
         this.router.navigateByUrl('signIn');
       });
     });
