@@ -37,6 +37,7 @@ export abstract class Repostitory<T> {
   }
 
   public postWorkoutPercent(id: number, percent: number, workout: Workout): Observable<Workout> {
+    console.log(percent);
     const data = {'workout': workout, 'todo': percent};
     console.log(data);
     return this.httpClient.post(`${this.endPoint}${id}/workoutProgress`, this.httpOptions).pipe(

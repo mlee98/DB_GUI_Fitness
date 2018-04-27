@@ -73,7 +73,7 @@ export class WorkoutTodayComponent implements OnInit {
         newPercent = newPercent + (this.repsRecord[i] / this.pickedWorkout.reps[i]);
     }
     console.log(newPercent);
-    newPercent = newPercent / 4;
+    newPercent = newPercent / 4 * 100;
     console.log(newPercent);
     newPercent = (newPercent + this.pickedWorkout.goal) / 2;
     console.log(newPercent);
