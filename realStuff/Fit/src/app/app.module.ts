@@ -25,7 +25,8 @@ import { DatePipe } from '@angular/common';
   ],
   providers: [
     AccountRepostitory,
-    HomeRepostitory
+    HomeRepostitory,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

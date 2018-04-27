@@ -16,7 +16,7 @@ export class WorkoutTodayComponent implements OnInit {
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
     private router: Router,
-    public pipe: DatePipe,
+    private pipe: DatePipe,
   ) { }
   public workouts: Workout[];
   public pickedWorkout: Workout;
