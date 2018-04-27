@@ -7,10 +7,10 @@
       <span class="float-left" *ngFor="let i of workouts">
           <div *ngFor="let index of [0,1,2,3]">
           {{i.exercises[index]}}     {{i.reps[index]}}
-        </div>
-          <button (click)="selectWorkout(i)">
+          <button (click)="selectWorkout(index);addWorkout()">
               Pick Workout
             </button>
+        </div>
       </span>
     </div>
     <div *ngIf="pickedWorkout" class="card-body">
