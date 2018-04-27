@@ -3,11 +3,13 @@
     <div class="card-header" style="text-align: center">
       <h4>Core Area</h4>
     </div>
-    <div class="card-body">
+    <div *ngIf="workouts" class="card-body">
       <span class="float-left" *ngFor="let i of workouts">
           <div *ngFor="let x of i.exercises">
-              {{x.name}}  {{x.reps}}
-              <br>
+              {{x}}
+          </div>
+          <div *ngFor="let x of i.reps">
+              {{x}}
           </div>
           <button (click)="selectWorkout(i)">
               Pick Workout
