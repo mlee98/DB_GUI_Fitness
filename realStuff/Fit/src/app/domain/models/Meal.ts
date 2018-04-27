@@ -1,5 +1,8 @@
 export class Meal {
   id?: number;
-  Calories?: number;
-  Date?: Date;
+  breakfast?: string;
+  lunch?: string;
+  dinner?: string;
+  snack?: string;
+  date?: Date;
 }
