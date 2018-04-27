@@ -23,10 +23,12 @@ export class WorkoutTodayComponent implements OnInit {
   public goal: number;
   public type: string[];
   public repsRecord: number[];
+  public showInputs: boolean;
 
   ngOnInit() {
     this.workouts = [];
     this.pickedWorkout = {};
+    this.showInputs = false;
     this.activedRoute.params.subscribe((params: any) => {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
@@ -49,6 +51,7 @@ export class WorkoutTodayComponent implements OnInit {
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * this.percent);
     }
+    this.showInputs = true;
   }
 
   public addWorkout() {
