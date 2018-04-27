@@ -72,8 +72,11 @@ export class WorkoutTodayComponent implements OnInit {
     for (let i = 0; i < this.repsRecord.length; i++) {
         newPercent = newPercent + (this.repsRecord[i] / this.pickedWorkout.reps[i]);
     }
+    console.log(newPercent);
     newPercent = newPercent / 4;
-    this.pickedWorkout.goal = (newPercent + this.pickedWorkout.goal) / 2;
+    console.log(newPercent);
+    newPercent = (newPercent + this.pickedWorkout.goal) / 2;
+    console.log(newPercent);
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, this.percent, this.pickedWorkout).subscribe(data => {
       });
