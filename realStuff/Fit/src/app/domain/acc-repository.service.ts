@@ -20,6 +20,7 @@ export abstract class Repostitory<T> {
   constructor(protected httpClient: HttpClient) {}
 
   public getAcc(id: number): Observable<Account> {
+    console.log('this is the id in repo'  + id);
     return this.httpClient.get(`${this.endPoint}${id}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
