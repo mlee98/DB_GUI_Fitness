@@ -25,6 +25,7 @@ export abstract class Repostitory<T> {
     );
   }
   public getWorkoutToday(id: number): Observable<Workout[]> {
+    console.log('id in repo:' + id);
     return this.httpClient.get(`${this.endPoint}${id}/workoutToday`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
