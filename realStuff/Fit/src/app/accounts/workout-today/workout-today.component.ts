@@ -50,7 +50,7 @@ export class WorkoutTodayComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
-      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * (this.pickedWorkout.todo / 100));
+      this.pickedWorkout.reps[i] = Math.ceil(this.pickedWorkout.reps[i] * (this.pickedWorkout.todo / 100));
     }
     this.showInputs = true;
   }
