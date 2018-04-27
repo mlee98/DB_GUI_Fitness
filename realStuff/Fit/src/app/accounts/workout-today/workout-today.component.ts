@@ -54,9 +54,9 @@ export class WorkoutTodayComponent implements OnInit {
   }
 
   public updatePercent() {
-    this.activedRoute.params.subscribe((params: any) => {
+    /*this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
       });
-    });
+    });*/
   }
 }
