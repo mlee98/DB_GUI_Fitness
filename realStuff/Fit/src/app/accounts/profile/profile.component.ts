@@ -22,8 +22,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.getAcc(params['id']).subscribe(data => {
+      const num = params['id'];
+      this.acocuntRepository.getAcc(num).subscribe(data => {
         console.log('id in profile' + +params.id);
+        console.log('id in profile' + params['id']);
         this.acc = data;
       });
     });
