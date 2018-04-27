@@ -1,10 +1,12 @@
 <html>
 
 <body>
+  <aside class="float-right">
+    <img src="assets/blueberry.jpg">
+  </aside>
   <main id="creAcc">
-    <div style="text-align:center">
-      <h3>Create Account</h3>
-    </div>
+    <div id="text">
+    <h3>Create Account</h3>
     <br />
     <div class="container">
       <form class="form">
@@ -28,18 +30,18 @@
         </div>
         <hr>
         <div id="info">
-          <label class="text col-md-3" for="Name">First Name: </label>
-          <input class="text col-md-3" name="fname" type="text" [(ngModel)]="acc.fName" required #myFNameControl="ngModel">
-          <div *ngIf="myFNameControl.invalid && (myFNameControl.dirty || myFNameControl.touched)">
+          <div class="row">
+            <label class="text col-md-3" for="Name">First Name: </label>
+            <input class="text col-md-3" name="fname" type="text" [(ngModel)]="acc.fName" required #myFNameControl="ngModel">
+            <div *ngIf="myFNameControl.invalid && (myFNameControl.dirty || myFNameControl.touched)">
             <div class="alert alert-danger col-md-6" *ngIf="!myFNameControl.valid" user>First Name is required</div>
           </div>
-          <br>
-          <br>
           <label class="text col-md-3" for="Name"> Last Name: </label>
           <input class="text col-md-3" name="lname" type="text" [(ngModel)]="acc.lName" required #myLNameControl="ngModel">
           <div *ngIf="myLNameControl.invalid && (myLNameControl.dirty || myLNameControl.touched)">
             <div class="alert alert-danger col-md-6" *ngIf="!myLNameControl.valid" user>Last Name is required</div>
           </div>
+        </div>
           <br>
           <br>
           <label class="text col-md-3" for="height">Height: </label>
@@ -65,7 +67,7 @@
           <br>
           <label class="text col-md-3" for="disabilities">Disabilites: </label>
 
-          <select class="selectpicker" multiple>
+          <select size="3" multiple>
             <option>peanutz</option>
             <option>sleep apnia</option>
             <option>lactose intolerant</option>
@@ -97,6 +99,7 @@
         </div>
       </form>
     </div>
+  </div>
   </main>
 </body>
 
