@@ -32,8 +32,8 @@ export class WorkoutTodayComponent implements OnInit {
        });
      });
   }
-  public selectWorkout(num: number) {
-    this.pickedWorkout = this.workouts[num];
+  public selectWorkout(work: Workout) {
+    this.pickedWorkout = work;
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
         this.type[i] = 'reps';
