@@ -50,7 +50,7 @@ export class WorkoutTodayComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
-      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * 0.80);
+      this.pickedWorkout.reps[i] = Math.floor(this.pickedWorkout.reps[i] * this.pickedWorkout.todo);
     }
     this.showInputs = true;
   }
@@ -65,9 +65,15 @@ export class WorkoutTodayComponent implements OnInit {
   public updatePercent() {
     console.log(this.repsRecord);
     console.log(this.pickedWorkout.reps);
-    /*this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.postWorkoutPercent(+params.id, this.percent).subscribe(data => {
+    let newPercent = 0;
+    for (let i = 0; i < this.repsRecord.length; i++) {
+        newPercent = newPercent + (this.repsRecord[i] / this.pickedWorkout.reps[i]);
+    }
+    newPercent = newPercent / 4;
+    this.pickedWorkout.goal = (newPercent + this.pickedWorkout.goal) / 2;
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.postWorkoutPercent(+params.id, this.percent, this.pickedWorkout).subscribe(data => {
       });
-    });*/
+    });
   }
 }

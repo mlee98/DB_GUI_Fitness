@@ -36,8 +36,9 @@ export abstract class Repostitory<T> {
     );
   }
 
-  public postWorkoutPercent(id: number, percent: number): Observable<Workout> {
-    return this.httpClient.post(`${this.endPoint}${id}/workoutPercent`, this.httpOptions).pipe(
+  public postWorkoutPercent(id: number, percent: number, workout: Workout): Observable<Workout> {
+    const data = {'workout': workout, 'todo': percent};
+    return this.httpClient.post(`${this.endPoint}${id}/workoutProgress`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
