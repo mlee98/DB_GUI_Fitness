@@ -1,14 +1,23 @@
+html{
+  background-color: #88BBD6;
+  min-height: 100vh;
+}
+
 body{
-  background-color: rgb(192,219,186);
+  margin-left: 5%;
+  border-left-style: solid;
+  border-right-style: solid;
+  background-color: white;
+  width: 90%;
+  min-height: 100vh;
 }
 
 #search{
-  background-color: white;
-  border-style: solid;
+
+
   text-align: center;
 }
 
 #results{
-  background-color: white;
-  border-style: solid;
+
 }
