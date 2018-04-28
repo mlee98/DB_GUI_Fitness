@@ -14,12 +14,14 @@ import { SearchComponent } from './search/search.component';
 import { WorkoutTodayComponent } from './workout-today/workout-today.component';
 import { WorkoutPastComponent } from './workout-past/workout-past.component';
 import { FoodPastComponent } from './food-past/food-past.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(ACCOUNTS_ROUTES)
+    RouterModule.forChild(ACCOUNTS_ROUTES),
+    ChartsModule
   ],
   declarations: [
     SignInComponent,
