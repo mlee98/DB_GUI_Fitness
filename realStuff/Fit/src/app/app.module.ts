@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AccountModule } from './accounts/account.module';
 import { DatePipe, SlicePipe } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DatePipe, SlicePipe } from '@angular/common';
     HttpClientModule,
     AccountModule,
     ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     AccountRepostitory,

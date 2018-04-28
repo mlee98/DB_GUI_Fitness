@@ -18,6 +18,32 @@ export class WorkoutPastComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private router: Router) { }
 
+    pieChartOptions = {
+      responsive: true
+    };
+    pieChartLabels =  ['Core', 'Arms', 'Legs', 'Cardio'];
+
+    // CHART COLOR.
+    pieChartColor: any = [
+        {
+            backgroundColor: ['rgba(30, 169, 224, 0.8)',
+            'rgba(255,165,0,0.9)',
+            'rgba(139, 136, 136, 0.9)',
+            'rgba(255, 161, 181, 0.9)'
+            ]
+        }
+    ];
+
+    pieChartData: any = [
+      {
+          data: []
+      }
+    ];
+    public corePercent: number;
+    public armsPercent: number;
+    public legsPercent: number;
+    public cardioPercent: number;
+
   ngOnInit() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
@@ -25,6 +51,24 @@ export class WorkoutPastComponent implements OnInit {
         console.log(this.workouts);
      });
    });
+   for (let i = 0; i < this.workouts.length; i++) {
+    if (this.workouts[i].type === 'Core') {
+      this.corePercent++;
+    } else if (this.workouts[i].type === 'Arms') {
+      this.armsPercent++;
+    } else if (this.workouts[i].type === 'Legs') {
+      this.legsPercent++;
+    } else {
+      this.cardioPercent++;
+    }
+   }
+   this.corePercent = this.corePercent / this.workouts.length;
+   this.armsPercent = this.armsPercent / this.workouts.length;
+   this.legsPercent = this.legsPercent / this.workouts.length;
+   this.cardioPercent = this.cardioPercent / this.workouts.length;
+   this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
+   console.log(this.pieChartColor);
+   console.log(this.pieChartData);
   }
 
 }
