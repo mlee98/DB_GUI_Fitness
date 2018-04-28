@@ -42,7 +42,7 @@ export class WorkoutTodayComponent implements OnInit {
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
     const obj = new Date();
-    this.pickedWorkout.date =  this.pipe.transform(obj, 'YYYY-MM-DD');
+    this.pickedWorkout.date =  this.pipe.transform(obj, 'yyyy-MM-dd');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
