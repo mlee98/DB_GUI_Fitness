@@ -39,4 +39,8 @@ export class SignInComponent implements OnInit {
         }
      });
   }
+
+  public goToCreateAccount() {
+    this.router.navigateByUrl('createAccount');
+  }
 }
