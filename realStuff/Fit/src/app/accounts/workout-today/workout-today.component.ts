@@ -98,6 +98,7 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(newPercent);
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, newPercent, this.pickedWorkout).subscribe(data => {
+        this.alreadyWorkdedOut = true;
       });
     });
   }
