@@ -19,6 +19,7 @@ export class WorkoutTodayComponent implements OnInit {
     private datePipe: DatePipe,
     private slicePipe: SlicePipe,
   ) { }
+
   public workouts: Workout[];
   public pickedWorkout: Workout;
   public goal: number;
@@ -26,8 +27,10 @@ export class WorkoutTodayComponent implements OnInit {
   public repsRecord: number[];
   public showInputs: boolean;
   public alreadyWorkdedOut: boolean;
+  public date: Date;
 
   ngOnInit() {
+    this.date = new Date();
     this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
@@ -37,24 +40,22 @@ export class WorkoutTodayComponent implements OnInit {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
           console.log(this.workouts);
+          const date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+          let dateCheck = this.workouts[0].date;
+          dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
+          console.log(dateCheck);
+          console.log(date);
+          if (dateCheck === date) {
+           this.alreadyWorkdedOut = true;
+          }
        });
      });
-    /* const obj = new Date();
-     const date = this.datePipe.transform(obj, 'yyyy-MM-dd');
-     let dateCheck = this.workouts[0].date;
-     dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
-     console.log(dateCheck);
-     console.log(date);
-     if (dateCheck === date) {
-      this.alreadyWorkdedOut = true;
-     }*/
   }
   public selectWorkout(work: any) {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
-    const obj = new Date();
-    this.pickedWorkout.date =  this.datePipe.transform(obj, 'yyyy-MM-dd');
+    this.pickedWorkout.date =  this.datePipe.transform(this.date, 'yyyy-MM-dd');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
@@ -67,11 +68,15 @@ export class WorkoutTodayComponent implements OnInit {
       this.pickedWorkout.reps[i] = Math.ceil(this.pickedWorkout.reps[i] * (this.pickedWorkout.todo / 100));
     }
     this.showInputs = true;
+    console.log(this.showInputs);
+    console.log(this.alreadyWorkdedOut);
   }
 
   public addWorkout() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutToday(+params.id, this.pickedWorkout).subscribe(data => {
+        console.log('here');
+        console.log(this.pickedWorkout);
       });
     });
   }
@@ -97,6 +102,7 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(newPercent);
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, newPercent, this.pickedWorkout).subscribe(data => {
+        this.alreadyWorkdedOut = true;
       });
     });
   }
