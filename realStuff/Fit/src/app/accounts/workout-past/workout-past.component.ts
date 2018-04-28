@@ -45,6 +45,10 @@ export class WorkoutPastComponent implements OnInit {
     public cardioPercent: number;
 
   ngOnInit() {
+    this.corePercent = 0;
+    this.armsPercent = 0;
+    this.legsPercent = 0;
+    this.cardioPercent = 0;
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
