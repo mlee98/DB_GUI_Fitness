@@ -1,3 +1,4 @@
+<html>
 <body>
   <div class="container">
     <br />
@@ -17,8 +18,8 @@
     <div class="row">
       <label for="drop" class="col-sm-2 mb-3">Weight:</label>
       <input type="text" class="col-md-3 mb-3">
-      <label for="disabilities" class="col-sm-2">Disabilites: </label>
-      <select multiple name="disabilities" class="col-md-3 mb-3" size="1">
+      <label for="disabilities" class="col-sm-2">Alergies: </label>
+      <select multiple name="disabilities" class="selectpicker col-md-3 mb-3" size="1">
         <option>peanutz</option>
         <option>sleep apnia</option>
         <option>lactose intolerant</option>
@@ -61,17 +62,17 @@
               {{i.fName}} {{i.lName}}
             </div>
             <div class="card-body bg-light clearfix">
-              <div class="row">
+              <div class="row mb-2">
                 <span class="text-muted m-2">
                   Age: {{ i.age }}
                 </span>
               </div>
-              <div class="row">
+              <div class="row mb-2">
                 <span class="text-muted m-2">
                   Height: {{ i.height }}
                 </span>
               </div>
-              <div class="row">
+              <div class="row mb-2">
                 <span class="text-muted m-2">
                   Weight: {{ i.weight }}
                 </span>
@@ -89,3 +90,4 @@
   </div>
   </div>
 </body>
+</html>

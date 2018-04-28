@@ -32,6 +32,7 @@
     "npm": "^5.8.0",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
+    "ui-select": "^0.19.8",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
