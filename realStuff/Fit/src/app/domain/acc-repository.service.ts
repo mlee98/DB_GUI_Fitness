@@ -46,7 +46,7 @@ export abstract class Repostitory<T> {
   }
 
   public getWorkoutPast(id: number): Observable<Workout[]> {
-    return this.httpClient.get(`${this.endPoint}${id}/workoutToday`, this.httpOptions).pipe(
+    return this.httpClient.get(`${this.endPoint}${id}/pastWorkoutList`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }
