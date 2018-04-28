@@ -15,6 +15,7 @@ import { WorkoutTodayComponent } from './workout-today/workout-today.component';
 import { WorkoutPastComponent } from './workout-past/workout-past.component';
 import { FoodPastComponent } from './food-past/food-past.component';
 import { ChartsModule } from 'ng2-charts';
+import { PieComponent } from './pie/pie.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ChartsModule } from 'ng2-charts';
     SearchComponent,
     WorkoutTodayComponent,
     WorkoutPastComponent,
-    FoodPastComponent
+    FoodPastComponent,
+    PieComponent
 
   ],
   exports: [
