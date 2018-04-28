@@ -11,6 +11,7 @@
         </button>
       </span>
     </div>
+    </div>
     <div *ngIf="showInputs && !alreadyWorkdedOut" class="card-body mt-2 mb-2">
       <div class="col-md-3 mt-2 mb-2" *ngFor="let index of [0,1,2,3]">
         <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} {{type[index]}})</label>
@@ -22,4 +23,3 @@
       </button>
     </div>
   </div>
-</div>
