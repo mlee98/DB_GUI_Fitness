@@ -27,23 +27,25 @@ var connection = mysql.createPool({
 
 server.route({
     method: 'POST',
-    path: '/accounts/addUser',
+    path: '/createAccount',
     handler: function (request, reply) {
         let fName = request.payload['fName'];
         let lName = request.payload['lName'];
-        let Height = request.payload['Height'];
-        let Weight = request.payload['Weight'];
-        let Age = request.payload['Age'];
-        let UserName = request.payload['UserName'];
-        let Disability = request.payload['Disability'];
-        let Password = request.payload['Password'];
+        let Height = request.payload['height'];
+        let Weight = request.payload['weight'];
+        let Age = request.payload['age'];
+        let UserName = request.payload['username'];
+        let Disability = request.payload['disabilities'];
+        let Password = request.payload['password'];
+        let Goal = request.payload['goal'];
+        let Public = request.payload['public'];
 
         let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
         
         let getUserId = "SELECT UserId FROM UserInfo WHERE UserName = \'" + UserName + "\'";
 
-        let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Disability)';
-        uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\'," + Disability + ")";
+        let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Public)';
+        uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\'," + Public + ")";
 
         connection.getConnection(function (err, connection) {
             //run the query
@@ -58,16 +60,25 @@ server.route({
                     connection.query(loginTable, function (error, r3, fields) {
                         if (error)
                             throw error;
-                        
-                        reply(userID);
+                        let target = 100;
+                        if(Goal === "Gain Weight") {
+                            Goal = 80;
+                        } else {
+                            if (Goal === "Gain Muscle") {
+                                Goal = 120;
+                            }
+                        }
+                        let workoutTable = "INSERT INTO Fitness_Tracker (UserId, WorkoutPlan, Date, PercentToDo, Goal) VALUES(" + userID + ", default, default, "+ Goal +", " + Goal+ ")";
+                        connection.query(workoutTable, function (error, r3, fields) {
+                            if (error)
+                                throw error;
+                            reply(userID);
+                        });
                     });
                 });
             });
-
             connection.release();
         });
-        
-        
     }
 });
 
@@ -88,18 +99,159 @@ server.route({
                     throw error;
                 for (let i = 0; i < results.length; i++) {
                     if (results[i].UserName === UserName && results[i].Password === hashedPW) {
-                        loginMessage.id = 5;
+                        loginMessage.id = results[i].UserId;
                         break;
                     }
                     loginMessage.id = -1;
                 }
-
                 reply(loginMessage);
             });
 
             connection.release();//release the connection
         });
         
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/accounts/{id}/workoutToday',
+    handler: function (request, reply) {
+        connection.getConnection(function (err, connection) {
+            //run the query
+            let UserId = encodeURIComponent(request.params.id);
+            let randNum = [];
+            randNum[0] = Math.floor(Math.random() * 4) + 1;
+            for (let i = 1; i < 4; i++) {
+                randNum[i] = randNum[i - 1] + 4;
+            }
+            connection.query('SELECT * FROM Workouts WHERE WorkoutPlan = ' + randNum[0] + ' OR WorkoutPlan = ' + randNum[1] + ' OR WorkoutPlan = ' + randNum[2] + ' OR WorkoutPlan = ' + randNum[3], function (error, results, fields) {
+                if (error)
+                    throw error;
+                let tempEx = [];
+                let tempReps = [];
+                for (let acc = 0; acc < results.length; acc++) {
+                    tempEx[acc] = [];
+                    tempReps[acc] = [];
+                    tempEx[acc][0] = results[acc].Exercise1;
+                    tempEx[acc][1] = results[acc].Exercise2;
+                    tempEx[acc][2] = results[acc].Exercise3;
+                    tempEx[acc][3] = results[acc].Exercise4;
+                    tempReps[acc][0] = results[acc].Rep1;
+                    tempReps[acc][1] = results[acc].Rep2;
+                    tempReps[acc][2] = results[acc].Rep3;
+                    tempReps[acc][3] = results[acc].Rep4;
+
+                }
+                connection.query('SELECT * FROM Fitness_Tracker WHERE UserId = ' + UserId, function (error, r1, fields) {
+                    if (error)
+                        throw error;
+
+                    
+                    let workoutObject = [];
+                    for(let i = 0; i < 4; i++){
+                        workoutObject[i] = {
+                            wid: results[i].WorkoutPlan,
+                            type: results[i].PrimaryArea,
+                            exercises: tempEx[i],
+                            reps: tempReps[i],
+                            todo: r1[0].PercentToDo,
+                            goal: r1[0].Goal,
+                            date: r1[0].Date
+                        };
+                    }
+                    
+                    reply(workoutObject);
+                });
+            });
+            connection.release();//release the connection
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/{id}/workoutToday',
+    handler: function (request, reply) {
+        let workout = request.payload['workout'];
+        connection.getConnection(function (err, connection) {
+            //run the query
+            let UserId = encodeURIComponent(request.params.id);
+            let query = 'UPDATE Fitness_Tracker SET WorkoutPlan = '+workout.wid+' WHERE UserId = '+ UserId;
+            connection.query(query, function (error, results, fields) {
+                if (error)
+                    throw error;
+                reply(workout);
+            });
+            connection.release();//release the connection
+        });
+    }
+});
+
+server.route({
+    method: 'POST',
+    path: '/accounts/{id}/workoutProgress',
+    handler: function (request, reply) {
+        let workout = request.payload['workout'];
+        let todo = request.payload['todo'];
+        connection.getConnection(function (err, connection) {
+            //run the query
+            let UserId = encodeURIComponent(request.params.id);
+            connection.query('INSERT INTO Completed_Workouts (workoutID, UserId, WorkoutPlan, Date) VALUES(default,' + UserId + ', ' + workout.wid + ', "' + workout.date +'")', function (error, results, fields) {
+                if (error)
+                    throw error;
+                let query = 'UPDATE Fitness_Tracker SET PercentToDo = ' + todo + ', Date = "'+ workout.date+'" WHERE UserId = ' + UserId;
+                connection.query(query, function (error, r1, fields) {
+                    if (error)
+                        throw error;
+                    reply();
+                });
+            });
+            connection.release();//release the connection
+        });
+    }
+});
+
+
+
+
+server.route({
+    method: 'GET',
+    path: '/workoutList',
+    handler: function (request, reply) {
+        connection.getConnection(function (err, connection) {
+            //run the query
+            connection.query('SELECT * FROM Fitness_Tracker', function (error, results, fields) {
+                if (error)
+                    throw error;
+                let accNames = '';
+                for (let acc = 0; acc < results.length; acc++) {
+                    accNames += results[acc].UserId;
+                    accNames += ' ';
+                    accNames += results[acc].WorkoutPlan;
+                    accNames += ' ';
+                    accNames += results[acc].Date;
+                }
+                reply(accNames);
+            });
+            connection.release();//release the connection
+        });
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/pastWorkoutList',
+    handler: function (request, reply) {
+        connection.getConnection(function (err, connection) {
+            //run the query
+            connection.query('SELECT * FROM Completed_Workouts', function (error, results, fields) {
+                if (error)
+                    throw error;
+                reply(results);
+            });
+            connection.release();//release the connection
+        });
     }
 });
 
@@ -133,6 +285,34 @@ server.route({
 
 server.route({
     method: 'GET',
+    path: '/accounts/{id}',
+    handler: function (request, reply) {
+        connection.getConnection(function (err, connection) {
+            let UserId = encodeURIComponent(request.params.id);
+            //run the query
+            connection.query('SELECT * FROM UserInfo WHERE UserId = ' + UserId, function (error, results, fields) {
+                if (error)
+                    throw error;
+                let account = {};
+                account.id = results[0].UserId;
+                account.username = results[0].UserName;
+                account.password = null;
+                account.fName = results[0].fName;
+                account.lName = results[0].lName;
+                account.height = results[0].Height;
+                account.weight = results[0].Weight;
+                account.disabilities = 0;
+                account.age = results[0].Age;
+                account.public = results[0].Public;
+                reply(account);
+            });
+            connection.release();//release the connection
+        });
+    }
+});
+
+server.route({
+    method: 'GET',
     path: '/accounts/loginInfo',
     handler: function (request, reply) {
         connection.getConnection(function (err, connection) {
@@ -150,13 +330,9 @@ server.route({
                     accNames += '   ';
                 }
                 reply(accNames);
-
             });
-
             connection.release();
         });
-        
-       
     }
 });
 
@@ -216,10 +392,12 @@ server.route({
         let deleteAccount = 'DELETE FROM UserInfo WHERE UserId = ' + UserId + ';';
         let deleteDisorders = 'DELETE FROM Account_Disorders WHERE UserId = ' + UserId + ';';
         let deleteAllergies = 'DELETE FROM Account_Allergies WHERE UserId = ' + UserId + ';';
-        let deleteLogin = 'DELETE FROM Login WHERE UserId = ' + UserId;
+        let deleteLogin = 'DELETE FROM Login WHERE UserId = ' + UserId + ';';
+        let deleteFitTrack = 'DELETE FROM Fitness_Tracker WHERE UserId = ' + UserId + ';';
+        let deletePastFil = 'DELETE FROM Completed_Workouts WHERE UserId = ' + UserId;
         connection.getConnection(function (err, connection) {
             //run the query
-            connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteLogin, function (error, results, fields) {
+            connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteLogin + deleteFitTrack + deletePastFil, function (error, results, fields) {
                 if (error)
                     throw error;
                 reply('User Deleted');
@@ -335,3 +513,5 @@ server.start((err) => {
     }
     console.log(`Server running at: ${server.info.uri}`);
 });
+
+
