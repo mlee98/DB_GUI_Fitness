@@ -49,26 +49,26 @@ export class WorkoutPastComponent implements OnInit {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
         console.log(this.workouts);
+        for (let i = 0; i < this.workouts.length; i++) {
+          if (this.workouts[i].type === 'Core') {
+            this.corePercent++;
+          } else if (this.workouts[i].type === 'Arms') {
+            this.armsPercent++;
+          } else if (this.workouts[i].type === 'Legs') {
+            this.legsPercent++;
+          } else {
+            this.cardioPercent++;
+          }
+         }
+         this.corePercent = this.corePercent / this.workouts.length;
+         this.armsPercent = this.armsPercent / this.workouts.length;
+         this.legsPercent = this.legsPercent / this.workouts.length;
+         this.cardioPercent = this.cardioPercent / this.workouts.length;
+         this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
+         console.log(this.pieChartColor);
+         console.log(this.pieChartData);
      });
    });
-   for (let i = 0; i < this.workouts.length; i++) {
-    if (this.workouts[i].type === 'Core') {
-      this.corePercent++;
-    } else if (this.workouts[i].type === 'Arms') {
-      this.armsPercent++;
-    } else if (this.workouts[i].type === 'Legs') {
-      this.legsPercent++;
-    } else {
-      this.cardioPercent++;
-    }
-   }
-   this.corePercent = this.corePercent / this.workouts.length;
-   this.armsPercent = this.armsPercent / this.workouts.length;
-   this.legsPercent = this.legsPercent / this.workouts.length;
-   this.cardioPercent = this.cardioPercent / this.workouts.length;
-   this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
-   console.log(this.pieChartColor);
-   console.log(this.pieChartData);
   }
 
 }
