@@ -19,6 +19,7 @@ export class WorkoutTodayComponent implements OnInit {
     private datePipe: DatePipe,
     private slicePipe: SlicePipe,
   ) { }
+
   public workouts: Workout[];
   public pickedWorkout: Workout;
   public goal: number;
@@ -27,6 +28,7 @@ export class WorkoutTodayComponent implements OnInit {
   public showInputs: boolean;
   public alreadyWorkdedOut: boolean;
   public date: Date;
+
   ngOnInit() {
     this.date = new Date();
     this.type = [];

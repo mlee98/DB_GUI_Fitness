@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Workout } from '../../domain/models/Workouts';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe, SlicePipe } from '@angular/common';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class WorkoutPastComponent implements OnInit {
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private datePipe: DatePipe,
+    private slicePipe: SlicePipe) { }
 
     pieChartOptions = {
       responsive: true
@@ -52,6 +55,9 @@ export class WorkoutPastComponent implements OnInit {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
+        for (let i = 0; i < this.workouts.length; i++) {
+          this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
+        }
         console.log(this.workouts);
         for (let i = 0; i < this.workouts.length; i++) {
           if (this.workouts[i].type === 'Core') {
