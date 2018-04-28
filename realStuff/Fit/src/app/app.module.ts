@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AccountModule } from './accounts/account.module';
-import { DatePipe } from '@angular/common';
+import { DatePipe, SlicePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { DatePipe } from '@angular/common';
   providers: [
     AccountRepostitory,
     HomeRepostitory,
-    DatePipe
+    DatePipe,
+    SlicePipe
   ],
   bootstrap: [AppComponent]
 })

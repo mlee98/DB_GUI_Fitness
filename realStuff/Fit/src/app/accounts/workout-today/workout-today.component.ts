@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
-import { DatePipe } from '@angular/common';
+import { DatePipe, SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-workout-today',
@@ -16,7 +16,8 @@ export class WorkoutTodayComponent implements OnInit {
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
     private router: Router,
-    private pipe: DatePipe,
+    private datePipe: DatePipe,
+    private slicePipe: SlicePipe,
   ) { }
   public workouts: Workout[];
   public pickedWorkout: Workout;
@@ -24,25 +25,36 @@ export class WorkoutTodayComponent implements OnInit {
   public type: string[];
   public repsRecord: number[];
   public showInputs: boolean;
+  public alreadyWorkdedOut: boolean;
 
   ngOnInit() {
     this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
     this.showInputs = false;
+    this.alreadyWorkdedOut = false;
     this.activedRoute.params.subscribe((params: any) => {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
           console.log(this.workouts);
        });
      });
+     const obj = new Date();
+     const date = this.datePipe.transform(obj, 'yyyy-MM-dd');
+     let dateCheck = this.workouts[0].date;
+     dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
+     console.log(dateCheck);
+     console.log(date);
+     if (dateCheck === date) {
+      this.alreadyWorkdedOut = true;
+     }
   }
   public selectWorkout(work: any) {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
     const obj = new Date();
-    this.pickedWorkout.date =  this.pipe.transform(obj, 'yyyy-MM-dd');
+    this.pickedWorkout.date =  this.datePipe.transform(obj, 'yyyy-MM-dd');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {

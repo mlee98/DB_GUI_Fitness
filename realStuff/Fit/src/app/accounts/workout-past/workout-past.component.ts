@@ -25,7 +25,6 @@ export class WorkoutPastComponent implements OnInit {
         console.log(this.workouts);
      });
    });
-
   }
 
 }
