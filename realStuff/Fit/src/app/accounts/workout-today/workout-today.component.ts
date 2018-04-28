@@ -68,6 +68,8 @@ export class WorkoutTodayComponent implements OnInit {
       this.pickedWorkout.reps[i] = Math.ceil(this.pickedWorkout.reps[i] * (this.pickedWorkout.todo / 100));
     }
     this.showInputs = true;
+    console.log(this.showInputs);
+    console.log(this.alreadyWorkdedOut);
   }
 
   public addWorkout() {
