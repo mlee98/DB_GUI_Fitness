@@ -39,7 +39,7 @@ export class WorkoutTodayComponent implements OnInit {
           console.log(this.workouts);
        });
      });
-    /* const obj = new Date();
+     const obj = new Date();
      const date = this.datePipe.transform(obj, 'yyyy-MM-dd');
      let dateCheck = this.workouts[0].date;
      dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
@@ -47,7 +47,7 @@ export class WorkoutTodayComponent implements OnInit {
      console.log(date);
      if (dateCheck === date) {
       this.alreadyWorkdedOut = true;
-     }*/
+     }
   }
   public selectWorkout(work: any) {
     console.log(work);
