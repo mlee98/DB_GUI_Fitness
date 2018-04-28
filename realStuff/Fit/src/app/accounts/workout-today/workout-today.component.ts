@@ -28,6 +28,7 @@ export class WorkoutTodayComponent implements OnInit {
   public alreadyWorkdedOut: boolean;
   public date: Date;
   ngOnInit() {
+    this.date = new Date();
     this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
