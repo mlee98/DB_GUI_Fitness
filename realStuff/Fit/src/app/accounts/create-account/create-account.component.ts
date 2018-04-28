@@ -21,8 +21,10 @@ export class CreateAccountComponent implements OnInit {
   ) {}
   public ngForm: FormGroup;
   public acc: Account;
+  public email: string;
 
   ngOnInit() {
+    this.email = '';
     this.acc = {};
     this.acc.disabilities = [];
     this.acc.calsBurned = [];

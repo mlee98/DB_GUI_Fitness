@@ -21,11 +21,7 @@ img{
 }
 
 .btn{
-  background-color: #fff;
-  border-style: solid;
-  border-color: black;
-  color: black;
-  opacity: 1;
+  border-color:white;
 }
 
 #text{
@@ -43,4 +39,9 @@ input{
 
 .alert{
   height: 1%;
+}
+
+.ng-touched.ng-invalid[required] {
+  border: 1px solid red;
+  background-color: rgb(252, 117, 117);
 }
