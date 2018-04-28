@@ -26,7 +26,7 @@ export class WorkoutTodayComponent implements OnInit {
   public repsRecord: number[];
   public showInputs: boolean;
   public alreadyWorkdedOut: boolean;
-
+  public date: Date;
   ngOnInit() {
     this.type = [];
     this.workouts = [];
@@ -37,24 +37,22 @@ export class WorkoutTodayComponent implements OnInit {
         this.acocuntRepository.getWorkoutToday(+params.id).subscribe(data => {
           this.workouts = data;
           console.log(this.workouts);
+          const date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+          let dateCheck = this.workouts[0].date;
+          dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
+          console.log(dateCheck);
+          console.log(date);
+          if (dateCheck === date) {
+           this.alreadyWorkdedOut = true;
+          }
        });
      });
-     const obj = new Date();
-     const date = this.datePipe.transform(obj, 'yyyy-MM-dd');
-     let dateCheck = this.workouts[0].date;
-     dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
-     console.log(dateCheck);
-     console.log(date);
-     if (dateCheck === date) {
-      this.alreadyWorkdedOut = true;
-     }
   }
   public selectWorkout(work: any) {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
-    const obj = new Date();
-    this.pickedWorkout.date =  this.datePipe.transform(obj, 'yyyy-MM-dd');
+    this.pickedWorkout.date =  this.datePipe.transform(this.date, 'yyyy-MM-dd');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
