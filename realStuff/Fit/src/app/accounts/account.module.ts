@@ -13,6 +13,7 @@ import { FoodTodayComponent } from './food-today/food-today.component';
 import { SearchComponent } from './search/search.component';
 import { WorkoutTodayComponent } from './workout-today/workout-today.component';
 import { WorkoutPastComponent } from './workout-past/workout-past.component';
+import { FoodPastComponent } from './food-past/food-past.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { WorkoutPastComponent } from './workout-past/workout-past.component';
     FoodTodayComponent,
     SearchComponent,
     WorkoutTodayComponent,
-    WorkoutPastComponent
+    WorkoutPastComponent,
+    FoodPastComponent
 
   ],
   exports: [
