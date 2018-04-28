@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Workout } from '../../domain/models/Workouts';
+import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,31 +13,19 @@ export class WorkoutPastComponent implements OnInit {
 
   public workouts: Array<Workout>;
 
-  public tempWork: Workout;
-
-  constructor() { }
+  constructor(
+    public acocuntRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-   /* this.tempWork = {};
-    this.tempExer = {};
-    this.tempExer1 = {};
-    this.tempExer2 = {};
-    this.tempExer3 = {};
-    this.workouts = [];
-    this.tempWork.date = new Date;
-    this.tempWork.workoutName = 'Chest Burn';
-    this.tempWork.type = 'Chest';
-    this.tempWork.wid = 1;
-    this.tempWork.exercises = [];
-    this.tempExer.name = 'Bench Press';
-    this.tempWork.exercises.push(this.tempExer);
-    this.tempExer1.name = 'Incline Bench';
-    this.tempWork.exercises.push(this.tempExer1);
-    this.tempExer2.name = 'Decline bench';
-    this.tempWork.exercises.push(this.tempExer2);
-    this.tempExer3.name = 'Chest Flys';
-    this.tempWork.exercises.push(this.tempExer3);
-    this.workouts.push(this.tempWork);*/
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
+        this.workouts = data;
+        console.log(this.workouts);
+     });
+   });
+
   }
 
 }
