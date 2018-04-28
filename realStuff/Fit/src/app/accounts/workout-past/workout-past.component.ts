@@ -45,6 +45,10 @@ export class WorkoutPastComponent implements OnInit {
     public cardioPercent: number;
 
   ngOnInit() {
+    this.corePercent = 0;
+    this.armsPercent = 0;
+    this.legsPercent = 0;
+    this.cardioPercent = 0;
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
@@ -60,13 +64,7 @@ export class WorkoutPastComponent implements OnInit {
             this.cardioPercent++;
           }
          }
-         this.corePercent = this.corePercent / this.workouts.length;
-         this.armsPercent = this.armsPercent / this.workouts.length;
-         this.legsPercent = this.legsPercent / this.workouts.length;
-         this.cardioPercent = this.cardioPercent / this.workouts.length;
          this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
-         console.log(this.pieChartColor);
-         console.log(this.pieChartData);
      });
    });
   }
