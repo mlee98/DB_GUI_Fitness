@@ -1,10 +1,7 @@
 <div style="text-align: center">
   <h2 *ngIf="alreadyWorkdedOut"> Already worked out! Nice job!</h2>
-  <div class="card">
-    <div class="card-header" style="text-align: center">
-      <h4>Core Area</h4>
-    </div>
     <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
+        <div class="card">
       <span class="float-left" *ngFor="let i of workouts">
         <div class = "m-2" *ngFor="let index of [0,1,2,3]">
           {{i.exercises[index]}} {{i.reps[index]}}
