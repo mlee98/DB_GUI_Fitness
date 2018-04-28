@@ -64,18 +64,7 @@ export class WorkoutPastComponent implements OnInit {
             this.cardioPercent++;
           }
          }
-         console.log(this.corePercent);
-         console.log(this.armsPercent);
-         console.log(this.legsPercent);
-         console.log(this.cardioPercent);
-         console.log(this.workouts.length);
-         this.corePercent = this.corePercent / this.workouts.length;
-         this.armsPercent = this.armsPercent / this.workouts.length;
-         this.legsPercent = this.legsPercent / this.workouts.length;
-         this.cardioPercent = this.cardioPercent / this.workouts.length;
          this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
-         console.log(this.pieChartColor);
-         console.log(this.pieChartData);
      });
    });
   }
