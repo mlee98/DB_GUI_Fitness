@@ -15,54 +15,55 @@
           <div class="row">
             <label for="user" class="col-md-2">Username: </label>
             <input class="form-group"
-              id="username" name="username" class="col-md-3" type="text"
+              id="username" name="username" class="text col-md-3 form-control" type="text"
               [(ngModel)]="acc.username" required #myUsernameControl="ngModel">
             <label for="email" class="col-md-2">Email: </label>
-            <input id="email" name="email" class="col-md-3" type="text"  required
+            <input id="email" name="email" class="text col-md-3 form-control"type="text"  required
             [(ngModel)]="email" required #myEmailControl="ngModel">
           </div>
           <br />
 
           <div class="row">
             <label for="password" class="col-md-2">Password: </label>
-            <input name="password" class="text col-md-3" type="text" [(ngModel)]="acc.password" required #myPasswordControl="ngModel">
+            <input name="password" class="text col-md-3 form-control" type="text" [(ngModel)]="acc.password" required #myPasswordControl="ngModel">
             <label for="password" class="col-md-2">Verify Password: </label>
-            <input type="text" class="col-md-3">
+            <input type="text" class="text col-md-3 form-control">
           </div>
         </div>
         <hr>
         <div id="info">
           <div class="row">
             <label class="text col-md-2" for="Name">First Name: </label>
-            <input class="text col-md-3" name="fname" type="text" [(ngModel)]="acc.fName" required #myFNameControl="ngModel">
+            <input class="text col-md-3 form-control" name="fname" type="text" [(ngModel)]="acc.fName" required #myFNameControl="ngModel">
           <label class="text col-md-2" for="Name"> Last Name: </label>
-          <input class="text col-md-3" name="lname" type="text" [(ngModel)]="acc.lName" required #myLNameControl="ngModel">
+          <input class="text col-md-3 form-control" name="lname" type="text" [(ngModel)]="acc.lName" required #myLNameControl="ngModel">
         </div>
           <br>
 
         <div class="row">
           <label class="text col-md-2" for="height">Height: </label>
-          <input class="text col-md-3" name="height" type="text" [(ngModel)]="acc.height" required #myHeightControl="ngModel">
+          <input class="text col-md-3 form-control" name="height" type="text" [(ngModel)]="acc.height" required #myHeightControl="ngModel">
           <label class="text col-md-2" for="weight">Weight: </label>
-          <input class="text col-md-3" name="weight" type="text" [(ngModel)]="acc.weight" required #myWeightControl="ngModel">
+          <input class="text col-md-3 form-control" name="weight" type="text" [(ngModel)]="acc.weight" required #myWeightControl="ngModel">
         </div>
           <br>
 
         <div class="row">
           <label class="text col-md-2" for="age">Age: </label>
-          <input class="text col-md-3" name="age" type="text" [(ngModel)]="acc.age" required #myAgeControl="ngModel">
+          <input class="text col-md-3 form-control" name="age" type="text" [(ngModel)]="acc.age" required #myAgeControl="ngModel">
           <label class="text col-md-2" for="gender">Gender: </label>
-          <input class="text col-md-3" name="gender" type="text">
+          <input class="text col-md-3 form-control" name="gender" type="text">
         </div>
         <br>
         <div class="row">
           <label class="text col-md-2" for="public">Public Profile:  </label>
-          <select id="pp" name="public" class="col-md-3 single" [(ngModel)]="acc.public" required #myPublicControl="ngModel">
+          <select id="pp" name="public" class="col-md-3 form-control" [(ngModel)]="acc.public" required #myPublicControl="ngModel">
             <option>True</option>
             <option>False</option>
             </select>
           <label class="text col-md-2" for="disabilities">Alergies: </label>
-          <select size="2" class="col-md-3" multiple [(ngModel)]="acc.allergies">
+          <select size="2" class="col-md-3 form-control" multiple [(ngModel)]="acc.allergies">
+
               <option>Nut Free</option>
               <option>Low Fat</option>
               <option>Gluten Free</option>
@@ -80,7 +81,7 @@
           <div class="row">
 
           <label class="col-md-2" for="goal">Goal: </label>
-          <select class="col-md-3 single" name="goal" [(ngModel)]="acc.goal">
+          <select class="col-md-3 single form-control" name="goal" [(ngModel)]="acc.goal">
             <option></option>
             <option>Lose Weight</option>
             <option>Gain Weight</option>
