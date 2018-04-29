@@ -21,19 +21,19 @@ export class ProfileComponent implements OnInit {
   public acc: Account;
 
   ngOnInit() {
-    //   this.activedRoute.params.subscribe((params: any) => {
-    //   this.acocuntRepository.getAcc(+params.id).subscribe(data => {
-    //     console.log(data);
-    //     this.acc = data;
-    //   });
-    // });
-    this.acc = {};
-    this.acc.fName = 'John';
-    this.acc.lName = 'Smith';
-    this.acc.height = 60;
-    this.acc.weight = '150';
-    this.acc.age = 15;
-    this.acc.id = 1;
+      this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.getAcc(+params.id).subscribe(data => {
+        console.log(data);
+        this.acc = data;
+      });
+    });
+    // this.acc = {};
+    // this.acc.fName = 'John';
+    // this.acc.lName = 'Smith';
+    // this.acc.height = 60;
+    // this.acc.weight = '150';
+    // this.acc.age = 15;
+    // this.acc.id = 1;
   }
 
 

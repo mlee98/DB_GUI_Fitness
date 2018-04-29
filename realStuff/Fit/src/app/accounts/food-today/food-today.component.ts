@@ -12,12 +12,6 @@ import { Meal } from '../../domain/models/Meal';
 })
 export class FoodTodayComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() {}
-
-  ngOnInit() {
-
-=======
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
@@ -41,6 +35,5 @@ export class FoodTodayComponent implements OnInit {
         this.meal = data;
      });
    });
->>>>>>> 0ee66fcc500992fa5ca506961d4ca2ce1e518dd6
   }
 }
