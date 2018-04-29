@@ -7,18 +7,22 @@ body{
 main{
   width: 45%;
   background-color: #99D3DF;
-  max-height: 100%;
+
 }
 
+input{
+  height: 1%;
+}
 aside{
-  min-height: 100vh;
+
   right: 0;
   position: absolute;
 }
 
 img{
-  max-height: 100vh;
-  min-height: 95%;
+  float: right;
+  width: 55vw;
+  height: 100vh;
 }
 
 .btn{
@@ -27,10 +31,6 @@ img{
 }
 
 #pp{
-  height: 1%;
-}
-
-input{
   height: 1%;
 }
 
