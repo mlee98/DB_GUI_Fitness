@@ -39,3 +39,7 @@ img{
 button{
   border-style: none;
 }
+
+input.pw {
+  -webkit-text-security: disc;
+}
