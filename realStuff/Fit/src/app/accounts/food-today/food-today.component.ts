@@ -22,6 +22,7 @@ export class FoodTodayComponent implements OnInit {
     public meal: Meal;
 
   ngOnInit() {
+    this.meal = {};
     this.date = new Date();
     this.updateValues();
   }
