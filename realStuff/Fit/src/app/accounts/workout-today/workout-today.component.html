@@ -1,27 +1,25 @@
 <div style="text-align: center">
   <h2 *ngIf="alreadyWorkdedOut"> Already worked out! Nice job!</h2>
-  <div class="card">
-    <div class="card-header" style="text-align: center">
-      <h4>Core Area</h4>
-    </div>
-    <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
+  <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
+    <div class="card">
       <span class="float-left" *ngFor="let i of workouts">
-        <div class = "m-2" *ngFor="let index of [0,1,2,3]">
+        <div class="m-2" *ngFor="let index of [0,1,2,3]">
           {{i.exercises[index]}} {{i.reps[index]}}
         </div>
-        <button class = " ml-2 mr-2" (click)="selectWorkout(i);addWorkout()">
+        <button class=" ml-2 mr-2" (click)="selectWorkout(i);addWorkout()">
           Pick Workout
         </button>
       </span>
     </div>
+    </div>
     <div *ngIf="showInputs && !alreadyWorkdedOut" class="card-body mt-2 mb-2">
-        <div class = "col-md-3 mt-2 mb-2" *ngFor="let index of [0,1,2,3]">
-          <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} {{type[index]}})</label>
-          <input value="0" [(ngModel)]= "repsRecord[index]"> <p> Completed</p>
-        </div>
+      <div class="col-md-3 mt-2 mb-2" *ngFor="let index of [0,1,2,3]">
+        <label> {{pickedWorkout.exercises[index]}} ({{pickedWorkout.reps[index]}} {{type[index]}})</label>
+        <input value="0" [(ngModel)]="repsRecord[index]">
+        <p> Completed</p>
+      </div>
       <button (click)="updatePercent()">
         Submit Reps
       </button>
     </div>
   </div>
-</div>
