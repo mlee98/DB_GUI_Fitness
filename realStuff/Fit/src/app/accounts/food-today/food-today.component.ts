@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Meal } from '../../domain/models/Meal';
 
+
 @Component({
   selector: 'app-food-today',
   templateUrl: './food-today.component.html',

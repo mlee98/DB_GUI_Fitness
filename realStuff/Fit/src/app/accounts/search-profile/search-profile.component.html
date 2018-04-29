@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+  <br />
+
+    <aside class="float-right" id="buttons">
+      <button (click)="changeToProfile()">Back to Search</button>
+      <button (click)="changeToSearch()">Back to Profile</button>
+    </aside>
+    <div *ngIf="acc" id="header" style="text-align: left">
+      <h1>{{acc.fName}} {{acc.lName}}</h1>
+
+      <div>
+          <h5>Age: {{acc.age}} · Height: {{acc.height}} inches · Weight: {{acc.weight}} lbs </h5>
+      </div>
+    </div>
+
+    <main class="container" id="profile">
+      <div id="tabs" class="container">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab">Past Food</a>
+          </li>
+          <li class="nav-item">
+            <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()" id="pastWorkoutTab">Past Workout</a>
+          </li>
+          <li class="nav-item">
+              <a href="#workoutStats" class="nav-link" data-toggle="tab" role="tab" aria-controls="workoutStats" (click)="pieChild.updateValues()"  id="workoutStatsTab">Workout Stats</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="tabCont">
+          <br>
+          <div class="tab-pane" role="tabpanel" id="pastFood">
+            <app-food-past></app-food-past>
+          </div>
+          <div class="tab-pane" role="tabpanel" id="pastWorkout">
+            <app-workout-past #pastWorkoutChild></app-workout-past>
+          </div>
+          <div class="tab-pane" role="tabpanel" id="workoutStats">
+              <app-pie #pieChild></app-pie>
+            </div>
+        </div>
+      </div>
+      <br />
+    </main>
+
+</body>
+
+</html>

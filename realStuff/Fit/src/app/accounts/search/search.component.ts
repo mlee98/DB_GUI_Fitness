@@ -27,6 +27,8 @@ export class SearchComponent implements OnInit {
          this.userAcc = data;
       });
      });
+     this.userAcc = {};
+     this.userAcc.id = 1;
     this.searchAcc = this.userAcc;
     this.resultList = [];
     this.fakeAcc = {};
@@ -47,5 +49,9 @@ export class SearchComponent implements OnInit {
      // this.accountRepository.search(this.searchAcc).subscribe(data => {
         // this.resultList = data;
      // });
+  }
+
+  public backToProfile() {
+    this.router.navigateByUrl('accounts/' + this.userAcc.id );
   }
 }
