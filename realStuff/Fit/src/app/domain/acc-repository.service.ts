@@ -32,7 +32,9 @@ export abstract class Repostitory<T> {
   }
 
   public getMealToday(id: number, date: string): Observable<Meal> {
-    return this.httpClient.post(`${this.endPoint}${id}/mealToday`, this.httpOptions).pipe(
+    console.log(date);
+    const data = {'date': date};
+    return this.httpClient.post(`${this.endPoint}${id}/mealToday`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }

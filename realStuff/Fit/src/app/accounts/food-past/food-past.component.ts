@@ -24,6 +24,7 @@ export class FoodPastComponent implements OnInit {
     public tempMeal: Meal;
 
   ngOnInit() {
+    this.meals = [];
     this.updateValues();
   }
 
