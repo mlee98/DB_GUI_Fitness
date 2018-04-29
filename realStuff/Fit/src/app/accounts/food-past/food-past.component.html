@@ -22,7 +22,7 @@
       <tfoot>
 
       </tfoot>
-      <tbody>
+      <tbody *ngIf="meals">
         <tr *ngFor="let meal of meals">
             <td >
               {{ meal.date | date:'LLL dd, yyyy' }}
