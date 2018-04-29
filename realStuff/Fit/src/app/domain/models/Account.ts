@@ -9,7 +9,7 @@ export class Account {
   lName?: string;
   height?: number;
   weight?: string;
-  disabilities?: Array<string>;
+  allergies?: Array<string>;
   workouts?: Array<Workout>;
   breakfast?: Array<Meal>;
   lunch?: Array<Meal>;
