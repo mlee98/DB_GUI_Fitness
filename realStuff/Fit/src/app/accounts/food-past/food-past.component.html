@@ -42,4 +42,11 @@
         </tr>
       </tbody>
     </table>
+    <div *ngFor="let meal of meals">
+        {{ meal.date | date:'LLL dd, yyyy' }}
+        {{ meal.breakfast }}
+        {{ meal.lunch }}
+        {{ meal.dinner }}
+        {{ meal.snack }}
+      </div>
   </div>
