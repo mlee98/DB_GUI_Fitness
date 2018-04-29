@@ -20,4 +20,5 @@ export class Account {
   toDo?: number;
   public?: boolean;
   age?: number;
+  gender?: string;
 }

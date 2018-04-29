@@ -36,6 +36,7 @@ export class CreateAccountComponent implements OnInit {
     this.acc.password = '';
     this.acc.username = '';
     this.acc.weight = '';
+    this.acc.gender = '';
   }
   public addAcc() {
     console.log(this.acc);
