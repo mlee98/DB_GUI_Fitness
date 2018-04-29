@@ -26,8 +26,7 @@
         "../node_modules/popper.js/dist/umd/popper.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
         "../node_modules/bootstrap-select/dist/js/bootstrap-select.js",
-        "../node_modules/chart.js/dist/Chart.min.js",
-        "../node_modules/angular-background-image/src/index.js"
+        "../node_modules/chart.js/dist/Chart.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
