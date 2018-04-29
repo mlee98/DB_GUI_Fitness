@@ -38,6 +38,7 @@ export class CreateAccountComponent implements OnInit {
     this.acc.weight = '';
   }
   public addAcc() {
+    console.log(this.acc);
       this.HomeRepository.createAccount(this.acc).subscribe(data => {
         console.log(this.acc);
         this.router.navigateByUrl('signIn');
