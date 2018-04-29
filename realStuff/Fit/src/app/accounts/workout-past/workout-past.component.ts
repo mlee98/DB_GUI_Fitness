@@ -22,14 +22,7 @@ export class WorkoutPastComponent implements OnInit {
     private slicePipe: SlicePipe) { }
 
   ngOnInit() {
-    this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
-        this.workouts = data;
-        for (let i = 0; i < this.workouts.length; i++) {
-          this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
-        }
-     });
-   });
+  this.updateValues();
   }
 
   public updateValues() {

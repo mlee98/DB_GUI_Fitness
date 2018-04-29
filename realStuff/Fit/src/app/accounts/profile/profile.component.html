@@ -35,7 +35,7 @@
             <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()" id="pastWorkoutTab">Past Workout</a>
           </li>
           <li class="nav-item">
-              <a href="#workoutStats" class="nav-link" data-toggle="tab" role="tab" aria-controls="workoutStats" id="workoutStatsTab">Workout Stats</a>
+              <a href="#workoutStats" class="nav-link" data-toggle="tab" role="tab" aria-controls="workoutStats" (click)="pieChild.updateValues()"  id="workoutStatsTab">Workout Stats</a>
             </li>
         </ul>
 
@@ -54,7 +54,7 @@
             <app-workout-past #pastWorkoutChild></app-workout-past>
           </div>
           <div class="tab-pane" role="tabpanel" id="workoutStats">
-              <app-pie></app-pie>
+              <app-pie #pieChild></app-pie>
             </div>
         </div>
       </div>
