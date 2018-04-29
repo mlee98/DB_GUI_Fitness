@@ -2,9 +2,9 @@
 <body>
   <div class="container">
     <br />
-    <br />
     <div id="search" class="container">
     <h3 class="mt-2">Search For Similar Users!</h3>
+    <br />
     <div class="row">
       <label for="drop" class="col-md-2 mb-3">Gender:</label>
       <select id="drop" class="custom select col-md-3 mb-3" data toggle="dropdown">
@@ -15,21 +15,21 @@
       <label for="drop" class="col-sm-2 mb-3">Age:</label>
       <input type="text" class="col-md-3 mb-3">
     </div>
-    <div class="row">
+    <div class="row" id="thickRow">
       <label for="drop" class="col-sm-2 mb-3">Weight:</label>
       <input type="text" class="col-md-3 mb-3">
       <label for="disabilities" class="col-sm-2">Alergies: </label>
-      <select multiple name="disabilities" class="selectpicker col-md-3 mb-3" size="1">
-        <option>peanutz</option>
-        <option>sleep apnia</option>
-        <option>lactose intolerant</option>
-        <option>celiac</option>
-        <option>blindness</option>
-        <option>bolimia</option>
-        <option>anorexia</option>
-        <option>kosher</option>
-        <option>halal</option>
-        <option>vegetarian</option>
+      <select multiple name="disabilities" class="col-md-3 mb-3" size="3">
+        <option>Nut Free</option>
+        <option>Low Fat</option>
+        <option>Gluten Free</option>
+        <option>No Carbs/Keto</option>
+        <option>High Protein</option>
+        <option>Citrus Free</option>
+        <option>Egg Free</option>
+        <option>Fish Free</option>
+        <option>Lactose Intolerant</option>
+        <option>Vegan</option>
       </select>
     </div>
 
@@ -40,7 +40,9 @@
         <option>Gain Weight</option>
         <option>Gain Muscle</option>
       </select>
-
+    </div>
+    <br />
+    <div class="row">
       <div class="col-md-2"></div>
       <button class="btn primary" (click)="search()" class="col-md-1 mb-3 mr-3">
         Search
