@@ -22,7 +22,7 @@
             [(ngModel)]="email" required #myEmailControl="ngModel">
           </div>
           <br />
-          <br />
+
           <div class="row">
             <label for="password" class="col-md-2">Password: </label>
             <input name="password" class="text col-md-3" type="text" [(ngModel)]="acc.password" required #myPasswordControl="ngModel">
@@ -39,7 +39,7 @@
           <input class="text col-md-3" name="lname" type="text" [(ngModel)]="acc.lName" required #myLNameControl="ngModel">
         </div>
           <br>
-          <br>
+
         <div class="row">
           <label class="text col-md-2" for="height">Height: </label>
           <input class="text col-md-3" name="height" type="text" [(ngModel)]="acc.height" required #myHeightControl="ngModel">
@@ -47,42 +47,47 @@
           <input class="text col-md-3" name="weight" type="text" [(ngModel)]="acc.weight" required #myWeightControl="ngModel">
         </div>
           <br>
-          <br>
+
         <div class="row">
           <label class="text col-md-2" for="age">Age: </label>
           <input class="text col-md-3" name="age" type="text" [(ngModel)]="acc.age" required #myAgeControl="ngModel">
+          <label class="text col-md-2" for="gender">Gender: </label>
+          <input class="text col-md-3" name="gender" type="text">
+        </div>
+        <br>
+        <div class="row">
           <label class="text col-md-2" for="public">Public Profile:  </label>
-          <select id="pp" name="public" class="col-md-3" [(ngModel)]="acc.public" required #myPublicControl="ngModel">
+          <select id="pp" name="public" class="col-md-3 single" [(ngModel)]="acc.public" required #myPublicControl="ngModel">
             <option>True</option>
             <option>False</option>
             </select>
-        </div>
-          <br>
-          <br>
-        <div class="row">
-          <label class="text col-md-2" for="disabilities">: </label>
+          <label class="text col-md-2" for="disabilities">Alergies: </label>
           <select size="2" class="col-md-3" multiple>
-            <option>peanutz</option>
-            <option>sleep apnia</option>
-            <option>lactose intolerant</option>
-            <option>celiac</option>
-            <option>blindness</option>
-            <option>bolimia</option>
-            <option>anorexia</option>
-            <option>kosher</option>
-            <option>halal</option>
-            <option>vegetarian</option>
+              <option>Nut Free</option>
+              <option>Low Fat</option>
+              <option>Gluten Free</option>
+              <option>No Carbs/Keto</option>
+              <option>High Protein</option>
+              <option>Citrus Free</option>
+              <option>Egg Free</option>
+              <option>Fish Free</option>
+              <option>Lactose Intolerant</option>
+              <option>Vegan</option>
           </select>
+        </div>
+          <br />
+          <hr>
+          <div class="row">
 
           <label class="col-md-2" for="goal">Goal: </label>
-          <select class="col-md-3" name="goal" [(ngModel)]="acc.goal">
+          <select class="col-md-3 single" name="goal" [(ngModel)]="acc.goal">
             <option></option>
             <option>Lose Weight</option>
             <option>Gain Weight</option>
             <option>Gain Muscle</option>
           </select>
         </div>
-      </div>
+        </div>
         <br />
         <div id="button1" style="text-align:center">
           <button class="btn btn-info" [disabled]="submitCheck()" (click)="addAcc()">

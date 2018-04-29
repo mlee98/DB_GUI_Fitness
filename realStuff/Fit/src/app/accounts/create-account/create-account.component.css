@@ -21,11 +21,8 @@ img{
 }
 
 .btn{
-  border-color:white;
-}
-
-#text{
-  margin-left: 9%;
+  border-width: 2px;
+  border-color: rgb(0, 0, 139);
 }
 
 #pp{
@@ -36,6 +33,15 @@ input{
   height: 1%;
 }
 
+.single{
+  height: 1%;
+}
+
+hr{
+  color: black;
+  width: 90%;
+  height: 15px;
+}
 
 .alert{
   height: 1%;
