@@ -52,7 +52,10 @@
           <label class="text col-md-2" for="age">Age: </label>
           <input class="text col-md-3  " name="age" type="text" [(ngModel)]="acc.age" required #myAgeControl="ngModel">
           <label class="text col-md-2" for="gender">Gender: </label>
-          <input class="text col-md-3  " name="gender" type="text" [(ngModel)]="acc.gender">
+          <select class="text col-md-3  " name="gender" type="text" [(ngModel)]="acc.gender">
+            <option>Male</option>
+            <option>False</option>
+            </select>
         </div>
         <br>
         <div class="row">
