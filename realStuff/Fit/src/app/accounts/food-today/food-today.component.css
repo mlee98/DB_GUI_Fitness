@@ -1,8 +1,13 @@
-.card-header{
-  padding-top: 7px;
-  padding-bottom: 7px;
+img{
+  width: 70%;
+  height: 20%;
+  opacity: .5;
+  position:absolute;
+  left: 0;
+  margin-left: 15%;
 }
-.card-body{
-  padding-top: 7px;
-  padding-bottom: 7px;
+#text{
+  font-weight: bold;
+
 }
+

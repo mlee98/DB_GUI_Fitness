@@ -44,6 +44,11 @@ export class CreateAccountComponent implements OnInit {
         this.router.navigateByUrl('signIn');
       });
   }
+
+  public goToSignIn() {
+    this.router.navigateByUrl('signIn');
+  }
+
   public submitCheck() {
     if (
       this.acc.age === 0 ||

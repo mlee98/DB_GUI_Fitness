@@ -7,6 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { InputComponent } from './input/input.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { SearchComponent } from './search/search.component';
+import { SearchProfileComponent } from './search-profile/search-profile.component';
+
 export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'homepage',
@@ -35,5 +37,9 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'accounts/:id/search',
     component: SearchComponent
+  },
+  {
+    path: 'accounts/:id/search/:searchId',
+    component: SearchProfileComponent
   }
 ];

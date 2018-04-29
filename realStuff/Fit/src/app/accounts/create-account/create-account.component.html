@@ -88,10 +88,16 @@
         </div>
         </div>
         <br />
-        <div id="button1" style="text-align:center">
-          <button class="btn btn-info" [disabled]="submitCheck()" (click)="addAcc()">
+      <div class="row" class="col-md-12">
+        <div class="col-md-2"></div>
+         <div id="button1" style="text-align:center">
+            <button class="btn btn-info col-md-3" [disabled]="submitCheck()" (click)="addAcc()">
               Create Account
-          </button>
+            </button>
+            <button class="btn btn-info col-md-3" (click)="goToSignIn()">
+              Sign In
+            </button>
+      </div>
           <br />
           <br />
         </div>
