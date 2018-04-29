@@ -18,12 +18,13 @@ export class FoodTodayComponent implements OnInit {
     private datePipe: DatePipe,
     private slicePipe: SlicePipe) {}
 
-    public date: Date;
+    public date: string;
     public meal: Meal;
 
   ngOnInit() {
     this.meal = {};
-    this.date = new Date();
+    const obj = new Date();
+    this.date = this.datePipe.transform(obj, 'yyyy-MM-dd');
     this.updateValues();
   }
 
