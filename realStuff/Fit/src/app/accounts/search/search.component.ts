@@ -22,13 +22,15 @@ export class SearchComponent implements OnInit {
   public fakeAcc: Account;
 
   ngOnInit() {
+     this.userAcc = {};
      this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.getAcc(+params.id).subscribe(data => {
          this.userAcc = data;
       });
      });
-     this.userAcc = {};
-     this.userAcc.id = 1;
+     this.resultList = [];
+     this.searchAcc = {};
+    /* this.userAcc.id = 1;
     this.searchAcc = this.userAcc;
     this.resultList = [];
     this.fakeAcc = {};
@@ -41,14 +43,16 @@ export class SearchComponent implements OnInit {
     this.fakeAcc.calsBurned = [];
     this.fakeAcc.calsEaten = [];
     this.resultList.push(this.fakeAcc);
-    this.resultList.push(this.fakeAcc);
+    this.resultList.push(this.fakeAcc);*/
     console.log(this.resultList);
   }
 
   public search() {
-     // this.accountRepository.search(this.searchAcc).subscribe(data => {
-        // this.resultList = data;
-     // });
+    this.activedRoute.params.subscribe((params: any) => {
+      this.accountRepository.search(+params.id, this.searchAcc).subscribe(data => {
+        this.resultList = data;
+     });
+   });
   }
 
   public backToProfile() {
