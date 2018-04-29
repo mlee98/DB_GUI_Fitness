@@ -32,6 +32,7 @@ export class FoodPastComponent implements OnInit {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getMealPast(+params.id).subscribe(data => {
         this.meals = data;
+        console.log(this.meals);
      });
    });
   }
