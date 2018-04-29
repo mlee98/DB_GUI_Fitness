@@ -30,6 +30,7 @@ export class FoodTodayComponent implements OnInit {
   }
 
   public updateValues() {
+    console.log(this.date.toString());
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getMealToday(+params.id, this.date.toString()).subscribe(data => {
         this.meal = data;
