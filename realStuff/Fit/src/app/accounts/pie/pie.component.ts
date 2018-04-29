@@ -48,6 +48,10 @@ export class PieComponent implements OnInit {
     public cardioPercent: number;
 
   ngOnInit() {
+    this.updateValues();
+  }
+
+  public updateValues() {
     this.corePercent = 0;
     this.armsPercent = 0;
     this.legsPercent = 0;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Workout } from '../../domain/models/Workouts';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,6 +22,10 @@ export class WorkoutPastComponent implements OnInit {
     private slicePipe: SlicePipe) { }
 
   ngOnInit() {
+  this.updateValues();
+  }
+
+  public updateValues() {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
@@ -31,5 +35,4 @@ export class WorkoutPastComponent implements OnInit {
      });
    });
   }
-
 }
