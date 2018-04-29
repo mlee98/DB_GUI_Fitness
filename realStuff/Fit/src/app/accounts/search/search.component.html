@@ -10,19 +10,19 @@
     <br />
     <div class="row">
       <label for="drop" class="col-md-2 mb-3">Gender:</label>
-      <select id="drop" class="custom select col-md-3 mb-3" data toggle="dropdown">
+      <select id="drop" class="custom select col-md-3 mb-3" [(ngModel)]="searchAcc.gender" data toggle="dropdown">
         <option selected></option>
         <option value="Male"> Male </option>
         <option value="Female"> Female </option>
       </select>
       <label for="drop" class="col-sm-2 mb-3">Age:</label>
-      <input type="text" class="col-md-3 mb-3">
+      <input type="text" value="userAcc.age" class="col-md-3 mb-3" [(ngModel)]="searchAcc.age">
     </div>
     <div class="row" id="thickRow">
       <label for="drop" class="col-sm-2 mb-3">Weight:</label>
-      <input type="text" class="col-md-3 mb-3">
-      <label for="disabilities" class="col-sm-2">Alergies: </label>
-      <select multiple name="disabilities" class="col-md-3 mb-3" size="3">
+      <input type="text" class="col-md-3 mb-3" value="userAcc.weight" [(ngModel)]="searchAcc.weight">
+      <label for="disabilities" class="col-sm-2">Allergies: </label>
+      <select multiple name="disabilities" class="col-md-3 mb-3" [(ngModel)]="searchAcc.allergies" size="3">
         <option>Nut Free</option>
         <option>Low Fat</option>
         <option>Gluten Free</option>
@@ -38,7 +38,7 @@
 
     <div class="row">
       <label for="goal" class="col-sm-2">Goal: </label>
-      <select name="goal" class="col-md-3 mb-3">
+      <select name="goal" class="col-md-3 mb-3" [(ngModel)]="searchAcc.goal">
         <option>Lose Weight</option>
         <option>Gain Weight</option>
         <option>Gain Muscle</option>

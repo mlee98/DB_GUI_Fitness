@@ -24,19 +24,19 @@
       </tfoot>
       <tbody *ngIf="meals">
         <tr *ngFor="let meal of meals">
-            <td >
+            <td id="date">
               {{ meal.date | date:'LLL dd, yyyy' }}
             </td>
-            <td >
+            <td id="breakfast">
               {{ meal.breakfast }}
             </td>
-            <td >
+            <td id="lunch">
               {{ meal.lunch }}
             </td>
-            <td >
+            <td id="dinner">
                 {{ meal.dinner }}
               </td>
-            <td >
+            <td id="snack">
               {{ meal.snack }}
             </td>
         </tr>

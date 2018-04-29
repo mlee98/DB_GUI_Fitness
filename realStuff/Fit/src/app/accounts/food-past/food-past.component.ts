@@ -33,6 +33,7 @@ export class FoodPastComponent implements OnInit {
       this.acocuntRepository.getMealPast(+params.id).subscribe(data => {
         this.meals = data;
         console.log(this.meals);
+        console.log(this.meals[0]);
      });
    });
   }
