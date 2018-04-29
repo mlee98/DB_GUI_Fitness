@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SlicePipe, DatePipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Meal } from '../../domain/models/Meal';
 
 @Component({
   selector: 'app-food-today',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoodTodayComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public acocuntRepository: AccountRepostitory,
+    private activedRoute: ActivatedRoute,
+    private router: Router,
+    private datePipe: DatePipe,
+    private slicePipe: SlicePipe) {}
+
+    public date: Date;
+    public meal: Meal;
 
   ngOnInit() {
+    this.date = new Date();
+    this.updateValues();
   }
 
+  public updateValues() {
+    this.activedRoute.params.subscribe((params: any) => {
+      this.acocuntRepository.getMealToday(+params.id, this.date.toString()).subscribe(data => {
+        this.meal = data;
+     });
+   });
+  }
 }

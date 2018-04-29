@@ -23,13 +23,13 @@
       <div id="tabs" class="container">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a href="#food" class="nav-link" data-toggle="tab" role="tab" aria-controls="food" id="foodTab">Today's Food</a>
+            <a href="#food" class="nav-link" data-toggle="tab" role="tab" aria-controls="food" id="foodTab" (click)="todayFoodChild.updateValues()">Today's Food</a>
           </li>
           <li class="nav-item">
             <a href="#workout" class="nav-link" data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
           </li>
           <li class="nav-item">
-            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab">Past Food</a>
+            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab" (click)="pastFoodChild.updateValues()">Past Food</a>
           </li>
           <li class="nav-item">
             <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()" id="pastWorkoutTab">Past Workout</a>
@@ -42,13 +42,13 @@
         <div class="tab-content" id="tabCont">
           <br>
           <div class="tab-pane active container" role="tabpanel" id="food">
-            <app-food-today></app-food-today>
+            <app-food-today #todayFoodChild ></app-food-today>
           </div>
           <div class="tab-pane" role="tabpanel" id="workout">
             <app-workout-today></app-workout-today>
           </div>
           <div class="tab-pane" role="tabpanel" id="pastFood">
-            <app-food-past></app-food-past>
+            <app-food-past #pastFoodChild ></app-food-past>
           </div>
           <div class="tab-pane" role="tabpanel" id="pastWorkout">
             <app-workout-past #pastWorkoutChild></app-workout-past>
