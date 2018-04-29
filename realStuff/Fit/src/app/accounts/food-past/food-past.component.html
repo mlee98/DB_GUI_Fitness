@@ -1,21 +1,21 @@
 <div>
     <table class="table ">
       <thead class="col-md-12" style="display:table-header-group">
-        <tr class="col-md-12">
+        <tr class="col-md-12" *ngFor="let i of meals">
           <th id="date" align="left">
-            <h5>Date</h5>
+            <h5>{{i.date}}</h5>
           </th>
           <th id="breakfast" align="left">
-            <h5>Breakfast</h5>
+            <h5>{{i.breakfast}}</h5>
           </th>
           <th id="lunch" align="left">
-            <h5>Lunch</h5>
+            <h5>{{i.lunch}}</h5>
           </th>
           <th id="dinner" align="left">
-              <h5>Dinner</h5>
+              <h5>{{i.dinner}}</h5>
             </th>
           <th id="snack" align="left">
-            <h5>Snack</h5>
+            <h5>{{i.snack}}</h5>
           </th>
         </tr>
       </thead>
