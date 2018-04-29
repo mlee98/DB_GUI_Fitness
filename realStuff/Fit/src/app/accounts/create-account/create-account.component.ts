@@ -26,7 +26,7 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit() {
     this.email = '';
     this.acc = {};
-    this.acc.disabilities = [];
+    this.acc.allergies = [];
     this.acc.calsBurned = [];
     this.acc.calsEaten = [];
     this.acc.username = '';
@@ -39,6 +39,7 @@ export class CreateAccountComponent implements OnInit {
   }
   public addAcc() {
       this.HomeRepository.createAccount(this.acc).subscribe(data => {
+        console.log(this.acc);
         this.router.navigateByUrl('signIn');
       });
   }
