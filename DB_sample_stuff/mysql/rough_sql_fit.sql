@@ -143,7 +143,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Snack` (
   `idSnack` INT NOT NULL AUTO_INCREMENT,
   `Vegan` VARCHAR(45) NULL,
-  `Carbs` VARCHAR(45) NULL,
+  `Low-Carb` VARCHAR(45) NULL,
   `Gluten-free` VARCHAR(45) NULL,
   `Lactose` VARCHAR(45) NULL,
   `Normal` VARCHAR(45) NULL,
@@ -159,12 +159,12 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Dinner` (
   `Normal` VARCHAR(45) NULL,
   `Lactose` VARCHAR(45) NULL,
   `Gluten-free` VARCHAR(45) NULL,
-  `Low Carb` VARCHAR(45) NULL,
+  `Low-Carb` VARCHAR(45) NULL,
   `Citrus-free` VARCHAR(45) NULL,
   `Fish-free` VARCHAR(45) NULL,
-  `Low Fat` VARCHAR(45) NULL,
+  `Low-Fat` VARCHAR(45) NULL,
   `Vegan` VARCHAR(45) NULL,
-  `High Protein` VARCHAR(45) NULL,
+  `High-Protein` VARCHAR(45) NULL,
   `Egg-free` VARCHAR(45) NULL,
   `Nut-free` VARCHAR(45) NULL,
   PRIMARY KEY (`idDinner`))
@@ -179,12 +179,12 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Lunch` (
   `Normal` VARCHAR(45) NULL,
   `Lactose` VARCHAR(45) NULL,
   `Gluten-free` VARCHAR(45) NULL,
-  `Low Carb` VARCHAR(45) NULL,
+  `Low-Carb` VARCHAR(45) NULL,
   `Citrus-free` VARCHAR(45) NULL,
   `Fish-free` VARCHAR(45) NULL,
-  `Low Fat` VARCHAR(45) NULL,
+  `Low-Fat` VARCHAR(45) NULL,
   `Vegan` VARCHAR(45) NULL,
-  `High Protein` VARCHAR(45) NULL,
+  `High-Protein` VARCHAR(45) NULL,
   `Egg-free` VARCHAR(45) NULL,
   `Nut-free` VARCHAR(45) NULL,
   PRIMARY KEY (`idLunch`))
@@ -199,16 +199,17 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Breakfast` (
   `Normal` VARCHAR(45) NULL,
   `Lactose` VARCHAR(45) NULL,
   `Gluten-free` VARCHAR(45) NULL,
-  `Low Carb` VARCHAR(45) NULL,
+  `Low-Carb` VARCHAR(45) NULL,
   `Citrus-free` VARCHAR(45) NULL,
   `Fish-free` VARCHAR(45) NULL,
-  `Low Fat` VARCHAR(45) NULL,
+  `Low-Fat` VARCHAR(45) NULL,
   `Vegan` VARCHAR(45) NULL,
-  `High Protein` VARCHAR(45) NULL,
+  `High-Protein` VARCHAR(45) NULL,
   `Egg-free` VARCHAR(45) NULL,
   `Nut-free` VARCHAR(45) NULL,
   PRIMARY KEY (`idBreakfast`))
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -230,7 +231,6 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
   `AllergyId` INT NOT NULL AUTO_INCREMENT,
   `UserId` INT NOT NULL,
   `Name` VARCHAR(240) NULL,
-  `Share` TINYINT NULL,
   PRIMARY KEY (`AllergyId`))
 ENGINE = InnoDB;
 
@@ -341,10 +341,10 @@ START TRANSACTION;
 USE `DB_GUI`;
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Normal');
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Nut-free');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Low fat');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Low-fat');
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Gluten-free');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Low Carbs');
-INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('High Protein');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Low-Carbs');
+INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('High-Protein');
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Citrus-free');
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Lactose');
 INSERT INTO `DB_GUI`.`Diet_Plan` (`Name`) VALUES ('Vegan');
@@ -362,10 +362,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Carbs`, `Gluten-free`, `Lactose`, `Normal`) VALUES (1, 'Carrots', 'Dates', 'Kale', 'Avocado', 'Chips');
-INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Carbs`, `Gluten-free`, `Lactose`, `Normal`) VALUES (2, 'Mango', 'Blueberries', 'Avocado', 'Watermelon', 'Popcorn');
-INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Carbs`, `Gluten-free`, `Lactose`, `Normal`) VALUES (2, 'Apricots', 'Apple', 'Carrots', 'Apple', 'Appplesauce');
-INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Carbs`, `Gluten-free`, `Lactose`, `Normal`) VALUES (4, 'Celery', 'Banana', 'Celery', 'Popcorn', 'Pineapple');
+INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Low-Carb`, `Gluten-free`, `Lactose`, `Normal`) VALUES (1, 'Carrots', 'Dates', 'Kale', 'Avocado', 'Chips');
+INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Low-Carb`, `Gluten-free`, `Lactose`, `Normal`) VALUES (2, 'Mango', 'Blueberries', 'Avocado', 'Watermelon', 'Popcorn');
+INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Low-Carb`, `Gluten-free`, `Lactose`, `Normal`) VALUES (3, 'Apricots', 'Apple', 'Carrots', 'Apple', 'Appplesauce');
+INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Low-Carb`, `Gluten-free`, `Lactose`, `Normal`) VALUES (4, 'Celery', 'Banana', 'Celery', 'Popcorn', 'Pineapple');
+INSERT INTO `DB_GUI`.`Snack` (`idSnack`, `Vegan`, `Low-Carb`, `Gluten-free`, `Lactose`, `Normal`) VALUES (5, 'Celery', 'Banana', 'Celery', 'Popcorn', 'Pineapple');
 
 COMMIT;
 
@@ -375,11 +376,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Pizza', 'Lighter Chicken Pot Pie', 'Vegan Chili', 'Barbacoa Tacos', 'Spinach Ricotta Lasgna', 'Steak and Garlic Potatoes', 'Pepperoni Pizza', 'Zucchini Pasta', 'Thai Turkey Wraps', 'Autumn Pear Salad', 'Roasted Vegetable Enchiladas');
-INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Tacos', 'Cashew Alfredo Pasta', 'Zucchini Crust Pizza', 'Roast Beef Salad', 'Egg Fried Rice', 'Kale Mushroom Frittata', 'Lemon-Olive Chicken', 'Veggie Kabobs', 'Healthy Turkey Chili', 'Butternut Squash', 'Lemon & Herb Lamb Chops');
-INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Stir Fry', 'Baja Fish Tacos', 'Cashew Potato Pasta Salad', 'BBQ Chicken', 'Sausage and Cheese Spaghetti', 'Chicken Chili', 'Teriyaki Chicken & Soba Noodles', 'Pesto Veggie Pasta', 'Sesame Beef', 'Bacon Ranch Turkey Wrap', 'Chicken & Sausage with Bowties');
-INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'Burritos', 'Thai Stirfry', 'Greek Stuffed Chicken', 'Cheesy Jalapeno Chicken', 'Shakshuka', 'Baked Cheese Crepes', 'Roast Dijon Chicken', 'Mushroom Burger', 'Tuna Salad with Avocado', 'Cobb Salad Pita Pockets', 'Cranberry Glazed Turkey Breast');
-INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Steak and Potatoes', 'Tandoori Chicken', 'Cranberry Balasmic Chicken', 'Grilled Halloumi Salad', 'Chicken Salad & Brussel Sprouts', 'Mac & Cheese Soup', 'Shrimp a la Grecque', 'Spring Minestrone', 'Greek-Braised Cod with Tomatoes', 'Sesame Noodles', 'Honey Mustard Garlic Rack-of-Lamb');
+INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Pizza', 'Lighter Chicken Pot Pie', 'Vegan Chili', 'Barbacoa Tacos', 'Spinach Ricotta Lasgna', 'Steak and Garlic Potatoes', 'Pepperoni Pizza', 'Zucchini Pasta', 'Thai Turkey Wraps', 'Autumn Pear Salad', 'Roasted Vegetable Enchiladas');
+INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Tacos', 'Cashew Alfredo Pasta', 'Zucchini Crust Pizza', 'Roast Beef Salad', 'Egg Fried Rice', 'Kale Mushroom Frittata', 'Lemon-Olive Chicken', 'Veggie Kabobs', 'Healthy Turkey Chili', 'Butternut Squash', 'Lemon & Herb Lamb Chops');
+INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Stir Fry', 'Baja Fish Tacos', 'Cashew Potato Pasta Salad', 'BBQ Chicken', 'Sausage and Cheese Spaghetti', 'Chicken Chili', 'Teriyaki Chicken & Soba Noodles', 'Pesto Veggie Pasta', 'Sesame Beef', 'Bacon Ranch Turkey Wrap', 'Chicken & Sausage with Bowties');
+INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'Burritos', 'Thai Stirfry', 'Greek Stuffed Chicken', 'Cheesy Jalapeno Chicken', 'Shakshuka', 'Baked Cheese Crepes', 'Roast Dijon Chicken', 'Mushroom Burger', 'Tuna Salad with Avocado', 'Cobb Salad Pita Pockets', 'Cranberry Glazed Turkey Breast');
+INSERT INTO `DB_GUI`.`Dinner` (`idDinner`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Steak and Potatoes', 'Tandoori Chicken', 'Cranberry Balasmic Chicken', 'Grilled Halloumi Salad', 'Chicken Salad & Brussel Sprouts', 'Mac & Cheese Soup', 'Shrimp a la Grecque', 'Spring Minestrone', 'Greek-Braised Cod with Tomatoes', 'Sesame Noodles', 'Honey Mustard Garlic Rack-of-Lamb');
 
 COMMIT;
 
@@ -389,11 +390,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Turkey Sandwhich', 'Blueberry Pork Corn Tacos', 'Gluten-free Quinoa Burgers', 'Caprese Avocado Salad', 'Pesto Pizza', 'Southwest Black Bean Pasta', 'Asian Noodle Salad', 'Cobb Salad', 'Portobello Stuffed Pizza', 'Chicken Caesar Ciabatta Sandwhich', 'Sunbutter & Banana Sandwhich');
-INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Chicken Salad', 'Shrimp & Avocado Taco Salad', 'Portobello and Zucchini Taco', 'Shrimp & Cauliflower Salad', 'Sausage and Tomato Pasta', 'BLT Croissant ', 'Mediterranean Orzo Salad', 'Tempeh Bowl', 'Chickpea Spinach Salad', 'Kale Salad with Vinaigrette', 'Pasta Salad');
-INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Chorizo Risotto', 'Spicy Noodles', 'Creamy Cashew Potato and Pasta Salad', 'California Turkey and Bacon Lettuce Wrap', 'Chickpea Avocado & Feta Salad', 'Humus & Veggie Wraps', 'Spinach Artichoke Quiche Cup', 'Crispy Tofu Bowl', 'Avocado Greek Yogurt Chicken Salad', 'Southwest Hummus Wraps', 'Cold Noddle Salad');
-INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'Lamb Kabobs', 'Cajun Chickpea Sweet Potato Burgers', 'Grilled Stuff Bacon Cheeseburger', 'Chicken and Asparagus Lemon Stir Fry', 'Pesto Chicken Pasta', 'Cucumber Turkey Wraps', 'Baked Tofu Sushi Bowl', 'Curried Lentils', 'Salmon Quinoa Bowl', 'Three Bean Salad', 'Tortilla Wrap');
-INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Crab Pasta', 'Tropical Rice Bowls', 'BLT Chopped Salad', 'Salmon Chickpea Salad', 'Loaded Baked Potato', 'Chicken Salad Sandwhich', 'Tuna and Chickpea Pita Sandwiches', 'Avocado Salad', 'Southwestern Veggie Hummus Wraps', 'Chicken Pesto Sandwhich', 'Quesadillas');
+INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Turkey Sandwhich', 'Blueberry Pork Corn Tacos', 'Gluten-free Quinoa Burgers', 'Caprese Avocado Salad', 'Pesto Pizza', 'Southwest Black Bean Pasta', 'Asian Noodle Salad', 'Cobb Salad', 'Portobello Stuffed Pizza', 'Chicken Caesar Ciabatta Sandwhich', 'Sunbutter & Banana Sandwhich');
+INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Chicken Salad', 'Shrimp & Avocado Taco Salad', 'Portobello and Zucchini Taco', 'Shrimp & Cauliflower Salad', 'Sausage and Tomato Pasta', 'BLT Croissant ', 'Mediterranean Orzo Salad', 'Tempeh Bowl', 'Chickpea Spinach Salad', 'Kale Salad with Vinaigrette', 'Pasta Salad');
+INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Chorizo Risotto', 'Spicy Noodles', 'Creamy Cashew Potato and Pasta Salad', 'California Turkey and Bacon Lettuce Wrap', 'Chickpea Avocado & Feta Salad', 'Humus & Veggie Wraps', 'Spinach Artichoke Quiche Cup', 'Crispy Tofu Bowl', 'Avocado Greek Yogurt Chicken Salad', 'Southwest Hummus Wraps', 'Cold Noddle Salad');
+INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'Lamb Kabobs', 'Cajun Chickpea Sweet Potato Burgers', 'Grilled Stuff Bacon Cheeseburger', 'Chicken and Asparagus Lemon Stir Fry', 'Pesto Chicken Pasta', 'Cucumber Turkey Wraps', 'Baked Tofu Sushi Bowl', 'Curried Lentils', 'Salmon Quinoa Bowl', 'Three Bean Salad', 'Tortilla Wrap');
+INSERT INTO `DB_GUI`.`Lunch` (`idLunch`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Crab Pasta', 'Tropical Rice Bowls', 'BLT Chopped Salad', 'Salmon Chickpea Salad', 'Loaded Baked Potato', 'Chicken Salad Sandwhich', 'Tuna and Chickpea Pita Sandwiches', 'Avocado Salad', 'Southwestern Veggie Hummus Wraps', 'Chicken Pesto Sandwhich', 'Quesadillas');
 
 COMMIT;
 
@@ -403,11 +404,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Pancakes', 'Almond Butter Toast', 'Muffins', 'Flourless Egg and Cheese Breakfast Muffins', 'Eggs Benedict', 'Goat Cheese Oatmeal', 'Zucchini Breakfast Bowl', 'Vegan Pancakes', 'Baked Eggs Avocados', 'Creamy Coconut-Citrus Waffle', 'Breakfast Tacos');
-INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Waffles', 'Oatmeal', 'Scones', 'Cream Cheese Pancakes', 'Eggplant and Walnut Frittata', 'Blueberry Power Smoothie', 'Apple Breakfast Porridge', 'Quinoa Breakfast Cereal', 'Feta Egg Toast', 'Sunflower Granola', 'Breakfast Soup');
-INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Crepes', 'Spiced Pumpkin Tea Bread', 'Chocolate Chip Pancakes', 'Spinach, Mushroom and Feta Crustless Quiche', 'Grilled Banana-Pear Pancake', 'Greek Cucumber and Chickpea Bowl', 'Breakfast Salad', 'Flourless Pumpkin Muffins', 'Poached Eggs with Tomato', 'Cucumber Toast', 'Waffles');
-INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'French Toast', 'Fresh Fruit Muesli', 'Waffles', 'Cream Cheese Muffins', 'French Baked Toast', 'Bacon Veggie Skillet', 'Blueberry Oatmeal', 'Vegan French Toast', 'Peanut Butter Oats', 'Blueberry-Orange Parfaits', 'Crepes');
-INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low Carb`, `Citrus-free`, `Fish-free`, `Low Fat`, `Vegan`, `High Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Bacon and Eggs', 'Quinoa Porridge', 'Quinoa Bowl', 'Coconut Chia Pudding', 'Blue Cheese Quiche', 'Softened Plums with Vanilla Yogurt', 'BLT Breakfast Salad', 'Avocado Toast', 'Cottage Cheese with Fruit and Toast', 'Pomegranate-Farro Salad', 'Doughnuts');
+INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (1, 'Pancakes', 'Almond Butter Toast', 'Muffins', 'Flourless Egg and Cheese Breakfast Muffins', 'Eggs Benedict', 'Goat Cheese Oatmeal', 'Zucchini Breakfast Bowl', 'Vegan Pancakes', 'Baked Eggs Avocados', 'Creamy Coconut-Citrus Waffle', 'Breakfast Tacos');
+INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (2, 'Waffles', 'Oatmeal', 'Scones', 'Cream Cheese Pancakes', 'Eggplant and Walnut Frittata', 'Blueberry Power Smoothie', 'Apple Breakfast Porridge', 'Quinoa Breakfast Cereal', 'Feta Egg Toast', 'Sunflower Granola', 'Breakfast Soup');
+INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (3, 'Crepes', 'Spiced Pumpkin Tea Bread', 'Chocolate Chip Pancakes', 'Spinach, Mushroom and Feta Crustless Quiche', 'Grilled Banana-Pear Pancake', 'Greek Cucumber and Chickpea Bowl', 'Breakfast Salad', 'Flourless Pumpkin Muffins', 'Poached Eggs with Tomato', 'Cucumber Toast', 'Waffles');
+INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (4, 'French Toast', 'Fresh Fruit Muesli', 'Waffles', 'Cream Cheese Muffins', 'French Baked Toast', 'Bacon Veggie Skillet', 'Blueberry Oatmeal', 'Vegan French Toast', 'Peanut Butter Oats', 'Blueberry-Orange Parfaits', 'Crepes');
+INSERT INTO `DB_GUI`.`Breakfast` (`idBreakfast`, `Normal`, `Lactose`, `Gluten-free`, `Low-Carb`, `Citrus-free`, `Fish-free`, `Low-Fat`, `Vegan`, `High-Protein`, `Egg-free`, `Nut-free`) VALUES (5, 'Bacon and Eggs', 'Quinoa Porridge', 'Quinoa Bowl', 'Coconut Chia Pudding', 'Blue Cheese Quiche', 'Softened Plums with Vanilla Yogurt', 'BLT Breakfast Salad', 'Avocado Toast', 'Cottage Cheese with Fruit and Toast', 'Pomegranate-Farro Salad', 'Doughnuts');
 
 COMMIT;
 
