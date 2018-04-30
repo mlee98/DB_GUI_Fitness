@@ -19,9 +19,11 @@ export class SearchComponent implements OnInit {
   public userAcc: Account;
   public searchAcc: Account;
   public resultList: Array<Account>;
-  public fakeAcc: Account;
+  public resultAcc: Account;
+  public resultPicked: boolean;
 
   ngOnInit() {
+     this.resultPicked = false;
      this.userAcc = {};
      this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.getAcc(+params.id).subscribe(data => {
@@ -53,6 +55,15 @@ export class SearchComponent implements OnInit {
         this.resultList = data;
      });
    });
+  }
+
+  public goToSearchProfile(result: Account) {
+    this.resultAcc = result;
+    this.resultPicked = true;
+  }
+
+  public reset() {
+    this.searchAcc = {};
   }
 
   public backToProfile() {

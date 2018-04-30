@@ -23,7 +23,7 @@
       <div id="tabs" class="container">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab">Past Food</a>
+            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" (click)="pastFoodChild.updateValues()"id="pastFoodTab">Past Food</a>
           </li>
           <li class="nav-item">
             <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()" id="pastWorkoutTab">Past Workout</a>
@@ -36,7 +36,7 @@
         <div class="tab-content" id="tabCont">
           <br>
           <div class="tab-pane" role="tabpanel" id="pastFood">
-            <app-food-past></app-food-past>
+            <app-food-past #pastFoodChild></app-food-past>
           </div>
           <div class="tab-pane" role="tabpanel" id="pastWorkout">
             <app-workout-past #pastWorkoutChild></app-workout-past>
