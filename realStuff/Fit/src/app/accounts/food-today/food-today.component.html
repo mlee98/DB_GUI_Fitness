@@ -1,28 +1,32 @@
 <div *ngIf="meal" style="text-align: center" id="body">
-  <div id="breakfast" background="assets/breakfast.jpg">
-    <img src="assets/pancake.jpg" class="float-left">
-    <div id="text" >
+  <img src="assets/agriculture.jpg" class="float-left"id="agri">
+  <img src="assets/buffet.jpg"  class="float-right" id="buffet">
+  <div id="breakfast" class="d-inline">
+    <div id="text">
       <h3> Breakfast </h3>
       <h4> {{meal.breakfast}}</h4>
+    </div>
   </div>
   <br />
-  <div id="lunch">
+  <div id="lunch" class="d-inline">
     <div id="text">
       <h3> Lunch </h3>
       <h4> {{meal.lunch}}</h4>
+    </div>
   </div>
-  <br />
-  <div id="snack">
-    <img src="assets/raspberry.jpg" class="float-left">
+    <br />
+  <div id="snack" class="d-inline">
     <div id="text">
       <h3> Snack </h3>
       <h4> {{meal.snack}}</h4>
+    </div>
   </div>
   <br />
-  <div id="dinner">
+  <div id="dinner" class="d-inline">
     <div id="text">
       <h3> Dinner</h3>
       <h4> {{meal.dinner}}</h4>
+    </div>
   </div>
 </div>
 
