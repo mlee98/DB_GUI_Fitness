@@ -26,7 +26,6 @@ export const ACCOUNTS_ROUTES: Route[] = [
   {
     path: 'accounts/:id',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'accounts/:id/search',
