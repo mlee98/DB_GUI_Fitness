@@ -24,14 +24,9 @@ export class FoodTodayComponent implements OnInit {
 
   ngOnInit() {
     this.meal = {};
-    this.meal.date = new Date;
-    this.meal.breakfast = 'waffle';
-    this.meal.lunch = 'hot dog';
-    this.meal.snack = 'apple';
-    this.meal.dinner = 'steak';
-    // const obj = new Date();
-    // this.date = this.datePipe.transform(obj, 'yyyy-MM-dd');
-    // this.updateValues();
+    const obj = new Date();
+    this.date = this.datePipe.transform(obj, 'yyyy-MM-dd');
+    this.updateValues();
   }
 
   public updateValues() {
