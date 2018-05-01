@@ -40,7 +40,7 @@ export abstract class Repostitory<T> {
     console.log(percent);
     const data = {'workout': workout, 'todo': percent};
     console.log(data);
-    return this.httpClient.post(`${this.endPoint}${id}/workoutProgress`, this.httpOptions).pipe(
+    return this.httpClient.post(`${this.endPoint}${id}/workoutProgress`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }

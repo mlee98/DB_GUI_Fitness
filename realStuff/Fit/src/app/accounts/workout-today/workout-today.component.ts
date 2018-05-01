@@ -15,11 +15,11 @@ export class WorkoutTodayComponent implements OnInit {
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private pipe: DatePipe,
   ) { }
   public workouts: Workout[];
   public pickedWorkout: Workout;
-  public percent: number;
   public goal: number;
   public type: string[];
   public repsRecord: number[];
@@ -41,8 +41,8 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(work);
     this.pickedWorkout = work;
     this.repsRecord = this.pickedWorkout.reps;
-    const obj = new Date('yyyy/MM/dd');
-    this.pickedWorkout.date =  obj.toDateString();
+    const obj = new Date();
+    this.pickedWorkout.date =  this.pipe.transform(obj, 'yyyy-MM-dd');
     console.log(this.pickedWorkout.date);
     for (let i = 0; i < this.pickedWorkout.reps.length; i++) {
       if (this.pickedWorkout.reps[i] > 10) {
@@ -75,7 +75,13 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(newPercent);
     newPercent = newPercent / 4 * 100;
     console.log(newPercent);
-    newPercent = (newPercent + this.pickedWorkout.goal) / 2;
+    if (this.pickedWorkout.goal === 80 ) {
+
+    } else if (this.pickedWorkout.goal === 100) {
+
+    } else {
+    }
+    newPercent = (newPercent * this.pickedWorkout.goal) / 100;
     console.log(newPercent);
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.postWorkoutPercent(+params.id, newPercent, this.pickedWorkout).subscribe(data => {
