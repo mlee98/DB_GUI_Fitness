@@ -1,4 +1,4 @@
-<html *ngIf="acc.workouts">
+<html>
 
 <head>
   <title>Profile</title>
@@ -39,7 +39,7 @@
             <app-food-past #pastFoodChild></app-food-past>
           </div>
           <div class="tab-pane" role="tabpanel" id="pastWorkout">
-            <app-workout-past #pastWorkoutChild></app-workout-past>
+            <app-workout-past [accNum]="acc.id" #pastWorkoutChild></app-workout-past>
           </div>
           <div class="tab-pane" role="tabpanel" id="workoutStats">
               <app-pie #pieChild></app-pie>
