@@ -59,7 +59,10 @@ export class SearchComponent implements OnInit {
 
   public goToSearchProfile(result: Account) {
     this.resultAcc = result;
-    this.resultPicked = true;
+    this.accountRepository.getAcc(this.resultAcc.id).subscribe(data => {
+      this.resultAcc = data;
+      this.resultPicked = true;
+   });
   }
 
   public reset() {
