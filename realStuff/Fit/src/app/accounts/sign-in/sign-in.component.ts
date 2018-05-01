@@ -38,6 +38,11 @@ export class SignInComponent implements OnInit {
        console.log(data.headers);
        console.log(data.Headers);
        console.log(data.HttpHeaders);
+       console.log(data.body);
+       const keys = data.headers.keys();
+       const headers = keys.map(key =>
+        `${key}: ${data.headers.get(key)}`);
+        console.log(headers);
        const token = data.headers;
        this.auth.setToken(token);
         if (data.id === -1) {
