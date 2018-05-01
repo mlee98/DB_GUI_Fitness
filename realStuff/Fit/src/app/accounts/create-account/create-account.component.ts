@@ -21,10 +21,12 @@ export class CreateAccountComponent implements OnInit {
   ) {}
   public ngForm: FormGroup;
   public acc: Account;
+  public email: string;
 
   ngOnInit() {
+    this.email = '';
     this.acc = {};
-    this.acc.disabilities = [];
+    this.acc.allergies = [];
     this.acc.calsBurned = [];
     this.acc.calsEaten = [];
     this.acc.username = '';
@@ -34,12 +36,20 @@ export class CreateAccountComponent implements OnInit {
     this.acc.password = '';
     this.acc.username = '';
     this.acc.weight = '';
+    this.acc.gender = '';
   }
   public addAcc() {
+    console.log(this.acc);
       this.HomeRepository.createAccount(this.acc).subscribe(data => {
+        console.log(this.acc);
         this.router.navigateByUrl('signIn');
       });
   }
+
+  public goToSignIn() {
+    this.router.navigateByUrl('signIn');
+  }
+
   public submitCheck() {
     if (
       this.acc.age === 0 ||

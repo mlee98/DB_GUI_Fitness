@@ -1,0 +1,55 @@
+html{
+  background: #88BBD6;
+  min-height: 100vh;
+}
+
+li:active{
+  background-color: #99D3Df;
+}
+
+li:active{
+  background-color: #99D3Df;
+}
+
+.nav-link:focus{
+  background-color: #99D3Df;
+  color: white;
+}
+
+#header{
+  width: 30%;
+  margin-left: 11%;
+  margin-right: 0%;
+}
+aside{
+  width:30%;
+  margin-top: 2%;
+}
+
+body{
+  margin-left: 5%;
+  border-left-style: solid;
+  border-right-style: solid;
+  background-color: white;
+  width: 90%;
+  min-height: 100vh;
+
+}
+
+#tabCont{
+	border-top: none;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+#food{
+  height: 80%;
+
+}
+
+

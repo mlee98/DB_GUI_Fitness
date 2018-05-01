@@ -19,14 +19,20 @@ export class SearchComponent implements OnInit {
   public userAcc: Account;
   public searchAcc: Account;
   public resultList: Array<Account>;
-  public fakeAcc: Account;
+  public resultAcc: Account;
+  public resultPicked: boolean;
 
   ngOnInit() {
+     this.resultPicked = false;
+     this.userAcc = {};
      this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.getAcc(+params.id).subscribe(data => {
          this.userAcc = data;
       });
      });
+     this.resultList = [];
+     this.searchAcc = {};
+    /* this.userAcc.id = 1;
     this.searchAcc = this.userAcc;
     this.resultList = [];
     this.fakeAcc = {};
@@ -35,17 +41,32 @@ export class SearchComponent implements OnInit {
     this.fakeAcc.fName = 'Rob';
     this.fakeAcc.lName = 'K';
     this.fakeAcc.weight = '195';
-    this.fakeAcc.disabilities = [];
+    this.fakeAcc.allergies = [];
     this.fakeAcc.calsBurned = [];
     this.fakeAcc.calsEaten = [];
     this.resultList.push(this.fakeAcc);
-    this.resultList.push(this.fakeAcc);
+    this.resultList.push(this.fakeAcc);*/
     console.log(this.resultList);
   }
 
   public search() {
-     // this.accountRepository.search(this.searchAcc).subscribe(data => {
-        // this.resultList = data;
-     // });
+    this.activedRoute.params.subscribe((params: any) => {
+      this.accountRepository.search(+params.id, this.searchAcc).subscribe(data => {
+        this.resultList = data;
+     });
+   });
+  }
+
+  public goToSearchProfile(result: Account) {
+    this.resultAcc = result;
+    this.resultPicked = true;
+  }
+
+  public reset() {
+    this.searchAcc = {};
+  }
+
+  public backToProfile() {
+    this.router.navigateByUrl('accounts/' + this.userAcc.id );
   }
 }

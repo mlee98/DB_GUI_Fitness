@@ -3,6 +3,7 @@ import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeRepostitory } from '../../domain/home.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,7 +12,7 @@ import { HomeRepostitory } from '../../domain/home.service';
 })
 export class SignInComponent implements OnInit {
   constructor(
-    private homeRepository: HomeRepostitory,
+    private auth: AuthService,
     private activedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -30,7 +31,7 @@ export class SignInComponent implements OnInit {
 
 
   public goodLogin() {
-    this.homeRepository.login(this.username, this.pass).subscribe(data => {
+    this.auth.login(this.username, this.pass).subscribe(data => {
        console.log(data);
         if (data.id === -1) {
           this.goodLog = 1;
@@ -38,5 +39,9 @@ export class SignInComponent implements OnInit {
           this.router.navigateByUrl('accounts/' + data.id);
         }
      });
+  }
+
+  public goToCreateAccount() {
+    this.router.navigateByUrl('createAccount');
   }
 }

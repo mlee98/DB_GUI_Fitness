@@ -7,7 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AccountModule } from './accounts/account.module';
-import { DatePipe } from '@angular/common';
+import { DatePipe, SlicePipe } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
+import { RequestOptions } from '@angular/http';
+import { AuthRequestOptions } from './auth/authRequestOptions';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,17 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     AccountModule,
     ReactiveFormsModule,
+    ChartsModule,
   ],
   providers: [
     AccountRepostitory,
     HomeRepostitory,
-    DatePipe
+    DatePipe,
+    SlicePipe,
+    {
+      provide: RequestOptions,
+      useClass: AuthRequestOptions
+    }
   ],
   bootstrap: [AppComponent]
 })

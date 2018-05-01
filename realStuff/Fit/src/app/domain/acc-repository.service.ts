@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Meal } from './models/Meal';
 
 export abstract class Repostitory<T> {
 
@@ -29,6 +30,21 @@ export abstract class Repostitory<T> {
       catchError(this.handleException)
     );
   }
+
+  public getMealToday(id: number, date: string): Observable<Meal> {
+    console.log(date);
+    const data = {'date': date};
+    return this.httpClient.post(`${this.endPoint}${id}/mealToday`, data, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
+  public getMealPast(id: number): Observable<Meal[]> {
+    return this.httpClient.get(`${this.endPoint}${id}/mealPast`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
   public postWorkoutToday(id: number, workout: Workout): Observable<Workout> {
     const data = {'workout': workout};
     return this.httpClient.post(`${this.endPoint}${id}/workoutToday`, data, this.httpOptions).pipe(
@@ -45,8 +61,8 @@ export abstract class Repostitory<T> {
     );
   }
 
-  public getWorkoutPast(id: number): Observable<Workout> {
-    return this.httpClient.get(`${this.endPoint}${id}/workoutToday`, this.httpOptions).pipe(
+  public getWorkoutPast(id: number): Observable<Workout[]> {
+    return this.httpClient.get(`${this.endPoint}${id}/pastWorkoutList`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
   }

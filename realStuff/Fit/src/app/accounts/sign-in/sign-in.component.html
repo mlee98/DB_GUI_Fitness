@@ -1,7 +1,7 @@
-<body id="mass"  *ngIf="goodLog == 0 || goodLog == 1">
-    <aside>
-        <img src="assets/runner.jpg">
-      </aside>
+<body id="mass" *ngIf="goodLog == 0 || goodLog == 1">
+  <aside>
+    <img src="assets/runner.jpg">
+  </aside>
   <main class="Aligner-item container float-left" id="sI">
     <form name="login">
       <div class="alert alert-danger" *ngIf="goodLog == 1"> bad username/password </div>
@@ -10,20 +10,23 @@
       </span>
       <br />
       <span id="user">
-        <label class="col-md-3 mr-1" for="username">Username:    </label>
-        <input class="col-md-6" type="text" name="user" id="user" [(ngModel)]="username" />
+        <input class="col-md-8" type="text" name="user" id="user" [(ngModel)]="username" placeholder="Username"/>
       </span>
       <br>
 
       <span id="pass">
-        <label class="col-md-3" for="password">Password: </label>
-        <input class="col-md-6" type="text" name="pass" id="pass" [(ngModel)]="pass" />
+        <input class="col-md-8" type="password" name="pass" id="pass" [(ngModel)]="pass" placeholder="Password"/>
       </span>
 
       <br>
-      <span id="enter">
+      <span id="enter" class="mb-5">
         <button class="btn btn-primary" (click)="goodLogin()">
           Sign In
+        </button>
+      </span>
+      <span>
+        <button class="btn btn-primary" (click)="goToCreateAccount()">
+            Create Account
         </button>
       </span>
     </form>

@@ -4,20 +4,8 @@ const Hapi = require('hapi');
 const crypto = require('crypto');
 const jwtplugin = require('hapi-auth-jwt2');
 const aguid = require('aguid');
-//var redisClient = require('redis-connection')();
-//const hapiredis = require('hapi-redis-connection');
 const JWT = require('jsonwebtoken');
 const secret = 'professorfontenotissometimescoolandsometimesnot';
-
-/*
-redisClient.set('redis', 'working');
-redisClient.get('redis', function(rediserror, reply) {
-    if (rediserror) {
-        console.log(rediserror);
-    }
-    console.log('redis is ' + reply.toString());
-})
-*/
 
 //Initialize the mysql variable and create the connection object with necessary values
 //Uses the https://www.npmjs.com/package/mysql package.
@@ -121,10 +109,11 @@ function getRoutes() {
             let Weight = request.payload['weight'];
             let Age = request.payload['age'];
             let UserName = request.payload['username'];
-            let Disability = request.payload['disabilities'];
+            let Allergies = request.payload['allergies'];
             let Password = request.payload['password'];
             let Goal = request.payload['goal'];
             let Public = request.payload['public'];
+            let Gender = request.payload['gender'];
 
             let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
 
@@ -144,6 +133,7 @@ function getRoutes() {
                         connection.query(getUserId, function (error, r2, fields) {
                             if (error)
                                 throw error;
+
                             let target = 100;
                             if (Goal === "Gain Weight") {
                                 Goal = 80;
@@ -156,7 +146,56 @@ function getRoutes() {
                             connection.query(workoutTable, function (error, r3, fields) {
                                 if (error)
                                     throw error;
-                                reply(userID);
+                                if (Allergies.length === 0) {
+                                    reply(userID);
+                                }
+                                let insertAllergies = '';
+                                for (let i = 0; i < Allergies.length; i++) {
+                                    let allergy = Allergies[i];
+                                    switch (Allergies[i]) {
+                                        case 'Nut Free':
+                                            allergy = 'Nut-free';
+                                            break;
+                                        case 'Gluten Free':
+                                            allergy = 'Gluten-free';
+                                            break;
+                                        case 'No Carbs/Keto':
+                                            allergy = 'Low-Carb';
+                                            break;
+                                        case 'Low Fat':
+                                            allergy = 'Low-Fat';
+                                            break;
+                                        case 'Citrus Free':
+                                            allergy = 'Citrus-free';
+                                            break;
+                                        case 'Egg Free':
+                                            allergy = 'Egg-free';
+                                            break;
+                                        case 'Fish Free':
+                                            allergy = 'Fish-free';
+                                            break;
+                                        case 'High Protein':
+                                            allergy = 'High-Protein';
+                                            break;
+                                        case 'Lactose Intolerant':
+                                            allergy = 'Lactose';
+                                            break;
+                                        default:
+                                            allergy = Allergies[i];
+                                    }
+                                    insertAllergies += ' INSERT INTO Account_Allergies (AllergyId, UserId, Name) VALUES(default, ' + userID + ', "' + allergy + '");';
+                                }
+                                connection.query(insertAllergies, function (error, r4, fields) {
+                                    if (error)
+                                        throw error;
+                                    let createMeal = 'INSERT INTO Meal_Tracker (UserId, Date, Breakfast, Lunch, Dinner, Snack) VALUES(' + userID + ',default,default,default,default,default)';
+                                    connection.query(createMeal, function (error, r5, fields) {
+                                        if (error)
+                                            throw error;
+
+                                        reply(userID);
+                                    });
+                                });
                             });
                         });
                     });
@@ -183,11 +222,12 @@ function getRoutes() {
                 connection.query(query, function (error, results, fields) {
                     if (error)
                         throw error;
-                    for (let i = 0; i < results.length; i++) {
-                        if (results[i].Username === Username && results[i].Password === Password) {
-                            loginMessage.id = results[i].UserId;
-                            break;
-                        }
+
+                    if (results[i].UserName === UserName && results[i].Password === hashedPW) {
+                        loginMessage.id = results[i].UserId;
+                        break;
+                    }
+                    else {
                         loginMessage.id = -1;
                     }
 
@@ -213,6 +253,7 @@ function getRoutes() {
         }
     });
 
+    // GET today's workout
     server.route({
         method: 'GET',
         path: '/accounts/{id}/workoutToday',
@@ -270,6 +311,7 @@ function getRoutes() {
         }
     });
 
+    // POST today's workout
     server.route({
         method: 'POST',
         path: '/accounts/{id}/workoutToday',
@@ -290,6 +332,7 @@ function getRoutes() {
         }
     });
 
+    // workout progress
     server.route({
         method: 'POST',
         path: '/accounts/{id}/workoutProgress',
@@ -315,7 +358,7 @@ function getRoutes() {
         }
     });
 
-
+    // workout list
     server.route({
         method: 'GET',
         path: '/workoutList',
@@ -341,31 +384,203 @@ function getRoutes() {
         }
     });
 
+    // past workout list
     server.route({
         method: 'GET',
-        path: '/pastWorkoutList',
+        path: '/accounts/{id}/pastWorkoutList',
         config: { auth: 'jwt' },
         handler: function (request, reply) {
             connection.getConnection(function (err, connection) {
                 //run the query
-                connection.query('SELECT * FROM Completed_Workouts', function (error, results, fields) {
+                let UserId = encodeURIComponent(request.params.id);
+                connection.query('SELECT * FROM Completed_Workouts NATURAL JOIN Workouts WHERE UserId = ' + UserId, function (error, results, fields) {
                     if (error)
                         throw error;
-                    reply(results);
+                    let tempEx = [];
+                    for (let acc = 0; acc < results.length; acc++) {
+                        tempEx[acc] = [];
+                        tempEx[acc][0] = results[acc].Exercise1;
+                        tempEx[acc][1] = results[acc].Exercise2;
+                        tempEx[acc][2] = results[acc].Exercise3;
+                        tempEx[acc][3] = results[acc].Exercise4;
+                    }
+                    let workoutObject = [];
+                    for (let i = 0; i < results.length; i++) {
+                        workoutObject[i] = {
+                            wid: results[i].WorkoutPlan,
+                            type: results[i].PrimaryArea,
+                            exercises: tempEx[i],
+                            date: results[i].Date
+                        };
+                    }
+                    reply(workoutObject);
                 });
                 connection.release();//release the connection
             });
         }
     });
 
-    //Real Queries
+    // today's meal
+    server.route({
+        method: 'POST',
+        path: '/accounts/{id}/mealToday',
+        config: { auth: 'jwt' },
+        handler: function (request, reply) {
+            let Date = request.payload['date'];
+            connection.getConnection(function (err, connection) {
+                //run the query
+                let UserId = encodeURIComponent(request.params.id);
+                let query = 'SELECT * FROM Account_Allergies WHERE UserId = ' + UserId;
+                let mealPlans = {
+                    0: 'Normal',
+                    1: 'Lactose',
+                    2: 'Gluten-free',
+                    3: 'Low-Carb',
+                    4: 'Vegan',
+                    5: 'Fish-free',
+                    6: 'Low-Fat',
+                    7: 'Citrus-free',
+                    8: 'High-Protein',
+                    9: 'Egg-free',
+                    10: 'Nut-free'
+                };
+
+                let mealObject = {
+                    id: UserId
+                }
+
+                let checkDay = 'SELECT * FROM Meal_Tracker WHERE UserId = ' + UserId + ' AND Date = "' + Date + '"';
+                connection.query(checkDay, function (error, r1, fields) {
+                    if (error)
+                        throw error;
+                    if (r1.length !== 0) {
+                        mealObject.breakfast = r1[0].Breakfast;
+                        mealObject.lunch = r1[0].Lunch;
+                        mealObject.dinner = r1[0].Dinner;
+                        mealObject.snack = r1[0].Snack;
+                        mealObject.date = Date;
+                        reply(mealObject);
+                    } else {
+                        connection.query(query, function (error, results, fields) {
+                            if (error)
+                                throw error;
+                            let meals = [];
+                            let mealIndex = [];
+                            while (meals.length < 4) {
+                                let isAllergic = false;
+                                let temp = mealPlans[Math.floor(Math.random() * 10)];
+                                if (meals.length === 3) {
+                                    temp = mealPlans[Math.floor(Math.random() * 4)];
+                                }
+                                for (let i = 0; i < results.length; i++) {
+                                    if (temp === results[i]) {
+                                        isAllergic = true;
+                                    }
+                                }
+                                if (isAllergic === false) {
+                                    meals.push(temp);
+                                    mealIndex.push(Math.floor(Math.random() * 5) + 1);
+                                }
+                            }
+                            connection.query('SELECT `' + meals[0] + '` FROM Breakfast WHERE idBreakfast = ' + mealIndex[0], function (error, breakfast, fields) {
+                                if (error)
+                                    throw error;
+                                connection.query('SELECT `' + meals[1] + '` FROM Lunch WHERE idLunch = ' + mealIndex[1], function (error, lunch, fields) {
+                                    if (error)
+                                        throw error;
+                                    connection.query('SELECT `' + meals[2] + '` FROM Dinner WHERE idDinner = ' + mealIndex[2], function (error, dinner, fields) {
+                                        if (error)
+                                            throw error;
+                                        connection.query('SELECT `' + meals[3] + '` FROM Snack WHERE idSnack = ' + mealIndex[3], function (error, snack, fields) {
+                                            if (error)
+                                                throw error;
+                                            mealObject.breakfast = breakfast[0][meals[0]];
+                                            mealObject.lunch = lunch[0][meals[1]];
+                                            mealObject.dinner = dinner[0][meals[2]];
+                                            mealObject.snack = snack[0][meals[3]];
+                                            mealObject.date = Date;
+                                            connection.query('INSERT INTO Completed_Meals (mealID, UserId, Date, Breakfast, Lunch, Dinner, Snack) VALUES(default, ' + UserId + ',"' + Date + '", "' + mealObject.breakfast + '", "' + mealObject.lunch + '", "' + mealObject.dinner + '", "' + mealObject.snack + '")', function (error, r5, fields) {
+                                                if (error)
+                                                    throw error;
+                                                connection.query('UPDATE Meal_Tracker SET Date = "' + Date + '", Breakfast =  "' + mealObject.breakfast + '", Lunch = "' + mealObject.lunch + '", Dinner = "' + mealObject.dinner + '", Snack = "' + mealObject.snack + '" WHERE UserId = ' + UserId, function (error, r5, fields) {
+                                                    if (error)
+                                                        throw error;
+                                                    reply(mealObject);
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }
+                });
+
+                connection.release();//release the connection
+            });
+        }
+    });
+
+    // past meals
+    server.route({
+        method: 'GET',
+        path: '/accounts/{id}/mealPast',
+        config: { auth: 'jwt' },
+        handler: function (request, reply) {
+            let UserId = encodeURIComponent(request.params.id);
+            connection.getConnection(function (err, connection) {
+                //run the query
+                connection.query('SELECT * FROM Completed_Meals WHERE UserId = ' + UserId, function (error, results, fields) {
+                    if (error)
+                        throw error;
+                    let mealList = [];
+                    for (let i = 0; i < results.length; i++) {
+                        mealList[i] = {
+                            breakfast: results[i].Breakfast,
+                            lunch: results[i].Lunch,
+                            dinner: results[i].Dinner,
+                            snack: results[i].Snack,
+                            date: results[i].Date
+                        }
+                    }
+                    reply(mealList);
+                });
+
+                connection.release();//release the connection
+            });
+
+        }
+    });
+
+    // current meal
+    server.route({
+        method: 'GET',
+        path: '/accounts/{id}/mealsCurr',
+        config: { auth: 'jwt' },
+        handler: function (request, reply) {
+            let UserId = encodeURIComponent(request.params.id);
+            connection.getConnection(function (err, connection) {
+                //run the query
+                connection.query('SELECT * FROM Meal_Tracker', function (error, results, fields) {
+                    if (error)
+                        throw error;
+
+                    reply(results);
+                });
+
+                connection.release();//release the connection
+            });
+
+        }
+    });
+
+    // accounts
     server.route({
         method: 'GET',
         path: '/accounts',
-        config: { auth: 'jwt' },
+        config: { auth: false },
         handler: function (request, reply) {
             connection.getConnection(function (err, connection) {
-                console.log('got into accounts');
                 //run the query
                 connection.query('SELECT * FROM UserInfo', function (error, results, fields) {
                     if (error)
@@ -381,7 +596,7 @@ function getRoutes() {
                         accNames += results[acc].Age;
                         accNames += '   ';
                     }
-                    reply(accNames).header("Authorization", request.headers.authorization);
+                    reply(accNames);
                 });
                 connection.release();//release the connection
             });
@@ -407,12 +622,20 @@ function getRoutes() {
                     account.lName = results[0].lName;
                     account.height = results[0].Height;
                     account.weight = results[0].Weight;
-                    account.disabilities = 0;
                     account.age = results[0].Age;
                     account.public = results[0].Public;
-                    reply(account);
+                    account.gender = results[0].Gender;
+                    connection.query('SELECT * FROM Account_Allergies WHERE UserId = ' + UserId, function (error, r1, fields) {
+                        if (error)
+                            throw error;
+                        let userAllergies = [];
+                        for (let i = 0; i < r1.length; i++) {
+                            userAllergies[i] = r1[i].Name;
+                        }
+                        account.allergies = userAllergies;
+                        reply(account);
+                    });
                 });
-                connection.release();//release the connection
             });
         }
     });
@@ -446,7 +669,7 @@ function getRoutes() {
     server.route({
         method: 'POST',
         path: '/accounts/addAllergy',
-        config: { auth: 'jwt' },
+        config: { auth: false },
         handler: function (request, reply) {
             let UserId = request.payload['UserId'];
             let Name = request.payload['Name'];
@@ -460,95 +683,169 @@ function getRoutes() {
                         throw error;
                     reply("Allergy added: " + query);
                 });
-
-                connection.release();//release the connection
+                connection.release();
             });
-
-        }
-    });
-
-    server.route({
-        method: 'POST',
-        path: '/accounts/addDisorder',
-        config: { auth: 'jwt' },
-        handler: function (request, reply) {
-            let UserId = request.payload['UserId'];
-            let Name = request.payload['Name'];
-            let Share = request.payload['Share'];
-            let query = 'INSERT INTO Account_Disorders (DisorderId, UserId, Name, Share)';
-            query += " VALUES (default ,\'" + UserId + "\', \'" + Name + "\', \'" + Share + "\')";
-            connection.getConnection(function (err, connection) {
-                //run the query
-                connection.query(query, function (error, results, fields) {
-                    if (error)
-                        throw error;
-                    reply("Eating Disorder added: " + query);
-                });
-            });
-
-            connection.release();
         }
     });
 
     server.route({
         method: 'POST',
         path: '/accounts/removeUser',
-        config: { auth: 'jwt' },
+        config: { auth: false },
         handler: function (request, reply) {
             let UserId = request.payload['UserId'];
             let deleteAccount = 'DELETE FROM UserInfo WHERE UserId = ' + UserId + ';';
-            let deleteDisorders = 'DELETE FROM Account_Disorders WHERE UserId = ' + UserId + ';';
             let deleteAllergies = 'DELETE FROM Account_Allergies WHERE UserId = ' + UserId + ';';
             let deleteLogin = 'DELETE FROM Login WHERE UserId = ' + UserId + ';';
             let deleteFitTrack = 'DELETE FROM Fitness_Tracker WHERE UserId = ' + UserId + ';';
-            let deletePastFil = 'DELETE FROM Completed_Workouts WHERE UserId = ' + UserId;
+            let deletePastFil = 'DELETE FROM Completed_Workouts WHERE UserId = ' + UserId + ';';
+            let deleteMealTrack = 'DELETE FROM Meal_Tracker WHERE UserId = ' + UserId + ';';
+            let deletePastMeal = 'DELETE FROM Completed_Meals WHERE UserId = ' + UserId;
+
             connection.getConnection(function (err, connection) {
                 //run the query
-                connection.query(deleteAccount + deleteDisorders + deleteAllergies + deleteLogin + deleteFitTrack + deletePastFil, function (error, results, fields) {
+                connection.query(deleteAccount + deleteAllergies + deleteLogin + deleteFitTrack + deletePastFil + deleteMealTrack + deletePastMeal, function (error, results, fields) {
                     if (error)
                         throw error;
                     reply('User Deleted');
                 });
 
+                connection.release();//release the connection
             });
+
         }
     });
 
     server.route({
         method: 'POST',
-        path: '/accounts/findSimilarUsers',
+        path: '/accounts/{id}/search',
         config: { auth: 'jwt' },
         handler: function (request, reply) {
             let UserId = request.payload['UserId'];
-            let commonCategory = request.payload['commonCategory'];
-            let condition = request.payload['condition'];
-            let table = '';
-            if (commonCategory == 'Allergy') {
-                table = 'Account_Allergies';
-            }
-            else {
-                if (commonCategory == 'eDisorder') {
-                    table = 'Account_Disorders';
-                }
-            }
-            let query = 'SELECT UserName FROM ' + table + ' NATURAL JOIN UserInfo WHERE Name = "' + condition + '" AND UserId != ' + UserId + ' AND Share = 1';
-            connection.getConnection(function (err, connection) {
-                //run the query
-                connection.query(query, function (error, users, fields) {
-                    if (error)
-                        throw error;
-                    let usernames = '';
-                    for (let i = 0; i < users.length; i++) {
-                        usernames += (' ' + users[i].UserName);
-                    }
-                    reply(usernames);
-                });
+            let Gender = request.payload['gender'];
+            let Weight = request.payload['weight'];
+            let Goal = request.payload['goal'];
+            let Age = request.payload['age'];
+            let Allergies = request.payload['allergies'];
 
-                connection.release();//release the connection
+            if (Gender === null && Weight === null && Goal === null && Age === null && Allergies === null) {
+                reply();
+            }
+            connection.getConnection(function (err, connection) {
+                let query = 'SELECT * FROM UserInfo ';
+                let alLength = 0;
+                if (Allergies !== undefined) {
+                    query += 'NATURAL JOIN Account_Allergies ';
+                    alLength = Allergies.length;
+                }
+                query += 'WHERE';
+                if (Gender !== undefined) {
+                    query += ' Gender = "' + Gender + '" AND';
+                }
+                if (Weight !== undefined) {
+                    query += ' Weight = "' + Weight + '" AND';
+                }
+                if (Goal !== undefined) {
+                    query += ' Goal = "' + Goal + '" AND';
+                }
+                if (Age !== undefined) {
+                    query += ' Age = "' + Age + '" AND';
+                }
+                for (let i = 0; i < alLength; i++) {
+                    let allergy = '';
+                    switch (Allergies[i]) {
+                        case 'Nut Free':
+                            allergy = 'Nut-free';
+                            break;
+                        case 'Gluten Free':
+                            allergy = 'Gluten-free';
+                            break;
+                        case 'No Carbs/Keto':
+                            allergy = 'Low-Carb';
+                            break;
+                        case 'Low Fat':
+                            allergy = 'Low-Fat';
+                            break;
+                        case 'Citrus Free':
+                            allergy = 'Citrus-free';
+                            break;
+                        case 'Egg Free':
+                            allergy = 'Egg-free';
+                            break;
+                        case 'Fish Free':
+                            allergy = 'Fish-free';
+                            break;
+                        case 'High Protein':
+                            allergy = 'High-Protein';
+                            break;
+                        case 'Lactose Intolerant':
+                            allergy = 'Lactose';
+                            break;
+                        default:
+                            allergy = Allergies[i];
+                    }
+                    query += ' Name = "' + allergy + '" AND';
+                }
+                query = query.slice(0, -3);
+                query += ' AND Public = 1';
+
+                connection.query(query, function (error, results, fields) {
+                    let matchingUsers = [];
+                    let allQuery = 'SELECT * FROM Account_Allergies WHERE ';
+                    if (results === undefined) {
+                        reply();
+                    }
+                    for (let i = 0; i < results.length; i++) {
+                        let account = {};
+                        account.id = results[i].UserId;
+                        account.username = results[i].UserName;
+                        account.password = null;
+                        account.fName = results[i].fName;
+                        account.lName = results[i].lName;
+                        account.height = results[i].Height;
+                        account.weight = results[i].Weight;
+                        account.age = results[i].Age;
+                        account.public = results[i].Public;
+                        account.gender = results[i].Gender;
+                        matchingUsers[i] = account;
+                        allQuery += ('UserId = ' + results[i].UserId + ' OR ');
+                    }
+                    allQuery = allQuery.slice(0, -3);
+
+                    connection.query(allQuery, function (error, r1, fields) {
+                        if (error)
+                            throw error;
+                        for (let i = 0; i < results.length; i++) {
+                            let all = [];
+                            for (let j = 0; j < r1.length; j++) {
+                                if (r1[j].UserId === results[i].UserId) {
+                                    all.push(r1[j].Name);
+                                }
+                            }
+                            matchingUsers[i].allergies = all;
+                            all = [];
+                        }
+                        let matching = [];
+                        for (let i = 0; i < matchingUsers.length; i++) {
+                            for (let j = 0; j < matching.length; j++) {
+                                if (matchingUsers[i].UserId === matching[j].UserId) {
+                                    break;
+                                } else {
+                                    if (j === matching.length - 1) {
+                                        matching.push(matchingUsers[i]);
+                                    }
+                                }
+                            }
+                        }
+                        reply(matchingUsers);
+                    });
+                });
+                connection.release(); //release the connection
             });
         }
     });
 
+    // get all allergies from all accounts
     server.route({
         method: 'GET',
         path: '/accounts/allergies',
@@ -565,48 +862,6 @@ function getRoutes() {
 
                 connection.release();
             });
-
-        }
-    });
-
-    server.route({
-        method: 'GET',
-        path: '/accounts/eatDisorders',
-        config: { auth: false },
-        handler: function (request, reply) {
-            connection.getConnection(function (err, connection) {
-                //run the query
-                connection.query('SELECT * FROM Account_Disorders', function (error, results, fields) {
-                    if (error)
-                        throw error;
-
-                    reply(results);
-                });
-
-                connection.release();
-            });
-        }
-    });
-
-    server.route({
-        method: 'POST',
-        path: '/signOut',
-        config: { auth: 'jwt' },
-        handler: function (request, reply) {
-            /*
-            connection.getConnection(function (err, connection) {
-                //run the query
-                connection.query('SELECT * FROM Ideal_body', function (error, results, fields) {
-                    if (error)
-                        throw error;
-
-                    reply(results);
-                });
-                connection.release();//release the connection
-            });
-            */
-
-            reply(); // remove token
         }
     });
 
@@ -622,10 +877,31 @@ function getRoutes() {
                     if (error)
                         throw error;
 
+                    connection.release();
+                });
+            });
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/signOut',
+        config: { auth: 'jwt' },
+        handler: function (request, reply) {
+            /*
+            connection.getConnection(function (err, connection) {
+                //run the query
+                connection.query('SELECT * FROM Ideal_body', function (error, results, fields) {
+                    if (error)
+                        throw error;
+ 
                     reply(results);
                 });
                 connection.release();//release the connection
             });
+            */
+
+            reply(); // remove token
         }
     });
 }
