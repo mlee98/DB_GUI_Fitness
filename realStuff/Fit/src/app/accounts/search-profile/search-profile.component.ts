@@ -29,11 +29,11 @@ export class SearchProfileComponent implements OnInit {
 
 
   public changeToProfile() {
-   this.router.navigateByUrl('accounts/' + this.acc.id);
+   this.router.navigateByUrl('accounts/' + this.searcher.id);
   }
 
   public changeToSearch() {
- this.router.navigateByUrl('accounts/' + this.acc.id + '/search');
+ this.router.navigateByUrl('accounts/' + this.searcher.id + '/search');
    }
 }
 
