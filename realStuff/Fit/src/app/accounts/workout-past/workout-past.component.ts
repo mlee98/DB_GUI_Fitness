@@ -35,6 +35,7 @@ export class WorkoutPastComponent implements OnInit {
           for (let i = 0; i < this.workouts.length; i++) {
             this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
           }
+          this.workouts.reverse();
        });
      });
     } else {
@@ -43,6 +44,7 @@ export class WorkoutPastComponent implements OnInit {
         for (let i = 0; i < this.workouts.length; i++) {
           this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
         }
+        this.workouts.reverse();
      });
     }
   }

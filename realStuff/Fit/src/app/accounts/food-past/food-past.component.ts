@@ -37,6 +37,7 @@ export class FoodPastComponent implements OnInit {
         for (let i = 0; i < this.meals.length; i++) {
           this.meals[i].date = this.slicePipe.transform(this.meals[i].date, 0, 10);
         }
+        this.meals.reverse();
      });
    });
   } else {
@@ -45,6 +46,7 @@ export class FoodPastComponent implements OnInit {
       for (let i = 0; i < this.meals.length; i++) {
         this.meals[i].date = this.slicePipe.transform(this.meals[i].date, 0, 10);
       }
+      this.meals.reverse();
    });
   }
   }
