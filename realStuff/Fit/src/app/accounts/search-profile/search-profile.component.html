@@ -8,14 +8,14 @@
   <br />
 
     <aside class="float-right" id="buttons">
-      <a href="accounts/{{searcher.id}}/search" class="btn">Back to Search</a>
-      <button (click)="changeToProfile()">Back to Profile</button>
+      <a href="accounts/{{searcher.id}}/search" class="btn btn-primary">Back to Search</a>
+      <button (click)="changeToProfile()" class="btn btn-primary">Back to Profile</button>
     </aside>
     <div *ngIf="acc" id="header" style="text-align: left">
       <h1>{{acc.fName}} {{acc.lName}}</h1>
 
       <div>
-          <h5>Age: {{acc.age}} · Height: {{acc.height}} inches · Weight: {{acc.weight}} lbs </h5>
+          <h5>Age: {{acc.age}} · Height(inches): {{acc.height}} inches · Weight: {{acc.weight}} lbs </h5>
       </div>
     </div>
 
