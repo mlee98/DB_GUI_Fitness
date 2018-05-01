@@ -2,8 +2,8 @@
   <h2 *ngIf="alreadyWorkdedOut"> Already worked out! Nice job!</h2>
   <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
     <div class="row">
-      <div *ngFor="let i of workouts">
-        <div class="card ml-5">
+      <div class="ml-5" *ngFor="let i of workouts">
+        <div class="card">
           <div class="card-body ">
             <div class="m-2" *ngFor="let index of [0,1,2,3]">
               {{i.exercises[index]}} {{i.reps[index]}}
