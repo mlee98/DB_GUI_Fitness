@@ -1,13 +1,26 @@
 
-body{
-  background-color: #99D3DF;
+html{
   min-height: 100vh;
+  min-width: 100vw;
+  background-color: #99D3DF;
+
 }
 
-main{
-  width: 45%;
-  background-color: #99D3DF;
+body{
+  background-color: white;
+  margin-left: 5%;
+  min-height: 100vh;
+  width: 90%;
+  border-left-style: solid;
+  border-right-style: solid;
 
+}
+
+
+main{
+  background-color: white;
+  width: 90%;
+  min-height: 100vh;
 }
 
 input{
@@ -19,11 +32,10 @@ aside{
   position: absolute;
 }
 
-img{
-  float: right;
-  width: 55vw;
-  min-height: 100vh;
+#height{
+  height: 1%;
 }
+
 
 .btn{
   border-width: 2px;
