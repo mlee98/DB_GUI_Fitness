@@ -3,7 +3,7 @@
   <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
    <div class="row">
     <div class="card" *ngFor="let i of workouts">
-      <div class="card-body float-left">
+      <div class="card-body ml-2">
           <div class="m-2" *ngFor="let index of [0,1,2,3]">
             {{i.exercises[index]}} {{i.reps[index]}}
           </div>
