@@ -23,6 +23,8 @@ export class SearchProfileComponent implements OnInit {
   @Input() public searcher: Account;
 
   ngOnInit() {
+    console.log(this.acc);
+    console.log(this.searcher);
   }
 
 
