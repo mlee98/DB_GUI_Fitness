@@ -61,6 +61,8 @@ export class SearchComponent implements OnInit {
     this.resultAcc = result;
     this.accountRepository.getAcc(this.resultAcc.id).subscribe(data => {
       this.resultAcc = data;
+      console.log('this is sent to search prfoile');
+      console.log(this.resultAcc);
       this.resultPicked = true;
    });
   }
