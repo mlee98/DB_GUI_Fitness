@@ -1,19 +1,22 @@
 <div style="text-align: center">
   <h2 *ngIf="alreadyWorkdedOut"> Already worked out! Nice job!</h2>
   <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
-   <div class="row">
-    <div class="card ml-3" *ngFor="let i of workouts">
-      <div class="card-body ">
-          <div class="m-2" *ngFor="let index of [0,1,2,3]">
-            {{i.exercises[index]}} {{i.reps[index]}}
+    <div class="row">
+      <div *ngFor="let i of workouts">
+        <div class="card col-md-2">
+          <div class="card-body ">
+            <div class="m-2" *ngFor="let index of [0,1,2,3]">
+              {{i.exercises[index]}} {{i.reps[index]}}
+            </div>
+            <button class=" ml-2 mr-2" (click)="selectWorkout(i);addWorkout()">
+              Pick Workout
+            </button>
           </div>
-          <button class=" ml-2 mr-2" (click)="selectWorkout(i);addWorkout()">
-            Pick Workout
-          </button>
-          </div>
+        </div>
+        <div class="col-md-1" *ngIf="i != workouts[workouts.length]"></div>
       </div>
     </div>
-    </div>
+  </div>
     <div *ngIf="showInputs && !alreadyWorkdedOut" class="card-body mt-2 mb-2">
       <div class="row">
       <div class="col-md-3 mt-2 mb-2" *ngFor="let index of [0,1,2,3]">
