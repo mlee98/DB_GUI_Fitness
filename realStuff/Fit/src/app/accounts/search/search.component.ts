@@ -32,6 +32,7 @@ export class SearchComponent implements OnInit {
      });
      this.resultList = [];
      this.searchAcc = {};
+     this.resultAcc = {};
     /* this.userAcc.id = 1;
     this.searchAcc = this.userAcc;
     this.resultList = [];
@@ -59,7 +60,12 @@ export class SearchComponent implements OnInit {
 
   public goToSearchProfile(result: Account) {
     this.resultAcc = result;
-    this.resultPicked = true;
+    this.accountRepository.getAcc(this.resultAcc.id).subscribe(data => {
+      this.resultAcc = data;
+      console.log('this is sent to search prfoile');
+      console.log(this.resultAcc);
+      this.resultPicked = true;
+   });
   }
 
   public reset() {

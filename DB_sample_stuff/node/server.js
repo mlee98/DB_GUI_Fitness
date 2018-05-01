@@ -712,7 +712,6 @@ function getRoutes() {
 
                 connection.release();//release the connection
             });
-
         }
     });
 
@@ -825,20 +824,24 @@ function getRoutes() {
                             matchingUsers[i].allergies = all;
                             all = [];
                         }
-                        let matching = [];
-                        for (let i = 0; i < matchingUsers.length; i++) {
-                            for (let j = 0; j < matching.length; j++) {
-                                if (matchingUsers[i].UserId === matching[j].UserId) {
-                                    break;
-                                } else {
-                                    if (j === matching.length - 1) {
-                                        matching.push(matchingUsers[i]);
-                                    }
+                        matchingUsers[i].allergies = all;
+                        all = [];
+                    });
+
+                    let matching = [];
+                    matching[0] = matchingUsers[0];
+                    for (let i = 0; i < matchingUsers.length; i++) {
+                        for (let j = 0; j < matching.length; j++) {
+                            if (matchingUsers[i].UserId === matching[j].UserId) {
+                                break;
+                            } else {
+                                if (j === matching.length - 1) {
+                                    matching.push(matchingUsers[i]);
                                 }
                             }
                         }
-                        reply(matchingUsers);
-                    });
+                    }
+                    reply(matching);
                 });
                 connection.release(); //release the connection
             });
@@ -888,20 +891,16 @@ function getRoutes() {
         path: '/signOut',
         config: { auth: 'jwt' },
         handler: function (request, reply) {
-            /*
             connection.getConnection(function (err, connection) {
                 //run the query
-                connection.query('SELECT * FROM Ideal_body', function (error, results, fields) {
+                let query = 'DELETE FROM Sessions WHERE Username = "' + Username + '" AND Password = "' + Password + '")';
+                connection.query(query, function (error, results, fields) {
                     if (error)
                         throw error;
- 
-                    reply(results);
+                    reply("Logged out");
                 });
                 connection.release();//release the connection
             });
-            */
-
-            reply(); // remove token
         }
     });
 }

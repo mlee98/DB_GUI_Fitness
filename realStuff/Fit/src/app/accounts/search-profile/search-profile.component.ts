@@ -23,15 +23,16 @@ export class SearchProfileComponent implements OnInit {
   @Input() public searcher: Account;
 
   ngOnInit() {
+    console.log(this.acc);
+    console.log(this.searcher);
   }
 
-
   public changeToProfile() {
-   this.router.navigateByUrl('accounts/' + this.acc.id);
+   this.router.navigateByUrl('accounts/' + this.searcher.id);
   }
 
   public changeToSearch() {
- this.router.navigateByUrl('accounts/' + this.acc.id + '/search');
+    console.log('accounts/' + this.searcher.id + '/search');
    }
 }
 

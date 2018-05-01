@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Workout } from '../../domain/models/Workouts';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,6 +13,8 @@ import { DatePipe, SlicePipe } from '@angular/common';
 export class WorkoutPastComponent implements OnInit {
 
   public workouts: Array<Workout>;
+  @Input() public accNum: number;
+  public passedString: string;
 
   constructor(
     public acocuntRepository: AccountRepostitory,
@@ -26,13 +28,24 @@ export class WorkoutPastComponent implements OnInit {
   }
 
   public updateValues() {
-    this.activedRoute.params.subscribe((params: any) => {
-      this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
+    if (!this.accNum) {
+      this.activedRoute.params.subscribe((params: any) => {
+        this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
+          this.workouts = data;
+          for (let i = 0; i < this.workouts.length; i++) {
+            this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
+          }
+          this.workouts.reverse();
+       });
+     });
+    } else {
+      this.acocuntRepository.getWorkoutPast(this.accNum).subscribe(data => {
         this.workouts = data;
         for (let i = 0; i < this.workouts.length; i++) {
           this.workouts[i].date = this.slicePipe.transform(this.workouts[i].date, 0, 10);
         }
+        this.workouts.reverse();
      });
-   });
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
@@ -42,10 +42,11 @@ export class PieComponent implements OnInit {
 
   public workouts: Workout[];
 
-     public corePercent: number;
+    public corePercent: number;
     public armsPercent: number;
     public legsPercent: number;
     public cardioPercent: number;
+    @Input() public accNum: number;
 
   ngOnInit() {
     this.updateValues();
@@ -56,6 +57,7 @@ export class PieComponent implements OnInit {
     this.armsPercent = 0;
     this.legsPercent = 0;
     this.cardioPercent = 0;
+   if (!this.accNum) {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getWorkoutPast(+params.id).subscribe(data => {
         this.workouts = data;
@@ -73,6 +75,23 @@ export class PieComponent implements OnInit {
          this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
      });
    });
+  } else {
+    this.acocuntRepository.getWorkoutPast(this.accNum).subscribe(data => {
+      this.workouts = data;
+      for (let i = 0; i < this.workouts.length; i++) {
+        if (this.workouts[i].type === 'Core') {
+          this.corePercent++;
+        } else if (this.workouts[i].type === 'Arms') {
+          this.armsPercent++;
+        } else if (this.workouts[i].type === 'Legs') {
+          this.legsPercent++;
+        } else {
+          this.cardioPercent++;
+        }
+       }
+       this.pieChartData = [{'data': [this.corePercent, this.armsPercent, this.legsPercent, this.cardioPercent] }];
+   });
+  }
   }
 
 }

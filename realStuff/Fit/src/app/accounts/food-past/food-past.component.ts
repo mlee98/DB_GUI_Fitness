@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Meal } from '../../domain/models/Meal';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,6 +22,7 @@ export class FoodPastComponent implements OnInit {
     public meals: Array<Meal>;
 
     public tempMeal: Meal;
+    @Input() public accNum: number;
 
   ngOnInit() {
     this.meals = [];
@@ -29,13 +30,25 @@ export class FoodPastComponent implements OnInit {
   }
 
   public updateValues() {
+   if (!this.accNum) {
     this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getMealPast(+params.id).subscribe(data => {
         this.meals = data;
-        console.log(this.meals);
-        console.log(this.meals[0]);
+        for (let i = 0; i < this.meals.length; i++) {
+          this.meals[i].date = this.slicePipe.transform(this.meals[i].date, 0, 10);
+        }
+        this.meals.reverse();
      });
    });
+  } else {
+    this.acocuntRepository.getMealPast(this.accNum).subscribe(data => {
+      this.meals = data;
+      for (let i = 0; i < this.meals.length; i++) {
+        this.meals[i].date = this.slicePipe.transform(this.meals[i].date, 0, 10);
+      }
+      this.meals.reverse();
+   });
+  }
   }
 
 }

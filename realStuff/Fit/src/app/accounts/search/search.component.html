@@ -74,7 +74,7 @@
               </div>
               <div class="row mb-2">
                 <span class="text-muted m-2">
-                  Height: {{ i.height }}
+                  Height(inches): {{ i.height }}
                 </span>
               </div>
               <div class="row mb-2">
@@ -95,5 +95,6 @@
   </div>
   </div>
 </body>
-<app-search-profile [searcher]="resultAcc" [acc]="userAcc" *ngIf="resultPicked"></app-search-profile>
+<app-search-profile [acc]="resultAcc"  [searcher]="userAcc"  *ngIf="resultPicked">
+</app-search-profile>
 </html>

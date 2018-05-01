@@ -51,6 +51,7 @@ export class WorkoutTodayComponent implements OnInit {
        });
      });
   }
+
   public selectWorkout(work: any) {
     console.log(work);
     this.pickedWorkout = work;
