@@ -16,7 +16,7 @@
 
       <div>
           <h5>Age: {{acc.age}} · Height(inches): {{acc.height}} inches · Weight: {{acc.weight}} lbs · Gender: {{acc.gender}} </h5>
-          <span class="row"><h5>Allergies: </h5> <h5 *ngFor="let i of acc.allergies"> {{i}} · </h5></span>
+          <h5>Allergies:  <span *ngFor="let i of acc.allergies"> {{i}} · </span></h5>
       </div>
     </div>
 
