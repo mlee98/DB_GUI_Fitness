@@ -33,16 +33,11 @@ export class SignInComponent implements OnInit {
 
 
   public goodLogin() {
+    console.log(this.username);
+    console.log(this.pass);
     this.auth.login(this.username, this.pass).subscribe(data => {
        console.log(data);
        console.log(data.headers);
-       console.log(data.Headers);
-       console.log(data.HttpHeaders);
-       console.log(data.body);
-       const keys = data.headers.keys();
-       const headers = keys.map(key =>
-        `${key}: ${data.headers.get(key)}`);
-        console.log(headers);
        const token = data.headers;
        this.auth.setToken(token);
         if (data.id === -1) {

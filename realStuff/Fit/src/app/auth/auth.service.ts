@@ -51,8 +51,7 @@ export class AuthService {
 
   public login(user: string, pass: string): Observable<any> {
     // tslint:disable-next-line:prefer-const
-    let data1 = {'username' : user, 'password' : pass};
-    const data = JSON.stringify(data1);
+    const data = {'username' : user, 'password' : pass};
     return this.httpClient.post(`${this.endPoint}signIn`, data, {observe: 'response'}).pipe(
       catchError(this.handleException)
     );
