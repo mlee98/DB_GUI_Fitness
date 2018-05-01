@@ -605,7 +605,7 @@ server.route({
         let Age = request.payload['age'];
         let Allergies = request.payload['allergies'];
 
-        if (Gender === null && Weight === null && Goal === null && Age === null && Allergies === null) {
+        if (Gender === undefined && Weight === undefined && Goal === undefined && Age === undefined && Allergies === undefined) {
             reply();
         }
         connection.getConnection(function (err, connection) {
@@ -703,6 +703,7 @@ server.route({
                         all = [];
                     }
                     let matching = [];
+                    matching[0] = matchingUsers[0];
                     for (let i = 0; i < matchingUsers.length; i++) {
                         for (let j = 0; j < matching.length; j++) {
                             if (matchingUsers[i].UserId === matching[j].UserId) {
@@ -714,7 +715,7 @@ server.route({
                             }
                         }
                     }
-                    reply(matchingUsers);
+                    reply(matching);
                 });
             });
 
