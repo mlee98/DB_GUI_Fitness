@@ -3,14 +3,17 @@
   <div *ngIf="!showInputs && !alreadyWorkdedOut" class="card-body">
     <div class="card">
       <span class="float-left" *ngFor="let i of workouts">
+        <br />
         <div class="row">
           <div class="col-md-3" *ngFor="let index of [0,1,2,3]">
             {{i.exercises[index]}} {{i.reps[index]}}
           </div>
-          <button class=" ml-2 mr-2 col-md-3" (click)="selectWorkout(i);addWorkout()">
+          <div class="col-md-4"></div>
+          <button class=" ml-2 mr-2 col-md-4" (click)="selectWorkout(i);addWorkout()">
             Pick Workout
           </button>
       </div>
+
       </span>
     </div>
     </div>
