@@ -32,6 +32,7 @@ export class SearchComponent implements OnInit {
      });
      this.resultList = [];
      this.searchAcc = {};
+     this.resultAcc = {};
     /* this.userAcc.id = 1;
     this.searchAcc = this.userAcc;
     this.resultList = [];
