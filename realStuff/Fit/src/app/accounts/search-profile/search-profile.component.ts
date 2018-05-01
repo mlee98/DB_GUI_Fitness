@@ -32,7 +32,8 @@ export class SearchProfileComponent implements OnInit {
   }
 
   public changeToSearch() {
- this.router.navigateByUrl('accounts/' + this.searcher.id + '/search');
+    console.log('accounts/' + this.searcher.id + '/search');
+  this.router.navigateByUrl('accounts/' + this.searcher.id + '/search');
    }
 }
 
