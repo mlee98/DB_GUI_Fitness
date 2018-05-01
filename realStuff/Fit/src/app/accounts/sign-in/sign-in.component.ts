@@ -36,6 +36,8 @@ export class SignInComponent implements OnInit {
     this.auth.login(this.username, this.pass).subscribe(data => {
        console.log(data);
        console.log(data.headers);
+       console.log(data.Headers);
+       console.log(data.HttpHeaders);
        const token = data.headers;
        this.auth.setToken(token);
         if (data.id === -1) {
