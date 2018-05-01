@@ -54,7 +54,8 @@ export class AuthService {
     let data1 = {'username' : user, 'password' : pass};
     const data = JSON.stringify(data1);
     return this.httpClient.post(`${this.endPoint}signIn`, data, {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      headers: new HttpHeaders({'Content-Type': 'application/json',
+    'authorization' : 'jwt_token'}),
       observe: 'response'
     }).pipe(
       catchError(this.handleException)
