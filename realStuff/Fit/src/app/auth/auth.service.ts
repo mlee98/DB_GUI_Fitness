@@ -53,7 +53,7 @@ export class AuthService {
     // tslint:disable-next-line:prefer-const
     let data1 = {'username' : user, 'password' : pass};
     const data = JSON.stringify(data1);
-    return this.httpClient.post(`${this.endPoint}signIn`, data, { observe: 'response' }).pipe(
+    return this.httpClient.post(`${this.endPoint}signIn`, data, {observe: 'response'}).pipe(
       catchError(this.handleException)
     );
   }
