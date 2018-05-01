@@ -4,12 +4,12 @@
     <div class="card">
       <span class="float-left" *ngFor="let i of workouts">
         <div class="row">
-        <div class="m-2" *ngFor="let index of [0,1,2,3]">
-          {{i.exercises[index]}} {{i.reps[index]}}
-        </div>
-        <button class=" ml-2 mr-2" (click)="selectWorkout(i);addWorkout()">
-          Pick Workout
-        </button>
+          <div class="m-2 col-md-2" *ngFor="let index of [0,1,2,3]">
+            {{i.exercises[index]}} {{i.reps[index]}}
+          </div>
+          <button class=" ml-2 mr-2 col-md-3" (click)="selectWorkout(i);addWorkout()">
+            Pick Workout
+          </button>
       </div>
       </span>
     </div>
