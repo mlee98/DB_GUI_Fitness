@@ -25,13 +25,15 @@ export class SearchProfileComponent implements OnInit {
   ngOnInit() {
     console.log(this.acc);
     console.log(this.searcher);
-      this.acocuntRepository.getAcc(this.acc.id).subscribe(data => {
-        console.log(data);
-        this.acc = data;
-      });
   }
 
 
+  public getAcc() {
+    this.acocuntRepository.getAcc(this.acc.id).subscribe(data => {
+      console.log(data);
+      this.acc = data;
+    });
+  }
   public changeToProfile() {
    this.router.navigateByUrl('accounts/' + this.searcher.id);
   }
