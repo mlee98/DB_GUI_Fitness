@@ -215,7 +215,7 @@ function getRoutes() {
             let Password = request.payload['password'];
             let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
 
-            let query = "SELECT * FROM Login";
+            let query = 'SELECT * FROM Login WHERE UserName = "' + Username + '" AND Password = "' + hashedPW + '"';
             let loginMessage = {};
             connection.getConnection(function (err, connection) {
                 //run the query
@@ -223,9 +223,8 @@ function getRoutes() {
                     if (error)
                         throw error;
 
-                    if (results[i].UserName === UserName && results[i].Password === hashedPW) {
+                    if (results !== undefined) {
                         loginMessage.id = results[i].UserId;
-                        break;
                     }
                     else {
                         loginMessage.id = -1;
@@ -233,19 +232,19 @@ function getRoutes() {
 
                     if (loginMessage.id != -1) {
                         let SessionId = aguid();
-                        let query1 = 'INSERT INTO Sessions (SessionId, Username, Password) VALUES("' + SessionId + '" ,"' + Username + '", "' + Password + '")';
+                        let query1 = 'INSERT INTO Sessions (SessionId, Username, Password) VALUES("' + SessionId + '" ,"' + Username + '", "' + hashedPW + '")';
                         connection.query(query1, function (error, results, fields) {
                             if (error)
                                 throw error;
-                            var token = getToken(Username, Password);
-                            reply().header("Authorization", token);
+                            var token = getToken(Username, hashedPW);
+                            reply(loginMessage).header("Authorization", token);
                             //reply().header("Authorization", token)
                             //.state("token", token, cookie_options);
                             // reply(getToken(UserName, Password));
                         });
                     }
                     else {
-                        reply("Login failed");
+                        reply(loginMessage);
                     }
                 });
                 connection.release();
