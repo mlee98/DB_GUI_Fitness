@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/authGuard';
 import { AuthService } from './auth/auth.service';
 import { HomeRepostitory } from './domain/home.service';
 import { AccountRepostitory } from './domain/account-repository.service';
@@ -37,7 +38,8 @@ import { AuthRequestOptions } from './auth/authRequestOptions';
       provide: RequestOptions,
       useClass: AuthRequestOptions
     },
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

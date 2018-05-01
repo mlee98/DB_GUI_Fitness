@@ -1,3 +1,4 @@
+import { Headers } from '@angular/http';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input, Output } from '@angular/core';
@@ -33,7 +34,7 @@ export class SignInComponent implements OnInit {
   public goodLogin() {
     this.auth.login(this.username, this.pass).subscribe(data => {
        console.log(data);
-       const token = data.token;
+       const token = data.Headers.token;
        this.auth.setToken(token);
         if (data.id === -1) {
           this.goodLog = 1;
