@@ -52,3 +52,11 @@ hr{
   border: 1px solid red;
   background-color: rgb(252, 117, 117);
 }
+#password {
+  -webkit-text-security: disc;
+}
+
+.ng-matched[required]{
+  border: 1px solid red;
+  background-color: rgb(252, 117, 117);
+}

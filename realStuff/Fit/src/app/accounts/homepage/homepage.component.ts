@@ -30,7 +30,7 @@ export class HomepageComponent implements OnInit {
   }
 
   public changeToSignIn() {
-    this.router.navigateByUrl('signIn');
+    this.router.navigateByUrl('signIn1');
   }
 
   public changeToCreateAccount() {

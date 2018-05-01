@@ -16,7 +16,7 @@ export const ACCOUNTS_ROUTES: Route[] = [
     component: HomepageComponent
   },
   {
-    path: 'signIn',
+    path: 'signIn1',
     component: SignInComponent
   },
   {
