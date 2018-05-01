@@ -27,13 +27,6 @@ export class SearchProfileComponent implements OnInit {
     console.log(this.searcher);
   }
 
-
-  public getAcc() {
-    this.acocuntRepository.getAcc(this.acc.id).subscribe(data => {
-      console.log(data);
-      this.acc = data;
-    });
-  }
   public changeToProfile() {
    this.router.navigateByUrl('accounts/' + this.searcher.id);
   }
