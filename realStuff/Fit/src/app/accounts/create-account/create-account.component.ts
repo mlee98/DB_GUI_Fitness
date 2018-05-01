@@ -22,8 +22,12 @@ export class CreateAccountComponent implements OnInit {
   public ngForm: FormGroup;
   public acc: Account;
   public email: string;
+  public passwordsSame: boolean;
+  public passwordMatch: string;
 
   ngOnInit() {
+    this.passwordMatch = '';
+    this.passwordsSame = true;
     this.email = '';
     this.acc = {};
     this.acc.allergies = [];
@@ -65,5 +69,13 @@ export class CreateAccountComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  public passCheck(pass1: string, pass2: string) {
+    if (pass1 === pass2) {
+      this.passwordsSame = true;
+    } else {
+      this.passwordsSame = false;
+    }
   }
 }

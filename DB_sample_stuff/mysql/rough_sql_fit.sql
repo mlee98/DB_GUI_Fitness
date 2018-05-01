@@ -235,6 +235,17 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Sessions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Sessions` (
+  `SessionId` VARCHAR(45) NOT NULL,
+  `Username` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NULL,
+  PRIMARY KEY (`SessionId`))
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
