@@ -9,7 +9,7 @@
 
     <aside class="float-right" id="buttons">
       <button (click)="changeToSearch()">Back to Search</button>
-      <button (click)="changeToProfile()">Back to Profile</button>
+      <button><a href"accounts/{{searcher.id}}/search">Back to Profile</button>
     </aside>
     <div *ngIf="acc" id="header" style="text-align: left">
       <h1>{{acc.fName}} {{acc.lName}}</h1>
