@@ -33,6 +33,8 @@ export class SignInComponent implements OnInit {
   public goodLogin() {
     this.auth.login(this.username, this.pass).subscribe(data => {
        console.log(data);
+       const token = data.token;
+       this.auth.setToken(token);
         if (data.id === -1) {
           this.goodLog = 1;
         } else {

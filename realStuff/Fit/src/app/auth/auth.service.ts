@@ -51,7 +51,7 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  public login(user: string, pass: string): Observable<Account> {
+  public login(user: string, pass: string): Observable<any> {
     // tslint:disable-next-line:prefer-const
     let data1 = {'username' : user, 'password' : pass};
     const data = JSON.stringify(data1);
