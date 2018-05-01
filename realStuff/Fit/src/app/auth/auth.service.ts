@@ -16,11 +16,9 @@ export class AuthService {
 
   private endPoint = 'http://192.168.99.100:3000/';
   private httpOptions  = {
-    headers: new HttpHeaders({
-      'Content-Type' : 'application/json',
-      'Authorization' : 'rkeehan'
-    })
-  };
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response'
+    };
 
   constructor(protected httpClient: HttpClient) { }
 
@@ -55,7 +53,10 @@ export class AuthService {
     // tslint:disable-next-line:prefer-const
     let data1 = {'username' : user, 'password' : pass};
     const data = JSON.stringify(data1);
-    return this.httpClient.post(`${this.endPoint}signIn`, data, this.httpOptions).pipe(
+    return this.httpClient.post(`${this.endPoint}signIn`, data, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response'
+    }).pipe(
       catchError(this.handleException)
     );
   }
