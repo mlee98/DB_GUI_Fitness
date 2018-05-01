@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public changeToSearch() {
- this.router.navigateByUrl('accounts/' + this.acc.id + '/search');
+  this.router.navigateByUrl('accounts/' + this.acc.id + '/search');
    }
 }
 
