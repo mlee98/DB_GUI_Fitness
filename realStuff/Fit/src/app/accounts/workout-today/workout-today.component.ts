@@ -31,6 +31,7 @@ export class WorkoutTodayComponent implements OnInit {
 
   ngOnInit() {
     this.date = new Date();
+    this.types = [];s
     this.type = [];
     this.workouts = [];
     this.pickedWorkout = {};
