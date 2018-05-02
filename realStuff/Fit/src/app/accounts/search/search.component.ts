@@ -25,17 +25,10 @@ export class SearchComponent implements OnInit {
   public resultPicked: boolean;
 
   ngOnInit() {
-    if (!this.auth.tokenExist() ) {
-      console.log('redirecting');
-      this.router.navigateByUrl('signIn');
-    }
      this.resultPicked = false;
      this.userAcc = {};
      this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.getAcc(+params.id).subscribe(data => {
-        if ( data.token === 0) {
-          this.router.navigateByUrl('signIn');
-        }
          this.userAcc = data;
       });
      });
