@@ -1,4 +1,3 @@
-import { Reps } from './reps';
 
 export class Workout {
   date?: string;
@@ -6,7 +5,6 @@ export class Workout {
   type?: string;
   exercises?: Array<string>;
   reps?: Array<number>;
-  realReps?: Array<Reps>;
   todo?: number;
   goal?: number;
 }
