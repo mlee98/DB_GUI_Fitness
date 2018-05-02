@@ -13,7 +13,7 @@ export abstract class Repostitory<T> {
   protected abstract endPoint;
 
   constructor(protected httpClient: HttpClient,
-  private auth: AuthService) {}
+  protected auth: AuthService) {}
   private httpOptions  = {
     headers: new HttpHeaders({
       'Content-Type' : 'application/json',
