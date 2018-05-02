@@ -42,6 +42,7 @@ export class WorkoutTodayComponent implements OnInit {
         this.workouts = data;
         console.log(this.workouts);
         for (let x = 0; x < this.workouts.length; x++) {
+          this.workouts[x].realReps = [];
           for (let i = 0; i < this.workouts[x].reps.length; i++) {
             if (this.workouts[x].reps[i] > 10) {
               this.workouts[x].realReps[i].num = this.workouts[i].reps[i];
@@ -109,10 +110,6 @@ export class WorkoutTodayComponent implements OnInit {
     console.log(newPercent);
     newPercent = newPercent / 4 * 100;
     console.log(newPercent);
-    if (this.pickedWorkout.goal === 80) {
-    } else if (this.pickedWorkout.goal === 100) {
-    } else {
-    }
     newPercent = newPercent * this.pickedWorkout.goal / 100;
     console.log(newPercent);
     this.activedRoute.params.subscribe((params: any) => {
