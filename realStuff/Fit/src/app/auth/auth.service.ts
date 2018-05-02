@@ -27,6 +27,7 @@ export class AuthService {
       return this.http.post('http://192.168.99.100:3000/signIn', ({ username: username, password: password }))
           .map((response: Response) => {
               // login successful if there's a jwt token in the response
+              console.log(response.headers);
               const token = response.headers.get('authentication');
               console.log(token);
               if (token) {
