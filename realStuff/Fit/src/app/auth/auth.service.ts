@@ -56,6 +56,10 @@ export class AuthService {
       catchError(this.handleException)
     );
   }
+  public logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem(TOKEN_NAME);
+  }
 
   protected handleException(exception: any) {
     // tslint:disable-next-line:prefer-const

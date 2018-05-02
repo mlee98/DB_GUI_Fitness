@@ -28,6 +28,7 @@ export class SignInComponent implements OnInit {
     this.pass = '';
     this.username = '';
     this.goodLog = 0;
+    this.auth.logout();
   }
 
 
