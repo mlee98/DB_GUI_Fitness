@@ -5,6 +5,7 @@
       <div class="ml-5" *ngFor="let i of workouts">
         <div class="card">
           <div class="card-body ">
+             <h6> {{i.type}} </h6>
             <div class="m-2" *ngFor="let index of [0,1,2,3]">
               {{i.exercises[index]}} {{i.reps[index]}} {{types[index][index]}}
             </div>
