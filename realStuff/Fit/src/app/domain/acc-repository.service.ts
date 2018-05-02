@@ -6,19 +6,21 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Meal } from './models/Meal';
+import { AuthService } from '../auth/auth.service';
 
 export abstract class Repostitory<T> {
 
   protected abstract endPoint;
 
+  constructor(protected httpClient: HttpClient,
+  private auth: AuthService) {}
   private httpOptions  = {
     headers: new HttpHeaders({
       'Content-Type' : 'application/json',
-      'Authorization' : 'rkeehan'
+      'Authorization':  this.auth.getToken()
     })
   };
 
-  constructor(protected httpClient: HttpClient) {}
 
   public getAcc(id: number): Observable<Account> {
     return this.httpClient.get(`${this.endPoint}${id}`, this.httpOptions).pipe(
