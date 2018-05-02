@@ -53,6 +53,7 @@ export class WorkoutTodayComponent implements OnInit {
             }
           }
         }
+        console.log(this.workouts);
         const date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
         let dateCheck = this.workouts[0].date;
         dateCheck = this.slicePipe.transform(dateCheck, 0, 10);
