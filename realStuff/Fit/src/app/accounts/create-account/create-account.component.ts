@@ -43,6 +43,10 @@ export class CreateAccountComponent implements OnInit {
     this.acc.gender = '';
   }
   public addAcc() {
+    this.passCheck(this.acc.password, this.passwordMatch);
+    if (!this.passwordsSame) {
+      return;
+    }
     console.log(this.acc);
       this.HomeRepository.createAccount(this.acc).subscribe(data => {
         console.log(this.acc);
