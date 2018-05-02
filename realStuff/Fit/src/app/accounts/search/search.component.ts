@@ -81,6 +81,7 @@ export class SearchComponent implements OnInit {
 
   public reset() {
     this.searchAcc = {};
+    this.resultList = [];
   }
 
   public backToProfile() {
