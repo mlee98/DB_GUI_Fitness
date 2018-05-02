@@ -45,14 +45,11 @@ const validate = function (decoded, request, callback) {
         if (error)
             throw error;
 
-        console.log(results);
 
         if (results[0].SessionId != null) {
-            console.log("returned true");
             return callback(null, true);
         }
         else {
-            console.log("returned false");
             return callback(null, false);
         }
     });
@@ -119,8 +116,9 @@ function getRoutes() {
 
             let getUserId = "SELECT UserId FROM UserInfo WHERE UserName = \'" + UserName + "\'";
 
-            let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Public)';
-            uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\'," + Public + ")";
+            let uInfoTable = 'INSERT INTO UserInfo (UserId, fName, lName, Height, Weight, Age, UserName, Public, Goal, Gender)';
+            uInfoTable += " VALUES (default, \'" + fName + "\', \'" + lName + "\', \'" + Height + "\', \'" + Weight + "\', \'" + Age + "\',\'" + UserName + "\'," + Public + ",\'" + Goal + "\',\'" + Gender + "\')";
+
 
             connection.getConnection(function (err, connection) {
                 //run the query
@@ -130,7 +128,9 @@ function getRoutes() {
                     connection.query(getUserId, function (error, r2, fields) {
                         if (error)
                             throw error;
-                        connection.query(getUserId, function (error, r2, fields) {
+                        let userID = r2[0].UserId;
+                        let loginTable = "INSERT INTO Login (UserId, UserName, Password) VALUES(" + userID + ", \'" + UserName + "\', \'" + hashedPW + "\')";
+                        connection.query(loginTable, function (error, r2, fields) {
                             if (error)
                                 throw error;
 
@@ -140,6 +140,10 @@ function getRoutes() {
                             } else {
                                 if (Goal === "Gain Muscle") {
                                     Goal = 120;
+                                } else {
+                                    if (Goal === "Lose Weight") {
+                                        Goal = 100;
+                                    }
                                 }
                             }
                             let workoutTable = "INSERT INTO Fitness_Tracker (UserId, WorkoutPlan, Date, PercentToDo, Goal) VALUES(" + userID + ", default, default, " + Goal + ", " + Goal + ")";
@@ -215,7 +219,7 @@ function getRoutes() {
             let Password = request.payload['password'];
             let hashedPW = crypto.createHash('md5').update(Password).digest("hex");
 
-            let query = 'SELECT * FROM Login WHERE UserName = "' + Username + '" AND Password = "' + hashedPW + '"';
+            let query = 'SELECT * FROM Login WHERE Username = "' + Username + '" AND Password = "' + hashedPW + '"';
             let loginMessage = {};
             connection.getConnection(function (err, connection) {
                 //run the query
@@ -223,13 +227,12 @@ function getRoutes() {
                     if (error)
                         throw error;
 
-                    if (results !== undefined) {
-                        loginMessage.id = results[i].UserId;
+                    if (results.length != 0) {
+                        loginMessage.id = results[0].UserId;
                     }
                     else {
                         loginMessage.id = -1;
                     }
-
                     if (loginMessage.id != -1) {
                         let SessionId = aguid();
                         let query1 = 'INSERT INTO Sessions (SessionId, Username, Password) VALUES("' + SessionId + '" ,"' + Username + '", "' + hashedPW + '")';
@@ -237,13 +240,17 @@ function getRoutes() {
                             if (error)
                                 throw error;
                             var token = getToken(Username, hashedPW);
-                            reply(loginMessage).header("Authorization", token);
+                            loginMessage.token = token;
+                           
+                            reply(loginMessage);
+                            //reply(loginMessage).header("Authorization", token);
                             //reply().header("Authorization", token)
                             //.state("token", token, cookie_options);
                             // reply(getToken(UserName, Password));
                         });
                     }
                     else {
+                        loginMessage.token = 0;
                         reply(loginMessage);
                     }
                 });
@@ -717,8 +724,9 @@ function getRoutes() {
     server.route({
         method: 'POST',
         path: '/accounts/{id}/search',
-        config: { auth: 'jwt' },
+        config: { auth: false },
         handler: function (request, reply) {
+            let oUserId = encodeURIComponent(request.params.id);
             let UserId = request.payload['UserId'];
             let Gender = request.payload['gender'];
             let Weight = request.payload['weight'];
@@ -726,7 +734,7 @@ function getRoutes() {
             let Age = request.payload['age'];
             let Allergies = request.payload['allergies'];
 
-            if (Gender === null && Weight === null && Goal === null && Age === null && Allergies === null) {
+            if (Gender === undefined && Weight === undefined && Goal === undefined && Age === undefined && Allergies === undefined) {
                 reply();
             }
             connection.getConnection(function (err, connection) {
@@ -782,65 +790,78 @@ function getRoutes() {
                         default:
                             allergy = Allergies[i];
                     }
-                    query += ' Name = "' + allergy + '" AND';
+                    query += ' Name = "' + allergy + '" OR ';
                 }
                 query = query.slice(0, -3);
                 query += ' AND Public = 1';
-
                 connection.query(query, function (error, results, fields) {
                     let matchingUsers = [];
                     let allQuery = 'SELECT * FROM Account_Allergies WHERE ';
-                    if (results === undefined) {
+                    if (results.length == 0) {
                         reply();
-                    }
-                    for (let i = 0; i < results.length; i++) {
-                        let account = {};
-                        account.id = results[i].UserId;
-                        account.username = results[i].UserName;
-                        account.password = null;
-                        account.fName = results[i].fName;
-                        account.lName = results[i].lName;
-                        account.height = results[i].Height;
-                        account.weight = results[i].Weight;
-                        account.age = results[i].Age;
-                        account.public = results[i].Public;
-                        account.gender = results[i].Gender;
-                        matchingUsers[i] = account;
-                        allQuery += ('UserId = ' + results[i].UserId + ' OR ');
-                    }
-                    allQuery = allQuery.slice(0, -3);
-
-                    connection.query(allQuery, function (error, r1, fields) {
-                        if (error)
-                            throw error;
+                    } else {
                         for (let i = 0; i < results.length; i++) {
-                            let all = [];
-                            for (let j = 0; j < r1.length; j++) {
-                                if (r1[j].UserId === results[i].UserId) {
-                                    all.push(r1[j].Name);
-                                }
-                            }
-                            matchingUsers[i].allergies = all;
-                            all = [];
+                            let account = {};
+                            account.id = results[i].UserId;
+                            account.username = results[i].UserName;
+                            account.password = null;
+                            account.fName = results[i].fName;
+                            account.lName = results[i].lName;
+                            account.height = results[i].Height;
+                            account.weight = results[i].Weight;
+                            account.age = results[i].Age;
+                            account.public = results[i].Public;
+                            account.gender = results[i].Gender;
+                            matchingUsers[i] = account;
+                            allQuery += ('UserId = ' + results[i].UserId + ' OR ');
                         }
-                        matchingUsers[i].allergies = all;
-                        all = [];
-                    });
+                        allQuery = allQuery.slice(0, -3);
 
-                    let matching = [];
-                    matching[0] = matchingUsers[0];
-                    for (let i = 0; i < matchingUsers.length; i++) {
-                        for (let j = 0; j < matching.length; j++) {
-                            if (matchingUsers[i].UserId === matching[j].UserId) {
-                                break;
-                            } else {
-                                if (j === matching.length - 1) {
-                                    matching.push(matchingUsers[i]);
+                        connection.query(allQuery, function (error, r1, fields) {
+                            if (error)
+                                throw error;
+                            for (let i = 0; i < results.length; i++) {
+                                let all = [];
+                                for (let j = 0; j < r1.length; j++) {
+                                    if (r1[j].UserId === results[i].UserId) {
+                                        all.push(r1[j].Name);
+                                    }
                                 }
+                                matchingUsers[i].allergies = all;
+                                all = [];
+                            }
+                        });
+
+                        let matching = [];
+                        let inc = 0;
+                        for (let i = 0; i < matchingUsers.length; i++) {
+                            if (matchingUsers[i].id != oUserId) {
+                                matching[inc] = matchingUsers[i];
+                                inc++;
                             }
                         }
+                        let matching2 = [];
+                        let isRepeat = false;
+                        for (let i = 0; i < matching.length; i++) {
+                            if (matching2.length == 0) {
+                                matching2.push(matching[i]);
+                            } else {
+                                for (let j = 0; j < matching2.length; j++) {
+                                    if (matching[i].id == matching2[j].id) {
+                                        isRepeat = true;
+                                        break;
+                                    }
+                                }
+                                if (isRepeat == false) {
+                                    matching2.push(matching[i]);
+                                }
+                                isRepeat = false;
+                            }
+                        }
+
+                        reply(matching2);
                     }
-                    reply(matching);
+                    
                 });
                 connection.release(); //release the connection
             });
