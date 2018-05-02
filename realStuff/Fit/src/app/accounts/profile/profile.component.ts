@@ -23,7 +23,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
       this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getAcc(+params.id).subscribe(data => {
+        console.log(data);
         if ( data.token === 0) {
+          console.log('redirecting');
           this.router.navigateByUrl('signIn');
         }
         console.log(data);
