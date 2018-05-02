@@ -25,7 +25,7 @@
             <label for="password" class="col-md-2">Password: </label>
             <input id= "password" name="password" class="text col-md-2  " type="password" [(ngModel)]="acc.password" required #myPasswordControl="ngModel">
             <label for="password" class="col-md-2">Verify Password: </label>
-            <input id="password" (change)="passCheck(acc.password,passwordMatch)" type="password" class="text col-md-2 " [(ngModel)] ="passwordMatch">
+            <input id="passwordVerify" (change)="passCheck(acc.password,passwordMatch)" type="password" class="text col-md-2 " [(ngModel)] ="passwordMatch">
           </div>
          <!-- <div class="alert col-md-4" *ngIf="!passwordsSame">
             <span>

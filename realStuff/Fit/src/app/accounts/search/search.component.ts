@@ -2,6 +2,7 @@ import { Account } from './../../domain/models/Account';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountRepostitory } from '../../domain/account-repository.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -13,7 +14,8 @@ export class SearchComponent implements OnInit {
   constructor(
     public accountRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   public userAcc: Account;
@@ -23,6 +25,10 @@ export class SearchComponent implements OnInit {
   public resultPicked: boolean;
 
   ngOnInit() {
+    if (!this.auth.tokenExist() ) {
+      console.log('redirecting');
+      this.router.navigateByUrl('signIn');
+    }
      this.resultPicked = false;
      this.userAcc = {};
      this.activedRoute.params.subscribe((params: any) => {
@@ -54,6 +60,8 @@ export class SearchComponent implements OnInit {
   }
 
   public search() {
+    console.log('search info');
+    console.log(this.searchAcc);
     this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.search(+params.id, this.searchAcc).subscribe(data => {
         this.resultList = data;
