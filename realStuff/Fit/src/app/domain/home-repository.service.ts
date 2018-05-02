@@ -31,14 +31,6 @@ export abstract class HRepostitory<T> {
     );
   }
 
-  public login(user: string, pass: string): Observable<Account> {
-    // tslint:disable-next-line:prefer-const
-    let data1 = {'username' : user, 'password' : pass};
-    const data = JSON.stringify(data1);
-    return this.httpClient.post(`${this.endPoint}signIn`, data, this.httpOptions).pipe(
-      catchError(this.handleException)
-    );
-  }
 
   protected handleException(exception: any) {
     // tslint:disable-next-line:prefer-const

@@ -22,7 +22,7 @@ export abstract class Repostitory<T> {
   };
 
 
-  public getAcc(id: number): Observable<Account> {
+  public getAcc(id: number): Observable<any> {
     return this.httpClient.get(`${this.endPoint}${id}`, this.httpOptions).pipe(
       catchError(this.handleException)
     );
