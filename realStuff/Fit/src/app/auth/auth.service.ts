@@ -19,8 +19,8 @@ export class AuthService {
     private activedRoute: ActivatedRoute,
     private router: Router) {
       // set token if saved in local storage
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      this.token = currentUser && currentUser.token;
+      const token = JSON.parse(localStorage.getItem('token'));
+      this.token = token;
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -34,7 +34,7 @@ export class AuthService {
                   this.token = token;
 
                   // store username and jwt token in local storage to keep user logged in between page refreshes
-                  localStorage.setItem('currentUser', JSON.stringify({token: token }));
+                  localStorage.setItem('token', JSON.stringify({token: token }));
                   this.router.navigateByUrl('accounts/' + response.json.arguments['id']);
                   // return true to indicate successful login
                   return true;
