@@ -35,7 +35,14 @@ export class SignInComponent implements OnInit {
     console.log(this.username);
     console.log(this.pass);
     this.auth.login(this.username, this.pass).subscribe(data => {
+       console.log(data);
 
+       this.auth.setToken(data.token);
+        if (data.id === -1) {
+          this.goodLog = 1;
+        } else {
+          this.router.navigateByUrl('accounts/' + data.id);
+        }
      });
   }
 

@@ -1,56 +1,63 @@
 import { Account } from './../domain/models/Account';
 import * as jwt_decode from 'jwt-decode';
+
 import { catchError } from 'rxjs/operators';
 import jwt from 'jsonwebtoken';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Router, ActivatedRoute } from '@angular/router';
 
 
 export const TOKEN_NAME = 'jwt_token';
 
 @Injectable()
 export class AuthService {
-  public token: string;
 
-  constructor(private http: HttpClient,
-    private activedRoute: ActivatedRoute,
-    private router: Router) {
-      // set token if saved in local storage
-      const token = JSON.parse(localStorage.getItem('token'));
-      this.token = token;
+  private endPoint = 'http://192.168.99.100:3000/';
+  private httpOptions  = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    };
+
+  constructor(protected httpClient: HttpClient) { }
+
+  getToken(): string {
+    return localStorage.getItem(TOKEN_NAME);
   }
 
-  login(username: string, password: string): Observable<boolean> {
-      return this.http.post('http://192.168.99.100:3000/signIn', ({ username: username, password: password }))
-          .map((response: Response) => {
-              // login successful if there's a jwt token in the response
-              console.log(response);
-              const token = response.json.arguments['token'];
-              console.log(token);
-              if (token) {
-                  // set token property
-                  this.token = token;
-
-                  // store username and jwt token in local storage to keep user logged in between page refreshes
-                  localStorage.setItem('token', JSON.stringify({token: token }));
-                  this.router.navigateByUrl('accounts/' + response.json.arguments['id']);
-                  // return true to indicate successful login
-                  return true;
-              } else {
-                  // return false to indicate failed login
-                  return false;
-              }
-          });
+  setToken(token: string): void {
+    localStorage.setItem(TOKEN_NAME, token);
+    console.log(localStorage);
   }
 
-  logout(): void {
-      // clear token remove user from local storage to log user out
-      this.token = null;
-      localStorage.removeItem('currentUser');
+  getTokenExpirationDate(token: string): Date {
+    const decoded = jwt.decode(token);
+
+    if (decoded.exp === undefined) { return null; }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
   }
+
+  isTokenExpired(token?: string): boolean {
+    if (!token) {token = this.getToken(); }
+    if (!token) {return true; }
+
+    const date = this.getTokenExpirationDate(token);
+    if (date === undefined) {return false; }
+    return !(date.valueOf() > new Date().valueOf());
+  }
+
+  public login(user: string, pass: string): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    const data = {'username' : user, 'password' : pass};
+    return this.httpClient.post(`${this.endPoint}signIn`, data, this.httpOptions).do( res => {
+    this.setToken(res.toString()); }).pipe(
+      catchError(this.handleException)
+    );
+  }
+
   protected handleException(exception: any) {
     // tslint:disable-next-line:prefer-const
     let message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
