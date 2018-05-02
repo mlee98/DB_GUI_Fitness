@@ -3,7 +3,7 @@ import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { AccountRepostitory } from '../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,19 +15,20 @@ export class ProfileComponent implements OnInit {
   constructor(
     public acocuntRepository: AccountRepostitory,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   public acc: Account;
 
   ngOnInit() {
+    if (!this.auth.tokenExist() ) {
+      console.log('redirecting');
+      this.router.navigateByUrl('signIn');
+    }
       this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getAcc(+params.id).subscribe(data => {
         console.log(data);
-        if ( data.token === 0) {
-          console.log('redirecting');
-          this.router.navigateByUrl('signIn');
-        }
         console.log(data);
         this.acc = data;
       });

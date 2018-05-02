@@ -25,6 +25,13 @@ export class AuthService {
     return localStorage.getItem(TOKEN_NAME);
   }
 
+  public tokenExist() {
+    if (localStorage.getItem(TOKEN_NAME)) {
+      return true;
+    }
+    return false;
+  }
+
   setToken(token: string): void {
     localStorage.setItem(TOKEN_NAME, token);
     console.log(localStorage);
