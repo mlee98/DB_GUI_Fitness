@@ -44,6 +44,8 @@ export class WorkoutTodayComponent implements OnInit {
         for (let x = 0; x < this.workouts.length; x++) {
           this.workouts[x].realReps = [];
           for (let i = 0; i < this.workouts[x].reps.length; i++) {
+            this.workouts[x].realReps[i].type = '';
+            this.workouts[x].realReps[i].num = 0;
             if (this.workouts[x].reps[i] > 10) {
               console.log('here');
               this.workouts[x].realReps[i].num = this.workouts[i].reps[i];
