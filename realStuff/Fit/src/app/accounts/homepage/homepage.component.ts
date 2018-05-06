@@ -21,8 +21,6 @@ export class HomepageComponent implements OnInit {
   public createAccount: boolean;
 
   ngOnInit(): void {
-    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    // Add 'implements OnInit' to the class.
     // tslint:disable-next-line:no-unused-expression
     this.frontPage = true;
     this.signIn = false;

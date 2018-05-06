@@ -1,8 +1,8 @@
-import { Account } from './../../domain/models/Account';
+import { Account } from './../../../domain/models/Account';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountRepostitory } from '../../domain/account-repository.service';
-import { AuthService } from '../../auth/auth.service';
+import { AccountRepostitory } from '../../../domain/account-repository.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -35,26 +35,9 @@ export class SearchComponent implements OnInit {
      this.resultList = [];
      this.searchAcc = {};
      this.resultAcc = {};
-    /* this.userAcc.id = 1;
-    this.searchAcc = this.userAcc;
-    this.resultList = [];
-    this.fakeAcc = {};
-    this.fakeAcc.age = 25;
-    this.fakeAcc.height = 10;
-    this.fakeAcc.fName = 'Rob';
-    this.fakeAcc.lName = 'K';
-    this.fakeAcc.weight = '195';
-    this.fakeAcc.allergies = [];
-    this.fakeAcc.calsBurned = [];
-    this.fakeAcc.calsEaten = [];
-    this.resultList.push(this.fakeAcc);
-    this.resultList.push(this.fakeAcc);*/
-    console.log(this.resultList);
   }
 
   public search() {
-    console.log('search info');
-    console.log(this.searchAcc);
     this.activedRoute.params.subscribe((params: any) => {
       this.accountRepository.search(+params.id, this.searchAcc).subscribe(data => {
         this.resultList = data;
@@ -66,8 +49,6 @@ export class SearchComponent implements OnInit {
     this.resultAcc = result;
     this.accountRepository.getAcc(this.resultAcc.id).subscribe(data => {
       this.resultAcc = data;
-      console.log('this is sent to search prfoile');
-      console.log(this.resultAcc);
       this.resultPicked = true;
    });
   }

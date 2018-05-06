@@ -34,7 +34,6 @@ export abstract class Repostitory<T> {
   }
 
   public getMealToday(id: number, date: string): Observable<Meal> {
-    console.log(date);
     const data = {'date': date};
     return this.httpClient.post(`${this.endPoint}${id}/mealToday`, data, this.httpOptions).pipe(
       catchError(this.handleException)
@@ -55,9 +54,7 @@ export abstract class Repostitory<T> {
   }
 
   public postWorkoutPercent(id: number, percent: number, workout: Workout): Observable<Workout> {
-    console.log(percent);
     const data = {'workout': workout, 'todo': percent};
-    console.log(data);
     return this.httpClient.post(`${this.endPoint}${id}/workoutProgress`, data, this.httpOptions).pipe(
       catchError(this.handleException)
     );

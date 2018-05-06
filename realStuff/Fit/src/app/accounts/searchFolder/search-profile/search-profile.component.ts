@@ -1,7 +1,7 @@
-import { FoodTodayComponent } from './../food-today/food-today.component';
-import { Account } from '../../domain/models/Account';
+import { FoodTodayComponent } from './../../tabs/food-today/food-today.component';
+import { Account } from '../../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
-import { AccountRepostitory } from '../../domain/account-repository.service';
+import { AccountRepostitory } from '../../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -23,8 +23,6 @@ export class SearchProfileComponent implements OnInit {
   @Input() public searcher: Account;
 
   ngOnInit() {
-    console.log(this.acc);
-    console.log(this.searcher);
   }
 
   public changeToProfile() {
