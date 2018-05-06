@@ -41,6 +41,7 @@ export class SignInComponent implements OnInit {
         if (data.id === -1) {
           this.goodLog = 1;
         } else {
+          console.log(data.id);
           this.router.navigateByUrl('accounts/' + data.id);
         }
      });
