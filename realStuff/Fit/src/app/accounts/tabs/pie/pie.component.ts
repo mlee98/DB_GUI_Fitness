@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AccountRepostitory } from '../../domain/account-repository.service';
+import { AccountRepostitory } from '../../../domain/account-repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
-import { Workout } from '../../domain/models/Workouts';
+import { Workout } from '../../../domain/models/Workouts';
 
 @Component({
   selector: 'app-pie',

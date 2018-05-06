@@ -4,10 +4,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
-import { InputComponent } from './input/input.component';
-import { WorkoutComponent } from './workout/workout.component';
-import { SearchComponent } from './search/search.component';
-import { SearchProfileComponent } from './search-profile/search-profile.component';
+import { SearchComponent } from './searchFolder/search/search.component';
+import { SearchProfileComponent } from './searchFolder/search-profile/search-profile.component';
 import { AuthGuard } from '../auth/authGuard';
 
 export const ACCOUNTS_ROUTES: Route[] = [

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Meal } from '../../domain/models/Meal';
-import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Meal } from '../../../domain/models/Meal';
+import { AccountRepostitory } from '../../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 

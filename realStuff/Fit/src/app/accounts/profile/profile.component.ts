@@ -1,4 +1,4 @@
-import { FoodTodayComponent } from './../food-today/food-today.component';
+import { FoodTodayComponent } from './../tabs/food-today/food-today.component';
 import { Account } from '../../domain/models/Account';
 import { Component, OnInit, Input } from '@angular/core';
 import { AccountRepostitory } from '../../domain/account-repository.service';
@@ -24,18 +24,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
       this.activedRoute.params.subscribe((params: any) => {
       this.acocuntRepository.getAcc(+params.id).subscribe(data => {
-        console.log(data);
-        console.log(data);
         this.acc = data;
       });
     });
-    // this.acc = {};
-    // this.acc.fName = 'John';
-    // this.acc.lName = 'Smith';
-    // this.acc.height = 60;
-    // this.acc.weight = '150';
-    // this.acc.age = 15;
-    // this.acc.id = 1;
   }
 
 

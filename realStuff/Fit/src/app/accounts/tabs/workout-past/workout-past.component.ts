@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { Workout } from '../../domain/models/Workouts';
-import { AccountRepostitory } from '../../domain/account-repository.service';
+import { Workout } from '../../../domain/models/Workouts';
+import { AccountRepostitory } from '../../../domain/account-repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 
