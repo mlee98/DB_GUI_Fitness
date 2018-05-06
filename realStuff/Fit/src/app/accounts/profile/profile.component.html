@@ -7,61 +7,65 @@
 <body>
   <br />
 
-    <aside class="float-right" id="buttons">
-      <button (click)="changeToSearch()">Search</button>
-      <button (click)="changeToSignIn()">Log Out</button>
-    </aside>
-    <div *ngIf="acc" id="header" style="text-align: left">
-      <h1>{{acc.fName}} {{acc.lName}}</h1>
+  <aside class="float-right" id="buttons">
+    <button (click)="changeToSearch()">Search</button>
+    <button (click)="changeToSignIn()">Log Out</button>
+  </aside>
+  <div *ngIf="acc" id="header" style="text-align: left">
+    <h1>{{acc.fName}} {{acc.lName}}</h1>
 
-      <div>
-          <h5>Age: {{acc.age}} · Height(inches): {{acc.height}} inches</h5>
-          <h5> Weight: {{acc.weight}} lbs · Gender: {{acc.gender}} </h5>
-          <h5>Allergies:  <span *ngFor="let i of acc.allergies"> {{i}} · </span></h5>
-      </div>
+    <div>
+      <h5>Age: {{acc.age}} · Height(inches): {{acc.height}} inches</h5>
+      <h5> Weight: {{acc.weight}} lbs · Gender: {{acc.gender}} </h5>
+      <h5>Allergies:
+        <span *ngFor="let i of acc.allergies"> {{i}} · </span>
+      </h5>
     </div>
+  </div>
 
-    <main class="container" id="profile">
-      <div id="tabs" class="container">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a href="#food" class="nav-link" data-toggle="tab" role="tab" aria-controls="food" id="foodTab" (click)="todayFoodChild.updateValues()">Today's Food</a>
-          </li>
-          <li class="nav-item">
-            <a href="#workout" class="nav-link" data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
-          </li>
-          <li class="nav-item">
-            <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab" (click)="pastFoodChild.updateValues()">Past Food</a>
-          </li>
-          <li class="nav-item">
-            <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()" id="pastWorkoutTab">Past Workout</a>
-          </li>
-          <li class="nav-item">
-              <a href="#workoutStats" class="nav-link" data-toggle="tab" role="tab" aria-controls="workoutStats" (click)="pieChild.updateValues()"  id="workoutStatsTab">Workout Stats</a>
-            </li>
-        </ul>
+  <main class="container" id="profile">
+    <div id="tabs" class="container">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a href="#food" class="nav-link" data-toggle="tab" role="tab" aria-controls="food" id="foodTab" (click)="todayFoodChild.updateValues()">Today's Food</a>
+        </li>
+        <li class="nav-item">
+          <a href="#workout" class="nav-link" data-toggle="tab" role="tab" aria-controls="workout" id="workoutTab">Today's Workout</a>
+        </li>
+        <li class="nav-item">
+          <a href="#pastFood" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastFood" id="pastFoodTab" (click)="pastFoodChild.updateValues()">Past Food</a>
+        </li>
+        <li class="nav-item">
+          <a href="#pastWorkout" class="nav-link" data-toggle="tab" role="tab" aria-controls="pastWokrout" (click)="pastWorkoutChild.updateValues()"
+            id="pastWorkoutTab">Past Workout</a>
+        </li>
+        <li class="nav-item">
+          <a href="#workoutStats" class="nav-link" data-toggle="tab" role="tab" aria-controls="workoutStats" (click)="pieChild.updateValues()"
+            id="workoutStatsTab">Workout Stats</a>
+        </li>
+      </ul>
 
-        <div class="tab-content" id="tabCont">
-          <br>
-          <div class="tab-pane active container" role="tabpanel" id="food">
-            <app-food-today #todayFoodChild ></app-food-today>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="workout">
-            <app-workout-today></app-workout-today>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="pastFood">
-            <app-food-past #pastFoodChild ></app-food-past>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="pastWorkout">
-            <app-workout-past #pastWorkoutChild></app-workout-past>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="workoutStats">
-              <app-pie #pieChild></app-pie>
-            </div>
+      <div class="tab-content" id="tabCont">
+        <br>
+        <div class="tab-pane active container" role="tabpanel" id="food">
+          <app-food-today #todayFoodChild></app-food-today>
+        </div>
+        <div class="tab-pane" role="tabpanel" id="workout">
+          <app-workout-today></app-workout-today>
+        </div>
+        <div class="tab-pane" role="tabpanel" id="pastFood">
+          <app-food-past #pastFoodChild></app-food-past>
+        </div>
+        <div class="tab-pane" role="tabpanel" id="pastWorkout">
+          <app-workout-past #pastWorkoutChild></app-workout-past>
+        </div>
+        <div class="tab-pane" role="tabpanel" id="workoutStats">
+          <app-pie #pieChild></app-pie>
         </div>
       </div>
-      <br />
-    </main>
+    </div>
+    <br />
+  </main>
 
 </body>
 
