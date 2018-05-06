@@ -1,44 +1,36 @@
 -- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema DB_GUI
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema DB_GUI
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `DB_GUI` ;
 USE `DB_GUI` ;
 
--- -----------------------------------------------------
--- Table `DB_GUI`.`UserInfo`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`UserInfo` (
-  `UserId` INT NOT NULL,
+  `UserId` INT NOT NULL AUTO_INCREMENT,
   `fName` VARCHAR(45) NULL,
   `lName` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
   `Weight` VARCHAR(45) NULL,
   `Age` VARCHAR(45) NULL,
   `UserName` VARCHAR(45) NULL,
+  `Gender` VARCHAR(45) NULL,
   `Public` TINYINT NULL,
-  `Goal` VARCHAR(45) NULL,
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DB_GUI`.`Login`
+-- Table `DB_GUI`.`Workouts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
-  `UserId` INT NOT NULL,
-  `Password` VARCHAR(45) NULL,
-  `Username` VARCHAR(45) NULL,
-  PRIMARY KEY (`UserId`))
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
+  `WorkoutPlan` INT NOT NULL,
+  `PrimaryArea` VARCHAR(45) NULL,
+  `Exercise1` VARCHAR(45) NULL,
+  `Exercise2` VARCHAR(45) NULL,
+  `Exercise3` VARCHAR(45) NULL,
+  `Exercise4` VARCHAR(45) NULL,
+  `Rep1` INT NULL,
+  `Rep2`INT NULL,
+  `Rep3`INT NULL,
+  `Rep4`INT NULL,
+  PRIMARY KEY (`WorkoutPlan`))
 ENGINE = InnoDB;
 
 
@@ -54,77 +46,12 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Fitness_Tracker` (
   PRIMARY KEY (`UserId`))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Ideal_body`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Ideal_body` (
-  `Height` VARCHAR(45) NOT NULL,
-  `Weight` VARCHAR(45) NULL,
-  PRIMARY KEY (`Height`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Disorders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Disorders` (
-  `Type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Type`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Eating Disorders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Eating Disorders` (
-  `Name` VARCHAR(45) NOT NULL,
-  `Description` VARCHAR(240) NULL,
-  `Type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Type`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Allergies`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Allergies` (
-  `Name` VARCHAR(45) NOT NULL,
-  `Description` VARCHAR(240) NULL,
-  PRIMARY KEY (`Name`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Account_Workous`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Workous` (
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Completed_Workouts` (
+  `workoutID` INT NOT NULL AUTO_INCREMENT,
   `UserId` INT NOT NULL,
-  `Primary_Area` INT NULL,
-  `Share` TINYINT NULL,
-  `cardioProg` TINYINT NULL,
-  `upperProg` INT NULL,
-  `lowerProg` INT NULL,
-  `coreProg` INT NULL,
-  PRIMARY KEY (`UserId`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_GUI`.`Workouts`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_GUI`.`Workouts` (
   `WorkoutPlan` INT NOT NULL,
-  `Primary Area` VARCHAR(45) NULL,
-  `Exercise1` VARCHAR(45) NULL,
-  `Exercise2` VARCHAR(45) NULL,
-  `Exercise3` VARCHAR(45) NULL,
-  `Exercise4` VARCHAR(45) NULL,
-  `Rep1` INT NULL,
-  `Rep2` INT NULL,
-  `Rep3` INT NULL,
-  `Rep4` INT NULL,
-  PRIMARY KEY (`WorkoutPlan`))
+  `Date` DATE NULL,
+  PRIMARY KEY (`workoutID`))
 ENGINE = InnoDB;
 
 
@@ -132,10 +59,55 @@ ENGINE = InnoDB;
 -- Table `DB_GUI`.`Diet_Plan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_GUI`.`Diet_Plan` (
-  `Name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Name`))
+  `Plan` VARCHAR(45) NOT NULL,
+  `Name` VARCHAR(45) NULL,
+  PRIMARY KEY (`Plan`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Meal_Tracker` (
+  `UserId` INT NOT NULL,
+  `Date` DATE NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`UserId`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Completed_Meals` (
+  `mealID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Date` DATE NULL,
+  `Breakfast` VARCHAR(45) NULL,
+  `Lunch` VARCHAR(45) NULL,
+  `Dinner` VARCHAR(45) NULL,
+  `Snack` VARCHAR(45) NULL,
+  PRIMARY KEY (`mealID`))
+ENGINE = InnoDB;
+
+
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Login`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Login` (
+  `UserId` INT NOT NULL,
+  `UserName` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NULL,
+  PRIMARY KEY (`UserId`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `DB_GUI`.`Allergies`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `DB_GUI`.`Account_Allergies` (
+  `AllergyId` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `Name` VARCHAR(240) NULL,
+  `Share` TINYINT NULL,
+  PRIMARY KEY (`AllergyId`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `DB_GUI`.`Snack`
@@ -244,64 +216,6 @@ CREATE TABLE IF NOT EXISTS `DB_GUI`.`Sessions` (
   `Password` VARCHAR(45) NULL,
   PRIMARY KEY (`SessionId`))
 ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
--- -----------------------------------------------------
--- Data for table `DB_GUI`.`Fitness_Tracker`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Fitness_Tracker` (`UserId`, `WorkoutPlan`, `Date`, `PercentToDo`, `Goal`) VALUES (1, Weight Loss, '60', 10, 10);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `DB_GUI`.`Ideal_body`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'6', '63-77');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'7', '68-84');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'8', '72-88');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'9', '77-94');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'10', '81-99');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('4\'11', '86-105');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'0', '90-110');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'1', '95-116');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'2', '99-121');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'3', '104-127');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'4', '108-132');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'5', '113-138');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'6', '117-143');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'7', '122-149');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'8', '126-154');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'9', '131-160');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'10', '135-160');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('5\'11', '136-172');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('6\'0', '140-177');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('6\'1', '144-182');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('6\'2', '171-186');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('6\'3', '152-192');
-INSERT INTO `DB_GUI`.`Ideal_body` (`Height`, `Weight`) VALUES ('6\'4', '182-222');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `DB_GUI`.`Disorders`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `DB_GUI`;
-INSERT INTO `DB_GUI`.`Disorders` (`Type`) VALUES ('Allergies');
-
-COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `DB_GUI`.`Allergies`
